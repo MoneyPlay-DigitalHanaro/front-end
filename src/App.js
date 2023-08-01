@@ -3,11 +3,12 @@ import React from 'react';
 import './style/css/App.css';
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
-import Admin from './pages/admin/admin.js';
-import NavBar from './component/navbar.js';
-import SideBar from './component/sidebar.js';
+import Admin from './pages/admin/Admin.js';
+import NavBar from './component/Navbar.js';
+import SideBar from './component/Sidebar.js';
 import { Route, Routes, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import main from './pages/admin/Admin.js';
 
 function App() {
   return (
