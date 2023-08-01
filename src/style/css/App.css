@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 @font-face {
   font-family: 'Tmoney';
   src: url('../font/TmoneyRoundWindRegular.ttf') format('woff');
@@ -17,173 +19,48 @@
 }
 
 .container {
-  width: 1440px;
-  min-width: 1440px;
-  height: 1024px;
+  width: 400px;
+  min-width: 375px;
+  height: 812px;
   z-index: -5;
   display: block;
-  float: left;
-  margin-left: 50px;
-}
-
-.sidebar {
-  width: 277px;
-  height: 1024px;
-  background: #484bb3;
-  position: fixed;
-  z-index: 5;
-  color: white;
-  float: left;
-  display: block;
-}
-
-.sidebar div {
-  margin: 12px 10px 10px 15px;
+  float: none;
+  margin: auto;
 }
 
 .box {
-  width: 1163px;
-  height: 252px;
-  border: 1px solid black;
-  display: block;
-  float: right;
-  text-align: left;
-  padding: 20px;
-}
-
-.main {
-  width: 1163px;
-  height: 688px;
-  display: block;
-  float: right;
-  text-align: left;
-  padding: 20px;
-}
-
-nav {
-  width: 1440px;
-  height: 84px;
-  margin-left: 277px;
-  vertical-align: middle;
-  text-align: right;
-  z-index: 6;
-}
-
-.mgtop50 {
-  margin-top: 50px;
-}
-
-.nav .open > a {
-  background-color: transparent;
-}
-
-.nav .open > a:hover {
-  background-color: transparent;
-}
-
-.nav .open > a:focus {
-  background-color: transparent;
-}
-
-.sidebar-nav li {
   display: inline-block;
-
-  line-height: 40px;
-
-  position: relative;
-
-  width: 100%;
-}
-
-.sidebar-nav li a {
-  color: #dddddd;
-
-  display: block;
-
-  padding: 10px 15px 10px 30px;
-
-  text-decoration: none;
-}
-
-.sidebar-nav li.open:hover before {
-  -webkit-transition: width 0.2s ease-in;
-
-  transition: width 0.2s ease-in;
-
-  width: 100%;
-}
-
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus {
-  background-color: transparent;
-
-  color: #ffffff;
-
-  text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-  font-size: 25px;
-  height: 65px;
-  line-height: 44px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
-
-.personImage {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  vertical-align: middle;
-}
-
-.abc {
-  display: inline-block;
+  margin: 6px;
+  border: solid pink 2px;
   text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  margin-right: 15px;
 }
 
-.pointCard {
-  top: 84px;
-  width: 1440px;
-  height: 212px;
-  background-color: #fbbb61;
-  z-index: 8;
+.rowbox {
+  display: flex;
+  margin: auto;
+  border: solid black 0px;
+  width: 375px;
+  height: 180px;
+  padding: 0;
+  justify-content: space-around;
+}
+
+.mainbox {
+  margin: 91px 22px 139px 22px;
+  border: solid black 1px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.title {
+}
+
+.context {
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-.form {
-  vertical-align: middle;
-}
-
-.mg15 {
-  margin: 15px;
-}
-
-.mgr30 {
-  margin-right: 30px;
-}
-.ft22 {
-  font-size: 22px;
-}
-.mgl50 {
-  margin-left: 50px;
-}
-
-.inputbox {
-  height: 42px;
-  vertical-align: middle;
 }
 
 @media (prefers-reduced-motion: no-preference) {
