@@ -4,6 +4,8 @@ import '../../style/css/App.css';
 import styled from 'styled-components';
 import { useState } from 'react';
 import Maindata from './MainData.js';
+import person from '../../image/Main/Person.png';
+import coin from '../../image/Main/Coin.png';
 
 let MenuBtn = styled.button`
   background: ${(props) => props.bg};
@@ -14,38 +16,47 @@ let MenuBtn = styled.button`
   border: solid white 0px;
   border-radius: 15px;
   box-shadow: ${(props) => props.boxShadow};
+  position: relative;
+  text-align: left;
+  padding-left: 15px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 function Main() {
+  const [user, setUser] = useState(Maindata);
+
   return (
     <div className="container mainbox">
       <div className="rowbox" style={{ height: '138px' }}>
         <MenuBtn bg="white" boxShadow="2px 3px 4px 1px black;" width="238px" height="118px">
-          <p>
-            <b>서예진님은</b>
-            <br />
-            <span>5,000,000</span>
-            <br />
-            <span>가지고 있어요</span>
+          <p style={{}}>
+            <b className="title">{Maindata[0].username}님은</b>
+            <span>
+              <img src={coin} style={{ position: 'relative', display: 'inline-block', marginLeft: '10px' }} />
+              <b>{Maindata[0].price}</b>
+              <br /> 가지고 있어요
+            </span>
+            <img src={person} />
           </p>
         </MenuBtn>
         <MenuBtn bg="#FFDF8E" width="95px" height="118px">
           <p>
-            <b>QR</b>
+            <b className="title">QR</b>
           </p>
         </MenuBtn>
       </div>
       <div className="rowbox">
         <MenuBtn bg="#FFEDCB">
-          <p>
-            <b>오늘의 단어</b>
+          <b className="title">오늘의 단어</b>
+          <br />
+          <span>
+            매일 한 개씩
             <br />
-            <span>
-              매일 한 개씩
-              <br />
-              풀어봐요
-            </span>
-          </p>
+            풀어봐요
+          </span>
         </MenuBtn>
         <MenuBtn bg="#70C3FF">
           <p>
@@ -54,7 +65,7 @@ function Main() {
             <span>
               경제 뉴스를 읽고
               <br />
-              어쩌구구
+              {Maindata[1].news}
             </span>
           </p>
         </MenuBtn>
@@ -62,15 +73,17 @@ function Main() {
       <div className="rowbox">
         <MenuBtn bg="#1E90FF">
           <p>
-            <b>1등 서예진</b>
+            <b>1등 {Maindata[2].username}</b>
             <br />
-            <span>20,000,000</span>
+            <span>{Maindata[2].asset}</span>
             <br />
-            <b>2등 </b>
-            <span>김익환 15,000,000</span>
+            <b>2등 {Maindata[3].username}</b>
             <br />
-            <b>3등 </b>
-            <span>박민재 15,000,000</span>
+            <span>{Maindata[3].asset}</span>
+            <br />
+            <b>3등 {Maindata[4].username} </b>
+            <br />
+            <span>{Maindata[4].asset}</span>
           </p>
         </MenuBtn>
         <MenuBtn bg="#FFE070">
