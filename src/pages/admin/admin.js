@@ -31,7 +31,7 @@ function Admin() {
           <thead>
             <tr class="table-active">
               <th>선택</th>
-              <th>번호</th>
+              <th>번호22</th>
               <th>이름</th>
               <th>이메일</th>
               <th>포인트</th>
