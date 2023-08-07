@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import './style/css/Admin.css';
+import './style/css/Admin.module.css';
 
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
