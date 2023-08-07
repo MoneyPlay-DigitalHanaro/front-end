@@ -27,5 +27,6 @@ function App() {
     </div>
   );
 }
+// 왜안되는지 모르겠네
 
 export default App;
