@@ -15,10 +15,12 @@ import AutoLayoutSizingExample from './pages/test';
 function App() {
   return (
     <div className="App">
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
       <div className="container">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/test" element={<AutoLayoutSizingExample />} />
         </Routes>
       </div>
