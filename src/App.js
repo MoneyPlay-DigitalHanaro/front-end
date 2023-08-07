@@ -11,6 +11,7 @@ import { Route, Routes, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './pages/mainPage/Main.js';
 import AutoLayoutSizingExample from './pages/test';
+import QrCode from './pages/QR_Student/qrStudent';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/test" element={<AutoLayoutSizingExample />} />
+          <Route path="/qrcode" element={<QrCode />} />
         </Routes>
       </div>
     </div>
