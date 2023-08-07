@@ -12,10 +12,18 @@
   font-family: 'Tmoney';
   color: black;
   letter-spacing: -1px;
+<<<<<<< HEAD
   font-weight: 600;
 }
 
 .container-admin {
+=======
+  text-align: center;
+  font-weight: 600;
+}
+
+.container {
+>>>>>>> 7dc5c99c9b209e17047bca68b53704eec37a74e0
   width: 1440px;
   min-width: 1440px;
   height: 1024px;
@@ -29,9 +37,17 @@
   width: 277px;
   height: 1024px;
   background: #484bb3;
+<<<<<<< HEAD
   position: absolute;
   z-index: 5;
   color: white;
+=======
+  position: fixed;
+  z-index: 5;
+  color: white;
+  float: left;
+  display: block;
+>>>>>>> 7dc5c99c9b209e17047bca68b53704eec37a74e0
 }
 
 .sidebar div {
@@ -138,7 +154,11 @@ nav {
   vertical-align: middle;
 }
 
+<<<<<<< HEAD
 /* .abc {
+=======
+.abc {
+>>>>>>> 7dc5c99c9b209e17047bca68b53704eec37a74e0
   display: inline-block;
   text-align: center;
   position: relative;
@@ -146,7 +166,11 @@ nav {
   transform: translateY(-50%);
   font-size: 18px;
   margin-right: 15px;
+<<<<<<< HEAD
 } */
+=======
+}
+>>>>>>> 7dc5c99c9b209e17047bca68b53704eec37a74e0
 
 .pointCard {
   top: 84px;
