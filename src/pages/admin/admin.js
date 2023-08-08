@@ -7,22 +7,61 @@ import styles from '../../style/css/Admin.module.css';
 import axios from 'axios';
 
 function Admin() {
-  const [amount, setAmount] = useState(''); // useState를 사용하여 amount 상태 설정
-  const [selectedStudents, setSelectedStudents] = useState([]);
+  const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
+  const [ID, setID] = useState([]);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [tableData, setTableData] = useState([
+    { id: 1, name: 'Otto', email: '@mdo', points: 1111 },
+    { id: 2, name: 'a', email: '@fat', points: 2222 },
+    { id: 3, name: 'b', email: '@fat', points: 3333 },
+    { id: 4, name: 'c', email: '@fat', points: 4444 },
+    { id: 5, name: 'dd', email: '@fat', points: 5555 },
+    { id: 6, name: 'eee', email: '@fat', points: 6666 },
+    { id: 7, name: 'fff', email: '@fat', points: 7777 },
+    { id: 8, name: 'gggg', email: '@fat', points: 8888 },
 
-  const handleSubmit = (e) => {
+    // ... 나머지 데이터
+  ]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작을 중지
-    console.log('Amount Submitted:', amount); // 입력값 확인
-    console.log('Selected Students:', selectedStudents);
+    console.log('plusPoint:', plusPoint); // 입력값 확인
+    console.log('ID:', ID);
 
-    // 필요한 다른 로직 추가
+    try {
+      const response = await axios.post('YOUR_SERVER_ENDPOINT', {
+        ID: ID,
+        plusPoint: plusPoint,
+      });
+
+      console.log(response.data); // 서버로부터의 응답을 확인
+      // 여기서 필요한 다른 로직을 추가하십시오.
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
+  };
+
+  const resetPoints = () => {
+    const updatedData = tableData.map((item) => ({
+      ...item,
+      points: 0,
+    }));
+    setTableData(updatedData);
+  };
+
+  const handleOpenDialog = () => {
+    setShowConfirmDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setShowConfirmDialog(false);
   };
 
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
-      setSelectedStudents([...selectedStudents, id]);
+      setID([...ID, id]);
     } else {
-      setSelectedStudents(selectedStudents.filter((studentId) => studentId !== id));
+      setID(ID.filter((studentId) => studentId !== id));
     }
   };
 
@@ -33,21 +72,17 @@ function Admin() {
         <NavBar />
         <div className={styles.box}>
           <h3>포인트 주기</h3>
-          <div>
+          <div className="mb20">
             <form className={styles.form} onSubmit={handleSubmit}>
               <span className="ft22 mg15">지급 금액 </span>
               <input
                 className={`${styles.inputbox} mgr30`}
                 type="text"
                 name="plusPoint"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)} // 입력값 변화에 따라 amount 상태 업데이트
+                value={plusPoint}
+                onChange={(e) => setPlusPoint(e.target.value)} // 입력값 변화에 따라 plusPoint 상태 업데이트
               />
-              <input
-                type="checkbox"
-                aria-label="Checkbox for following text input"
-                onChange={(e) => handleCheckboxChange(1, e.target.checked)}
-              />
+
               <button type="submit" className="btn btn-primary btn-lg">
                 일괄 지급
               </button>
@@ -55,12 +90,12 @@ function Admin() {
           </div>
           <h3>포인트 초기화</h3>
           <p>
-            <button type="button" class="btn btn-primary mgl50 btn-lg">
+            <button type="button" class="btn btn-primary mgl50 btn-lg" onClick={handleOpenDialog}>
               일괄 초기화
             </button>
           </p>
 
-          <button
+          {/* <button
             onClick={() => {
               axios
                 .get('https://codingapple1.github.io/shop/data2.json')
@@ -73,10 +108,28 @@ function Admin() {
             }}
           >
             버튼
-          </button>
+          </button> */}
         </div>
+
+        {showConfirmDialog && (
+          <div className="confirm-modal">
+            <p>정말로 포인트를 초기화하겠습니까?</p>
+            <button
+              onClick={() => {
+                resetPoints();
+                // 초기화 로직
+                console.log('포인트 초기화됨');
+                handleCloseDialog();
+              }}
+            >
+              확인
+            </button>
+            <button onClick={handleCloseDialog}>취소</button>
+          </div>
+        )}
+
         <div className={styles.main}>
-          <h1>학생관리 명단</h1>
+          <h1>포인트관리 명단</h1>
           <table class="table mgtop50">
             <thead>
               <tr class="table-active">
@@ -88,69 +141,21 @@ function Admin() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>1</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1111</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>2</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>1111</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>3</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>1111</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>4</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>1111</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>5</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>1111</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>6</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>1111</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                </th>
-                <td>7</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>1111</td>
-              </tr>
+              {tableData.map((row) => (
+                <tr key={row.id}>
+                  <th scope="row">
+                    <input
+                      type="checkbox"
+                      aria-label="Checkbox for following text input"
+                      onChange={(e) => handleCheckboxChange(row.id, e.target.checked)}
+                    />
+                  </th>
+                  <td>{row.id}</td>
+                  <td>{row.name}</td>
+                  <td>{row.email}</td>
+                  <td>{row.points}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
