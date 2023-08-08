@@ -221,6 +221,10 @@ nav {
   margin-bottom: 50px;
 }
 
+.blackline {
+  border: solid black 1px;
+}
+
 .context {
 }
 
