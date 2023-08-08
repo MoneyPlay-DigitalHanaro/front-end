@@ -1,0 +1,44 @@
+[33mcommit b88f4b73a9d3d3c3b3fdc978b6c2fe0ba5ec37db[m[33m ([m[1;36mHEAD -> [m[1;32madminPage[m[33m, [m[1;31morigin/adminPage[m[33m)[m
+Author: tusker4 <tusker4@naver.com>
+Date:   Tue Aug 1 09:35:52 2023 +0900
+
+    Fix : 파일명 앞글자 대문자로 변경
+
+[33mcommit f1a5c82d446b47f1040142c17b788df8466abed5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: af9fbcf c403258
+Author: Nam sunghee <118495934+tusker4@users.noreply.github.com>
+Date:   Thu Jul 27 15:02:17 2023 +0900
+
+    Merge pull request #1 from MoneyPlay-DigitalHanaro/adminPage
+    
+    refactor: 프론트 초기 세팅 수정
+
+[33mcommit c403258c526126ecda5f13a1a489fe8e8063e43d[m
+Author: tusker4 <tusker4@naver.com>
+Date:   Thu Jul 27 15:00:41 2023 +0900
+
+    refactor: 초기세팅 수정
+
+[33mcommit c64ff9fa988747123da3c1987bcd048286643365[m
+Author: tusker4 <tusker4@naver.com>
+Date:   Wed Jul 26 16:54:06 2023 +0900
+
+    Add : 티머니, 안동까투리체 글꼴 추가
+
+[33mcommit af9fbcf2743ecafce8d4b0062fbf07b6566e0f01[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mmain[m[33m, [m[1;32mdevelop[m[33m)[m
+Author: tusker4 <tusker4@naver.com>
+Date:   Wed Jul 26 14:51:24 2023 +0900
+
+    feat: 프론트 초기 세팅
+
+[33mcommit 5a4a57ab342a1702f2da0b6998362e7d8e6adb99[m
+Author: IkHwan Kim <52392858+dlrghks2090@users.noreply.github.com>
+Date:   Wed Jul 26 13:43:55 2023 +0900
+
+    Update README.md
+
+[33mcommit f50bbaa817b8605b2136f56aa1b16a2edbb52c93[m
+Author: IkHwan Kim <52392858+dlrghks2090@users.noreply.github.com>
+Date:   Wed Jul 26 13:43:31 2023 +0900
+
+    Initial commit

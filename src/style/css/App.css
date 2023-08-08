@@ -28,13 +28,6 @@
   margin: auto;
 }
 
-.box {
-  display: inline-block;
-  margin: 6px;
-  border: solid pink 2px;
-  text-align: center;
-}
-
 .rowbox {
   display: flex;
   margin: auto;
@@ -65,6 +58,22 @@ span {
   font-size: 14px;
 }
 
+.ft22 {
+  font-size: 22px;
+}
+
+.mg15 {
+  margin: 15px;
+}
+
+.mgr30 {
+  margin-right: 30px;
+}
+
+.mgl50 {
+  margin-left: 50px;
+}
+
 .mt7 {
   margin-top: 7px;
 }
@@ -92,6 +101,11 @@ span {
 .mb15 {
   margin-bottom: 15px;
 }
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
 .firstgrade {
   display: flex;
   flex-direction: column;
@@ -138,7 +152,97 @@ img {
   display: inline-block;
 }
 
+nav {
+  width: 1440px;
+  height: 84px;
+  margin-left: 277px;
+  vertical-align: middle;
+  text-align: right;
+  z-index: 6;
+}
+
+.mgtop50 {
+  margin-top: 50px;
+}
+
+.nav .open > a {
+  background-color: transparent;
+}
+
+.nav .open > a:hover {
+  background-color: transparent;
+}
+
+.nav .open > a:focus {
+  background-color: transparent;
+}
+
+.sidebar-nav li {
+  display: inline-block;
+
+  line-height: 40px;
+
+  position: relative;
+
+  width: 100%;
+}
+
+.sidebar-nav li a {
+  color: #dddddd;
+
+  display: block;
+
+  padding: 10px 15px 10px 30px;
+
+  text-decoration: none;
+}
+
+.sidebar-nav li.open:hover before {
+  -webkit-transition: width 0.2s ease-in;
+
+  transition: width 0.2s ease-in;
+
+  width: 100%;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus {
+  background-color: transparent;
+
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  font-size: 25px;
+  height: 65px;
+  line-height: 44px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.blackline {
+  border: solid black 1px;
+}
+
 .context {
+}
+
+.confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  z-index: 1000;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .App-logo {

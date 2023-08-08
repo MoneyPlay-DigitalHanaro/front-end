@@ -5,18 +5,7 @@
   font-style: normal;
 }
 
-.App {
-  text-align: center;
-  padding-left: 50px;
-  font-size: 20px;
-  font-family: 'Tmoney';
-  color: black;
-  letter-spacing: -1px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.container {
+.containerAdmin {
   width: 1440px;
   min-width: 1440px;
   height: 1024px;
@@ -30,11 +19,9 @@
   width: 277px;
   height: 1024px;
   background: #484bb3;
-  position: fixed;
+  position: absolute;
   z-index: 5;
   color: white;
-  float: left;
-  display: block;
 }
 
 .sidebar div {
@@ -42,13 +29,15 @@
 }
 
 .box {
-  width: 1163px;
+  width: 1153px;
   height: 252px;
-  border: 1px solid black;
   display: block;
   float: right;
   text-align: left;
   padding: 20px;
+  margin: 6px;
+  border: solid pink 2px;
+  position: relative;
 }
 
 .main {
@@ -60,88 +49,15 @@
   padding: 20px;
 }
 
-nav {
-  width: 1440px;
-  height: 84px;
-  margin-left: 277px;
-  vertical-align: middle;
-  text-align: right;
-  z-index: 6;
-}
-
-.mgtop50 {
-  margin-top: 50px;
-}
-
-.nav .open > a {
-  background-color: transparent;
-}
-
-.nav .open > a:hover {
-  background-color: transparent;
-}
-
-.nav .open > a:focus {
-  background-color: transparent;
-}
-
-.sidebar-nav li {
-  display: inline-block;
-
-  line-height: 40px;
-
-  position: relative;
-
-  width: 100%;
-}
-
-.sidebar-nav li a {
-  color: #dddddd;
-
-  display: block;
-
-  padding: 10px 15px 10px 30px;
-
-  text-decoration: none;
-}
-
-.sidebar-nav li.open:hover before {
-  -webkit-transition: width 0.2s ease-in;
-
-  transition: width 0.2s ease-in;
-
-  width: 100%;
-}
-
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus {
-  background-color: transparent;
-
-  color: #ffffff;
-
-  text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-  font-size: 25px;
-  height: 65px;
-  line-height: 44px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
-
 .personImage {
   display: inline-block;
   width: 50px;
   height: 50px;
   vertical-align: middle;
+  position: relative;
 }
 
-.abc {
+.teacher {
   display: inline-block;
   text-align: center;
   position: relative;
@@ -165,20 +81,6 @@ nav {
 }
 .form {
   vertical-align: middle;
-}
-
-.mg15 {
-  margin: 15px;
-}
-
-.mgr30 {
-  margin-right: 30px;
-}
-.ft22 {
-  font-size: 22px;
-}
-.mgl50 {
-  margin-left: 50px;
 }
 
 .inputbox {
