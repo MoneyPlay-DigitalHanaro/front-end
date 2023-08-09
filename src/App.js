@@ -6,6 +6,7 @@ import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import Admin from './pages/admin/admin.js';
 import NavBar from './component/navbar.js';
 import SideBar from './component/sidebar.js';
+import NewsList from './pages/NewsPage/NewsList';
 import { Route, Routes, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SideBar />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/news" element={<NewsList/>} />
         </Routes>
       </div>
     </div>
