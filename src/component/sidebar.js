@@ -11,7 +11,7 @@ function SideBar() {
     <div className={styles.sidebar}>
       <ul className="nav sidebar-nav">
         <li class="sidebar-brand">
-          <a href="/">금전 놀이</a>
+          <a href="/">금전 놀이22</a>
         </li>
         <li className={styles.flexContainer}>
           <a href="/admin" className={styles.menuItem}>
