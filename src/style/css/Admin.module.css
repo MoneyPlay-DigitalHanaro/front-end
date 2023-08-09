@@ -13,15 +13,18 @@
   display: block;
   float: left;
   margin-left: 50px;
+  background-color: rgb(216, 228, 236, 0.25);
 }
 
 .sidebar {
   width: 277px;
   height: 1024px;
-  background: #484bb3;
+  background: #4478c6;
   position: absolute;
   z-index: 5;
   color: white;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 .sidebar div {
@@ -29,24 +32,44 @@
 }
 
 .box {
-  width: 1153px;
-  height: 252px;
+  width: 540px;
+  height: 212px;
   display: block;
   float: right;
   text-align: left;
   padding: 20px;
   margin: 6px;
-  border: solid pink 2px;
+  border: solid white 0px;
   position: relative;
+  background-color: white;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 30px;
 }
 
 .main {
-  width: 1163px;
-  height: 688px;
+  width: 1115px;
+  height: 612px;
   display: block;
   float: right;
   text-align: left;
   padding: 20px;
+  background-color: white;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  vertical-align: middle;
+  padding: 50px;
+}
+
+.sidebarImage {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  position: absolute;
+  text-align: left;
+  left: 45px;
+  bottom: 15px;
 }
 
 .personImage {
@@ -86,6 +109,49 @@
 .inputbox {
   height: 42px;
   vertical-align: middle;
+}
+
+.title {
+  display: inline-block;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: space-between;
+}
+
+.fadedText {
+  color: #9b9b9b !important; /* 이것은 연한 회색입니다. 원하는 색상 코드로 변경할 수 있습니다. */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #4478c6;
+  color: white;
+}
+
+.activePage {
+  background-color: #4478c6;
+  color: white;
+}
+
+.menuItem:hover {
+  background-color: #4478c6;
+  color: white;
+}
+
+.flexContainer {
+  display: flex;
+  align-items: center; /* 텍스트와 이미지를 수평의 중앙에 정렬 */
 }
 
 @media (prefers-reduced-motion: no-preference) {

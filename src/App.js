@@ -20,12 +20,12 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/admin" element={<Admin />} />
+        <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
       </Routes>
       <div className="container">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/test" element={<AutoLayoutSizingExample />} />
-          <Route path="/test2" element={<AutoLayoutSizingExample2 />} />
           <Route path="/qrcode" element={<QrCode />} />
           <Route path="/join" element={<Join />} />
         </Routes>
@@ -33,6 +33,6 @@ function App() {
     </div>
   );
 }
-// 왜안되는지 모르겠네
+
 
 export default App;

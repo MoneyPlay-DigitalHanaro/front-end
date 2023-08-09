@@ -54,16 +54,39 @@ span {
   position: relative;
 }
 
+.fw400 {
+  font-weight: 400;
+}
+
+.fw500 {
+  font-weight: 500;
+}
+
 .ft14 {
   font-size: 14px;
+}
+.ft20 {
+  font-size: 20px;
 }
 
 .ft22 {
   font-size: 22px;
 }
 
+.ft30 {
+  font-size: 30px;
+}
+
 .mg15 {
   margin: 15px;
+}
+
+.mgr10 {
+  margin-right: 10px;
+}
+
+.mgr24 {
+  margin-right: 24px;
 }
 
 .mgr30 {
@@ -86,12 +109,38 @@ span {
   margin-top: 15px;
 }
 
+.mt45 {
+  margin-top: 45px;
+}
+
+.mt50 {
+  margin-top: 50px;
+}
+
+.ml0 {
+  margin-left: 0px;
+}
+
+.ml5 {
+  margin-left: 5px;
+}
+
 .ml10 {
   margin-left: 10px;
 }
 
+.ml20 {
+  margin-left: 20px;
+}
+.ml24 {
+  margin-left: 24px;
+}
+
 .mb_3 {
   margin-bottom: -3px;
+}
+.mb5 {
+  margin-bottom: 5px;
 }
 
 .mb10 {
@@ -163,6 +212,11 @@ nav {
 
 .mgtop50 {
   margin-top: 50px;
+}
+
+input[type='checkbox'] {
+  transform: scale(1.5); /* 1.5배 크기로 확대 */
+  margin-right: 10px; /* 체크박스와 라벨 사이의 간격 조정 */
 }
 
 .nav .open > a {
