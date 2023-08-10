@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from'axios';
 import News from '../../component/News';
+import styled from 'styled-components';
+
+const NewsListContainer = styled.div`
+    width: 375px;
+    height: 812px;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
 const NewsList = () => {
     const [newsArray,setNewsArray] = useState([])
     useEffect(()=>{
         axios.get("http://localhost:8080/news").then((response)=>{
-        console.log(response.data) 
+        // console.log(response.data) 
         setNewsArray(response.data);
     })
     },[])
     return (
-        <div>
+        <NewsListContainer>
             {
                 newsArray.map(e => {
                     return(
@@ -18,7 +28,7 @@ const NewsList = () => {
                     )
                 })
             }
-        </div>
+        </NewsListContainer>
     );
 };
 

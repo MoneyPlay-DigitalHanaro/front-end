@@ -14,6 +14,7 @@ import AutoLayoutSizingExample from './pages/test';
 import AutoLayoutSizingExample2 from './pages/test2';
 import QrCode from './pages/QR_Student/qrStudent';
 import Join from './pages/Join/Join';
+import NewsList from './pages/NewsPage/NewsList';
 
 function App() {
   return (
