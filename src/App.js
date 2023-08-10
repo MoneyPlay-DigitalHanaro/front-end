@@ -17,6 +17,7 @@ import AutoLayoutSizingExample from './pages/test';
 import AutoLayoutSizingExample2 from './pages/test2';
 import QrCode from './pages/QR_Student/qrStudent';
 import Join from './pages/Join/Join';
+import Footer from './component/Footer';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/test" element={<AutoLayoutSizingExample />} />
           <Route path="/qrcode" element={<QrCode />} />
           <Route path="/join" element={<Join />} />
+          <Route path="/footer" element={<Footer />} />
         </Routes>
       </div>
     </div>
