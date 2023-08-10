@@ -5,9 +5,9 @@ import './style/css/Admin.module.css';
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
-import Admin from './pages/admin/admin.js';
-import NavBar from './component/navbar.js';
-import SideBar from './component/sidebar.js';
+import Admin from './pages/admin/Admin';
+import NavBar from './component/Navbar';
+import SideBar from './component/Sidebar';
 import NewsList from './pages/NewsPage/NewsList';
 
 import { Route, Routes, Link } from 'react-router-dom';
@@ -28,11 +28,10 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/news" element={<NewsList/>} />
+          <Route path="/news" element={<NewsList />} />
           <Route path="/test" element={<AutoLayoutSizingExample />} />
           <Route path="/qrcode" element={<QrCode />} />
           <Route path="/join" element={<Join />} />
-
         </Routes>
       </div>
     </div>

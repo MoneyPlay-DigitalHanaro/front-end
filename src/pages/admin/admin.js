@@ -174,8 +174,8 @@ function Admin() {
         <div className={`${styles.main} mt45 mgr24`}>
           <table className="table">
             <thead>
-              <tr class="table-active">
-                <th className="ml20"> 선택</th>
+              <tr>
+                <th>&nbsp;&nbsp;선택</th>
                 <th>ID</th>
                 <th>이름</th>
                 <th>이메일</th>
