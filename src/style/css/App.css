@@ -287,6 +287,12 @@ input[type='checkbox'] {
 .context {
 }
 
+.footer {
+  width: 375px;
+  height: 84px;
+  border: solid black 1px;
+}
+
 .confirm-modal {
   position: fixed;
   top: 50%;
