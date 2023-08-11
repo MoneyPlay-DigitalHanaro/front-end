@@ -1,9 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Admin from './Admin.js';
+import Chat from './Chat.js';
+
 
 function App() {
   return (
     <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/chat" element={<Chat />}></Route>
+        </Routes>
+      </Router>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
