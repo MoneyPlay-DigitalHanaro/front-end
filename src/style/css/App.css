@@ -18,14 +18,15 @@
   font-weight: 600;
 }
 
-.container {
-  width: 400px;
+.App-container {
+  width: 375px;
   min-width: 375px;
   height: 812px;
-  z-index: -5;
-  display: block;
-  float: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: auto;
+  border: solid black 1px;
 }
 
 .rowbox {
@@ -40,7 +41,7 @@
 
 .mainbox {
   margin: 91px 22px 139px 22px;
-  border: solid black 0px;
+  border: solid black 1px;
   text-align: center;
   vertical-align: middle;
 }
@@ -54,12 +55,27 @@ span {
   position: relative;
 }
 
+.FooterCircle {
+  position: absolute; /* 절대적 위치를 설정하여 부모 요소를 기준으로 배치합니다. */
+  top: -50%; /* 상단에 위치 */
+  left: 50%; /* 중앙에 위치 */
+  transform: translateX(-50%); /* 이미지의 중앙을 정확히 부모의 중앙으로 이동시킵니다. */
+  z-index: 3; /* footer 박스의 아래에 배치합니다. */
+}
+
+.iconChat {
+}
+
 .fw400 {
   font-weight: 400;
 }
 
 .fw500 {
   font-weight: 500;
+}
+
+.ft12 {
+  font-size: 12px;
 }
 
 .ft14 {
@@ -93,6 +109,10 @@ span {
   margin-right: 30px;
 }
 
+.mgr60 {
+  margin-right: 60px;
+}
+
 .mgl50 {
   margin-left: 50px;
 }
@@ -117,6 +137,10 @@ span {
   margin-top: 50px;
 }
 
+.mt80 {
+  margin-top: 80px;
+}
+
 .ml0 {
   margin-left: 0px;
 }
@@ -129,11 +153,23 @@ span {
   margin-left: 10px;
 }
 
+.ml12 {
+  margin-left: 12px;
+}
+
 .ml20 {
   margin-left: 20px;
 }
 .ml24 {
   margin-left: 24px;
+}
+
+.ml60 {
+  margin-left: 60px;
+}
+
+.ml290 {
+  margin-left: 290px;
 }
 
 .mb_3 {
@@ -167,7 +203,7 @@ span {
   font-size: 12px;
 }
 
-img {
+.imgMain {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -288,9 +324,18 @@ input[type='checkbox'] {
 }
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f8f8dc;
   width: 375px;
   height: 84px;
-  border: solid black 1px;
+  border: solid #f9f8f8dc 1px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+  position: relative;
+  z-index: 2;
 }
 
 .confirm-modal {
