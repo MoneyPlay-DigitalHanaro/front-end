@@ -146,6 +146,7 @@ function Admin() {
               일괄 초기화
             </button>
           </p>
+          
         </div> */}
 
 
