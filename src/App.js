@@ -17,6 +17,8 @@ import AutoLayoutSizingExample from './pages/test';
 import AutoLayoutSizingExample2 from './pages/test2';
 import QrCode from './pages/QR_Student/qrStudent';
 import Join from './pages/Join/Join';
+import Footer from './component/Footer';
+import MyPage from './pages/myPage/MyPage';
 
 function App() {
   return (
@@ -25,15 +27,15 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
       </Routes>
-      <div className="container">
+      <div className="App-container">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/news" element={<NewsList/>} />
-          <Route path="/test" element={<AutoLayoutSizingExample />} />
-          <Route path="/qrcode" element={<QrCode />} />
+          <Route path="/news" element={<NewsList />} />
+          <Route path="/test" element={<AutoLayoutSizingExample />} />  
           <Route path="/join" element={<Join />} />
-          
+          <Route path="/mypage" element={<MyPage />} />
         </Routes>
+        <Footer></Footer>
       </div>
     </div>
   );
