@@ -11,6 +11,7 @@ import Dog from '../../image/Main/Dog.png';
 import Globe from '../../image/Main/Globe.png';
 import Money from '../../image/Main/Money.png';
 import QR from '../../image/Main/QrCode.png';
+import Footer from '../../component/Footer.js';
 
 let MenuBtn = styled.button`
   background: ${(props) => props.bg};
@@ -34,7 +35,7 @@ function Main() {
   const [user, setUser] = useState(Maindata);
 
   return (
-    <div className="container mainbox">
+    <div className="main mt80">
       <div className="rowbox" style={{ height: '138px' }}>
         <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
           <p style={{}}>
@@ -44,13 +45,13 @@ function Main() {
               <b>{Maindata[0].price}</b>
               <br /> 가지고 있어요
             </span>
-            <img src={person} />
+            <img src={person} className="imgMain" />
           </p>
         </MenuBtn>
         <MenuBtn bg="rgba(255, 223, 142, 0.5);" width="95px" height="118px">
           <p>
             <b className="title">QR</b>
-            <img src={QR} className="qr" />
+            <img src={QR} className="qr imgMain" />
           </p>
         </MenuBtn>
       </div>
@@ -62,14 +63,14 @@ function Main() {
             <br />
             풀어봐요
           </span>
-          <img src={Calender} />
+          <img src={Calender} className="imgMain" />
         </MenuBtn>
         <MenuBtn bg="rgba(112, 195, 255, 0.5);">
-          <p>
+          <div>
             <b className="title mt10 mb10">뉴스</b>
             <span>조금씩 알아보아요</span>
-            <img src={Globe} />
-          </p>
+            <img src={Globe} className="imgMain" />
+          </div>
         </MenuBtn>
       </div>
       <div className="rowbox">
@@ -121,20 +122,24 @@ function Main() {
               체험할 수 있어요
             </span>
           </p>
-          <img src={Money} />
+          <img src={Money} className="imgMain" />
         </MenuBtn>
       </div>
-      <div className="rowbox">
-        <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0,0,0, 0.25);" width="348px" height="97px">
-          <div>
-            <img src={Dog} className="dog" />
-            <div className="inline absolute mt15 ml10 ">
-              <b className="title mb_3">공지사항</b>
-              <span>금리, 상품 정보, 패치내용</span>
-            </div>
+      <MenuBtn
+        bg="white"
+        boxShadow="2px 3px 4px 1px rgba(0,0,0, 0.25);"
+        width="348px"
+        height="97px"
+        style={{ marginLeft: '12px' }}
+      >
+        <div>
+          <img src={Dog} className="dog" />
+          <div className="inline absolute mt15  ">
+            <b className="title mb_3">공지사항</b>
+            <span>금리, 상품 정보, 패치내용</span>
           </div>
-        </MenuBtn>
-      </div>
+        </div>
+      </MenuBtn>
     </div>
   );
 }
