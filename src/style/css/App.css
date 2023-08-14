@@ -21,7 +21,7 @@
   width: 375px;
   min-width: 375px;
   height: 812px;
-  padding-top: 80px;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -85,6 +85,15 @@ span {
 .ft14 {
   font-size: 14px;
 }
+
+.ft15 {
+  font-size: 15px;
+}
+
+.ft18 {
+  font-size: 18px;
+}
+
 .ft20 {
   font-size: 20px;
 }
@@ -105,8 +114,18 @@ span {
   margin: 15px;
 }
 
+.mgr_50 {
+  margin-right: -50px;
+}
+.mgr_20 {
+  margin-right: -20px;
+}
+
 .mgr10 {
   margin-right: 10px;
+}
+.mgr15 {
+  margin-right: 15px;
 }
 
 .mgr24 {
@@ -125,6 +144,14 @@ span {
   margin-left: 50px;
 }
 
+.mt_50 {
+  margin-top: -50px;
+}
+
+.mgt_50 {
+  margin-top: -50px;
+}
+
 .mt7 {
   margin-top: 7px;
 }
@@ -135,6 +162,10 @@ span {
 
 .mt15 {
   margin-top: 15px;
+}
+
+.mt30 {
+  margin-top: 30px;
 }
 
 .mt45 {
@@ -194,9 +225,24 @@ span {
 .mb15 {
   margin-bottom: 15px;
 }
+.mb17 {
+  margin-bottom: 15px;
+}
 
 .mb20 {
   margin-bottom: 20px;
+}
+
+.mb32 {
+  margin-bottom: 32px;
+}
+
+.mb40 {
+  margin-bottom: 40px;
+}
+
+.mb50 {
+  margin-bottom: 50px;
 }
 
 .firstgrade {

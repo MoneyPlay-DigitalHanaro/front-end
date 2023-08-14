@@ -35,7 +35,7 @@ function Main() {
   const [user, setUser] = useState(Maindata);
 
   return (
-    <div className="main">
+    <div className="main mt30">
       <div className="rowbox" style={{ height: '138px' }}>
         <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
           <p style={{}}>
