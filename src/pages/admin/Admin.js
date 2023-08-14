@@ -10,7 +10,6 @@ function Admin() {
   const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
   const [ID, setID] = useState([]);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const [tableData, setTableData] = useState([
@@ -77,7 +76,7 @@ function Admin() {
     console.log('ID:', ID);
 
     try {
-      const response = await axios.post('YOUR_SERVER_ENDPOINT', {
+      const response = await axios.post('https://codingapple1.github.io/shop/data2.json', {
         ID: ID,
         plusPoint: plusPoint,
       });
@@ -153,7 +152,7 @@ function Admin() {
             </form>
           </div>
         </div>
-
+        {/* 포인트 초기화  */}
         {showConfirmDialog && (
           <div className="confirm-modal">
             <p>정말로 포인트를 초기화하겠습니까?</p>
@@ -170,7 +169,7 @@ function Admin() {
             <button onClick={handleCloseDialog}>취소</button>
           </div>
         )}
-
+        {/* 테이블 */}
         <div className={`${styles.main} mt45 mgr24`}>
           <table className="table">
             <thead>

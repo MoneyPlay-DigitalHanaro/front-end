@@ -9,7 +9,6 @@
 
 .App {
   text-align: center;
-  padding-left: 50px;
   font-size: 20px;
   font-family: 'Tmoney';
   color: black;
@@ -22,6 +21,7 @@
   width: 375px;
   min-width: 375px;
   height: 812px;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -74,6 +74,10 @@ span {
   font-weight: 500;
 }
 
+.fw600 {
+  font-weight: 600;
+}
+
 .ft12 {
   font-size: 12px;
 }
@@ -87,6 +91,10 @@ span {
 
 .ft22 {
   font-size: 22px;
+}
+
+.ft24 {
+  font: size 24px;
 }
 
 .ft30 {
