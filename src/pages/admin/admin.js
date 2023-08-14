@@ -1,6 +1,6 @@
 /* eslint-disable */
-import NavBar from '../../component/Navbar.js';
-import SideBar from '../../component/Sidebar.js';
+import NavBar from '../../component/navbar';
+import SideBar from '../../component/sidebar';
 import '../../style/css/Admin.css';
 
 function Admin() {
