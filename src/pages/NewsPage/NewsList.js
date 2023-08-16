@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 const NewsListContainer = styled.div`
     width: 375px;
-    height: 812px;
+    max-height: 812px;
+    box-sizing: border-box;
     overflow: auto;
     margin-left: auto;
     margin-right: auto;
@@ -24,7 +25,7 @@ const NewsList = () => {
             {
                 newsArray.map(e => {
                     return(
-                        <News key={e.news_index} news_imageUrl={e.news_imageUrl} news_title={e.news_title} news_content={e.news_content} />
+                        <News key={e.news_index} news_imageUrl={e.news_imageUrl} news_title={e.news_title} news_content={e.news_content} news_index={e.news_index} />
                     )
                 })
             }

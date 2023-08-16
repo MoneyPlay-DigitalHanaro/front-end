@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const NewsLink = styled.a`
+    text-decoration: none;
+    color: black;
+`;
 const NewsThumbnail = styled.img`
     width: 330px;
     height: 165px;
     border-radius: 20px;
     position: static;
-    margin: 10px 0 10px 15px;
+    margin: 10px 0;
 `;
 const NewsTitle = styled.div`
     font-size: 17px;
     margin-top: 10px;
-    margin-left: 15px;   
+    margin-left: 20px;   
     text-align: left;
     width: 330px;
     box-sizing: border-box;
@@ -27,7 +31,7 @@ const NewsContent = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    margin-left: 10px;
+    margin-left: 15px;
     margin-top: 5px;
     margin-bottom: 30px;
 `;
@@ -42,10 +46,12 @@ const NewsContent = styled.div`
 //         </div>
 //     );
 // };
-const News = ({news_imageUrl, news_title, news_content}) => (
+const News = ({news_imageUrl, news_title, news_content, news_index}) => (
     <div>
-        <NewsTitle> {news_title} </NewsTitle>
-        <NewsThumbnail src={news_imageUrl} alt='newsThumb' />
+        <NewsLink href={`/news/detail?index=${news_index}`}>
+            <NewsTitle> {news_title} </NewsTitle>
+            <NewsThumbnail src={news_imageUrl} alt='newsThumb' />
+        </NewsLink>
         <NewsContent>  {news_content} </NewsContent>
     </div>
 );
