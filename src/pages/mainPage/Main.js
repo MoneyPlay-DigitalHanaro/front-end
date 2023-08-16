@@ -8,6 +8,12 @@ import styled from 'styled-components';
 import Maindata from './MainData.js';
 import person from '../../image/Main/Person.png';
 import coin from '../../image/Main/Coin.png';
+import Calender from '../../image/Main/Calender.png';
+import Dog from '../../image/Main/Dog.png';
+import Globe from '../../image/Main/Globe.png';
+import Money from '../../image/Main/Money.png';
+import QR from '../../image/Main/QrCode.png';
+import Footer from '../../component/Footer.js';
 import axios from 'axios';
 
 let MenuBtn = styled.button`
@@ -51,9 +57,9 @@ function Main() {
 
 
   return (
-    <div className="container mainbox">
+    <div className="main">
       <div className="rowbox" style={{ height: '138px' }}>
-        <MenuBtn bg="white" boxShadow="2px 3px 4px 1px black;" width="238px" height="118px">
+        <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
           <p style={{}}>
           <b className="title">{username ? `${username}님은` : ''}</b>
             <span>
@@ -64,71 +70,98 @@ function Main() {
             {username && <img src={person} alt="Profile" />}
           </p>
         </MenuBtn>
-        <MenuBtn bg="#FFDF8E" width="95px" height="118px">
+        <MenuBtn bg="rgba(255, 223, 142, 0.5);" width="95px" height="118px">
           <p>
             <b className="title">QR</b>
+            <img src={QR} className="qr imgMain" />
           </p>
         </MenuBtn>
       </div>
       <div className="rowbox">
-        <MenuBtn bg="#FFEDCB">
-          <b className="title">오늘의 단어</b>
-          <br />
+        <MenuBtn bg="rgba(255, 237, 203, 0.5);">
+          <b className="title mt10 mb10">오늘의 단어</b>
           <span>
             매일 한 개씩
             <br />
             풀어봐요
           </span>
+          <img src={Calender} className="imgMain" />
         </MenuBtn>
-        <MenuBtn bg="#70C3FF">
-          <p>
-            <b>뉴스</b>
-            <br />
-            <span>
-              경제 뉴스를 읽고
-              <br />
-              {Maindata[1].news}
-            </span>
-          </p>
+        <MenuBtn bg="rgba(112, 195, 255, 0.5);">
+          <div>
+            <b className="title mt10 mb10">뉴스</b>
+            <span>조금씩 알아보아요</span>
+            <img src={Globe} className="imgMain" />
+          </div>
         </MenuBtn>
       </div>
       <div className="rowbox">
-        <MenuBtn bg="#1E90FF">
-          <p>
-            <b>1등 {Maindata[2].username}</b>
-            <br />
-            <span>{Maindata[2].asset}</span>
-            <br />
-            <b>2등 {Maindata[3].username}</b>
-            <br />
-            <span>{Maindata[3].asset}</span>
-            <br />
-            <b>3등 {Maindata[4].username} </b>
-            <br />
-            <span>{Maindata[4].asset}</span>
-          </p>
+        <MenuBtn bg="rgba(30, 144, 255, 0.5)">
+          <div>
+            <b className="firstgrade mt15">1등 {Maindata[2].username}</b>
+            <div className="mb15 ft14">
+              <img src={coin} className="coin" />
+              <span>{Maindata[2].asset}</span>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '142px',
+                marginBottom: '7px',
+                fontSize: '12px',
+              }}
+            >
+              <b>2등 {Maindata[3].username}</b>
+              <span>{Maindata[3].asset}</span>
+            </div>
+
+            {/* <div style="display: flex; flex-direction: row; justify-content: space-between; width: 142px; margin-bottom: 7px;"></div> */}
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '142px',
+                marginBottom: '7px',
+                fontSize: '12px',
+              }}
+            >
+              <b>3등 {Maindata[4].username} </b>
+              <span>{Maindata[4].asset}</span>
+            </div>
+          </div>
         </MenuBtn>
-        <MenuBtn bg="#FFE070">
+        <MenuBtn bg="rgba(255, 224, 112, 0.5)">
           <p>
-            <b>자산 불리기</b>
-            <br />
+            <b className="title mt10 mb10">자산 불리기</b>
+
             <span>
               적금과 주식을
               <br />
               체험할 수 있어요
             </span>
           </p>
+          <img src={Money} className="imgMain" />
         </MenuBtn>
       </div>
-      <div className="rowbox">
-        <MenuBtn bg="white" boxShadow="2px 3px 4px 1px black;" width="348px" height="97px">
-          <p>
-            <b>공지사항</b>
-            <br />
+      <MenuBtn
+        bg="white"
+        boxShadow="2px 3px 4px 1px rgba(0,0,0, 0.25);"
+        width="348px"
+        height="97px"
+        style={{ marginLeft: '12px' }}
+      >
+        <div>
+          <img src={Dog} className="dog" />
+          <div className="inline absolute mt15  ">
+            <b className="title mb_3">공지사항</b>
             <span>금리, 상품 정보, 패치내용</span>
-          </p>
-        </MenuBtn>,
-      </div>
+          </div>
+        </div>
+      </MenuBtn>
     </div>
   );
 }

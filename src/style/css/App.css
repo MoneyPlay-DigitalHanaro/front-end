@@ -9,7 +9,6 @@
 
 .App {
   text-align: center;
-  padding-left: 50px;
   font-size: 20px;
   font-family: 'Tmoney';
   color: black;
@@ -18,21 +17,16 @@
   font-weight: 600;
 }
 
-.container {
-  width: 400px;
+.App-container {
+  width: 375px;
   min-width: 375px;
   height: 812px;
-  z-index: -5;
-  display: block;
-  float: none;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: auto;
-}
-
-.box {
-  display: inline-block;
-  margin: 6px;
-  border: solid pink 2px;
-  text-align: center;
+  border: solid black 1px;
 }
 
 .rowbox {
@@ -55,22 +49,314 @@
 .title {
   display: block;
   font-size: 18px;
+  width: 116.48px;
 }
 
 span {
-  position: absolute;
+  position: relative;
 }
 
-img {
+.FooterCircle {
+  position: absolute; /* 절대적 위치를 설정하여 부모 요소를 기준으로 배치합니다. */
+  top: -50%; /* 상단에 위치 */
+  left: 50%; /* 중앙에 위치 */
+  transform: translateX(-50%); /* 이미지의 중앙을 정확히 부모의 중앙으로 이동시킵니다. */
+  z-index: 3; /* footer 박스의 아래에 배치합니다. */
+}
+
+.iconChat {
+}
+
+.fw400 {
+  font-weight: 400;
+}
+
+.fw500 {
+  font-weight: 500;
+}
+
+.fw600 {
+  font-weight: 600;
+}
+
+.ft12 {
+  font-size: 12px;
+}
+
+.ft14 {
+  font-size: 14px;
+}
+.ft20 {
+  font-size: 20px;
+}
+
+.ft22 {
+  font-size: 22px;
+}
+
+.ft24 {
+  font: size 24px;
+}
+
+.ft30 {
+  font-size: 30px;
+}
+
+.mg15 {
+  margin: 15px;
+}
+
+.mgr10 {
+  margin-right: 10px;
+}
+
+.mgr24 {
+  margin-right: 24px;
+}
+
+.mgr30 {
+  margin-right: 30px;
+}
+
+.mgr60 {
+  margin-right: 60px;
+}
+
+.mgl50 {
+  margin-left: 50px;
+}
+
+.mt7 {
+  margin-top: 7px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.mt45 {
+  margin-top: 45px;
+}
+
+.mt50 {
+  margin-top: 50px;
+}
+
+.mt80 {
+  margin-top: 80px;
+}
+
+.ml0 {
+  margin-left: 0px;
+}
+
+.ml5 {
+  margin-left: 5px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.ml12 {
+  margin-left: 12px;
+}
+
+.ml20 {
+  margin-left: 20px;
+}
+.ml24 {
+  margin-left: 24px;
+}
+
+.ml60 {
+  margin-left: 60px;
+}
+
+.ml290 {
+  margin-left: 290px;
+}
+
+.mb_3 {
+  margin-bottom: -3px;
+}
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mb15 {
+  margin-bottom: 15px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.firstgrade {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 17px;
+}
+
+.anothergrade {
+  font-size: 12px;
+}
+
+.imgMain {
   position: absolute;
   bottom: 0;
   right: 0;
+  display: block;
 }
 
-.title {
+.coin {
+  display: inline-block;
+  position: relative;
+  margin-left: 13px;
+}
+
+.qr {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.dog {
+  position: relative;
+  display: inline-block;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.inline {
+  display: inline-block;
+}
+
+nav {
+  width: 1440px;
+  height: 84px;
+  margin-left: 277px;
+  vertical-align: middle;
+  text-align: right;
+  z-index: 6;
+}
+
+.mgtop50 {
+  margin-top: 50px;
+}
+
+input[type='checkbox'] {
+  transform: scale(1.5); /* 1.5배 크기로 확대 */
+  margin-right: 10px; /* 체크박스와 라벨 사이의 간격 조정 */
+}
+
+.nav .open > a {
+  background-color: transparent;
+}
+
+.nav .open > a:hover {
+  background-color: transparent;
+}
+
+.nav .open > a:focus {
+  background-color: transparent;
+}
+
+.sidebar-nav li {
+  display: inline-block;
+
+  line-height: 40px;
+
+  position: relative;
+
+  width: 100%;
+}
+
+.sidebar-nav li a {
+  color: #dddddd;
+
+  display: block;
+
+  padding: 10px 15px 10px 30px;
+
+  text-decoration: none;
+}
+
+.sidebar-nav li.open:hover before {
+  -webkit-transition: width 0.2s ease-in;
+
+  transition: width 0.2s ease-in;
+
+  width: 100%;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus {
+  background-color: transparent;
+
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  font-size: 25px;
+  height: 65px;
+  line-height: 44px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.blackline {
+  border: solid black 1px;
 }
 
 .context {
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f8f8dc;
+  width: 375px;
+  height: 84px;
+  border: solid #f9f8f8dc 1px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  z-index: 1000;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .App-logo {

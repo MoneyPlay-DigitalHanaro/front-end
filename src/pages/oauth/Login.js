@@ -23,7 +23,7 @@ export default function Login() {
 
                 <WrapLogin>
 
-                    <div className='catchphrase'>Play with money, money Play.</div>
+                    <div className='catchphrase'>아이코, 로그인하세요</div>
                     <div className='login-btn' onClick={kakaoLogin}>
                         <span>카카오톡으로 로그인</span>
                     </div>
