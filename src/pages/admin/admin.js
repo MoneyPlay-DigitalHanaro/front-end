@@ -1,6 +1,7 @@
 /* eslint-disable */
 import NavBar from '../../component/Navbar.js';
 import SideBar from '../../component/sidebar.js';
+import React, { useState } from 'react';
 
 function Admin() {
   const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
