@@ -1,0 +1,152 @@
+/* eslint-disable */
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.totalPoint {
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+
+.totalPointDefferance {
+  font-size: 15px;
+  color: #ff1e1e;
+  font-weight: 500;
+}
+
+.detailPoint {
+  font-size: 15px;
+  align-items: center;
+  letter-spacing: -0.32px;
+  font-weight: 400;
+  display: inline-block;
+}
+.detailPointDefferance {
+  font-size: 15px;
+  color: #ff1e1e;
+  font-weight: 500;
+}
+
+.myPageBox {
+  width: 330px;
+  height: 195px;
+  background-color: #ffe9c8;
+  border-radius: 15px;
+  padding-top: 30px;
+}
+
+.tabBox {
+  width: 330px;
+  height: 255px;
+}
+
+.stockBox {
+  width: 325px;
+  height: 77px;
+  border: solid black 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.stockName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.stockBoxDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-weight: 400;
+}
+
+.stockBoxDetail2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: 400;
+}
+
+.savingBox {
+  width: 327px;
+  height: 120px;
+  border: solid white 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px 10px 10px 20px;
+  border-radius: 20px;
+  background-color: rgba(112, 195, 255, 0.5);
+}
+
+.savingName {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tabMenu {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: solid black 0px;
+  z-index: 1;
+}
+
+.tab {
+  width: 100vmax;
+  padding: 10px 20px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-bottom: solid white 5px;
+  z-index: 2;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.selectedTab {
+  width: 100vmax;
+  padding: 10px 20px;
+  border: none;
+  border-bottom: solid #70c3ff 4px;
+  background-color: white;
+  color: #1e90ff;
+  cursor: pointer;
+  font-weight: 800;
+  z-index: 3;
+}
+
+.stockListContainer::-webkit-scrollbar {
+  width: 0;
+}
+
+.stockListContainer {
+  max-height: 300px; /* 원하는 높이를 지정합니다. */
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.savingListContainer::-webkit-scrollbar {
+  width: 0;
+}
+
+.savingListContainer {
+  max-height: 300px; /* 원하는 높이를 지정합니다. */
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.img_saving {
+  display: flex;
+}
