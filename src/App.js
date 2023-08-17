@@ -6,9 +6,10 @@ import './style/css/Admin.module.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
 import Admin from './pages/admin/admin';
-import NavBar from './component/Navbar';
+import NavBar from './component/Navbar.js';
 import SideBar from './component/sidebar';
 import NewsList from './pages/NewsPage/NewsList';
+import NewsDetail from './pages/NewsPage/NewsDetail';
 import Login from './pages/oauth/Login'
 import AdditionalInfo from './pages/oauth/AdditionalInfo'
 import KakaoAuthHandle from './pages/oauth/KakaoAuthHandle'
@@ -39,7 +40,7 @@ function App() {
           <Route path="/test" element={<AutoLayoutSizingExample />} />  
           <Route path="/join" element={<Join />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/news/detail" element={<NewsDetail />} />
           <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
           <Route path='/login' element={<Login/>}/>
         <Route path='/additionalInfo' element={<AdditionalInfo/>}/>
