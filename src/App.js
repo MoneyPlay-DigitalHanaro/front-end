@@ -6,7 +6,7 @@ import './style/css/Admin.module.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
 import Admin from './pages/admin/Admin.js';
-import NavBar from './component/Navbar.js';
+import NavBar from './component/Navbar';
 import SideBar from './component/Sidebar.js';
 import NewsList from './pages/NewsPage/NewsList';
 import NewsDetail from './pages/NewsPage/NewsDetail';
