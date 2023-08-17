@@ -5,10 +5,13 @@ import './style/css/Admin.module.css';
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
-import Admin from './pages/admin/Admin';
+
+import Admin from './pages/admin/Admin.js';
 import NavBar from './component/Navbar';
-import SideBar from './component/Sidebar';
+import SideBar from './component/Sidebar.js';
 import NewsList from './pages/NewsPage/NewsList';
+import NewsDetail from './pages/NewsPage/NewsDetail';
+
 import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './pages/mainPage/Main.js';
@@ -34,6 +37,7 @@ function App() {
           <Route path="/test" element={<AutoLayoutSizingExample />} />
           <Route path="/join" element={<Join />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/news/detail" element={<NewsDetail />} />
         </Routes>
         <Footer></Footer>
       </div>
