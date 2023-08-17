@@ -56,5 +56,4 @@ const News = ({news_imageUrl, news_title, news_content, news_index}) => (
     </div>
 );
 
-
 export default News;
