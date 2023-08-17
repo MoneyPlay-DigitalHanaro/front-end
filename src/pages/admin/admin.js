@@ -1,10 +1,6 @@
 /* eslint-disable */
-import React, { useState } from 'react'; // useState를 가져오기
-import { Container } from 'react-bootstrap';
 import NavBar from '../../component/Navbar.js';
-import SideBar from '../../component/Sidebar.js';
-import styles from '../../style/css/Admin.module.css';
-import axios from 'axios';
+import SideBar from '../../component/sidebar.js';
 
 function Admin() {
   const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정

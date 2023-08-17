@@ -1,10 +1,8 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import CardMenu from '../../component/Card.js';
-import UsernameFetcher from '../oauth/UsernameFetcher.js';
 import '../../style/css/App.css';
 import styled from 'styled-components';
-// import { useState } from 'react';
 import Maindata from './MainData.js';
 import person from '../../image/Main/Person.png';
 import coin from '../../image/Main/Coin.png';
@@ -55,19 +53,18 @@ function Main() {
   }, []);
 
 
-
   return (
-    <div className="main">
+    <div className="main mt80">
       <div className="rowbox" style={{ height: '138px' }}>
         <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
           <p style={{}}>
-          <b className="title">{username ? `${username}님은` : ''}</b>
+            <b className="title">{username ? `${username}님은` : ''}</b>
             <span>
               <img src={coin} style={{ position: 'relative', display: 'inline-block', marginLeft: '10px' }} />
               <b>{Maindata[0].price}</b>
               <br /> 가지고 있어요
             </span>
-            {username && <img src={person} alt="Profile" />}
+            <img src={person} className="imgMain" />
           </p>
         </MenuBtn>
         <MenuBtn bg="rgba(255, 223, 142, 0.5);" width="95px" height="118px">
