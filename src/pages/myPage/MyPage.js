@@ -131,7 +131,7 @@ function MyPage() {
                   <div className="ft14 fw400 mgr_15">
                     <div>현재금액</div>
                     <div>이자</div>
-                    <div>시작일1</div>
+                    <div>시작일</div>
                     <div>만기일</div>
                   </div>
 
