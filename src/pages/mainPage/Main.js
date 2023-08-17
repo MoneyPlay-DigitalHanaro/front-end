@@ -35,7 +35,7 @@ function Main() {
   const [user, setUser] = useState(Maindata);
 
   return (
-    <div className="main mt30">
+    <div className="main mt50">
       <div className="rowbox" style={{ height: '138px' }}>
         <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
           <p style={{}}>
@@ -94,8 +94,6 @@ function Main() {
               <b>2등 {Maindata[3].username}</b>
               <span>{Maindata[3].asset}</span>
             </div>
-
-            {/* <div style="display: flex; flex-direction: row; justify-content: space-between; width: 142px; margin-bottom: 7px;"></div> */}
 
             <div
               style={{
