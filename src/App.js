@@ -5,9 +5,9 @@ import './style/css/Admin.module.css';
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
-import Admin from './pages/admin/admin';
+import Admin from './pages/admin/Admin';
 import NavBar from './component/Navbar.js';
-import SideBar from './component/sidebar';
+import SideBar from './component/Sidebar';
 import NewsList from './pages/NewsPage/NewsList';
 import NewsDetail from './pages/NewsPage/NewsDetail';
 import Login from './pages/oauth/Login'
@@ -50,7 +50,7 @@ function App() {
                         element={<KakaoAuthHandle/>}
                     />
         </Routes>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </div>    
 
 
