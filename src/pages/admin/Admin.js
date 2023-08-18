@@ -8,7 +8,6 @@ import axios from 'axios';
 import AdminChart from '../../component/AdminChart.js';
 
 function Admin() {
-
   const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
   const [ID, setID] = useState([]);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -51,10 +50,6 @@ function Admin() {
 
     // ... 나머지 데이터
   ]);
-  const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
-  const [ID, setID] = useState([]);
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작을 중지
