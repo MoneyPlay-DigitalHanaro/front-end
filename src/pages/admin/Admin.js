@@ -75,7 +75,9 @@ function Admin() {
     console.log('ID:', ID);
 
     try {
-      const response = await axios.post('YOUR_SERVER_ENDPOINT', {
+
+      const response = await axios.post('https://codingapple1.github.io/shop/data2.json', {
+
         ID: ID,
         plusPoint: plusPoint,
       });
@@ -151,7 +153,6 @@ function Admin() {
             </form>
           </div>
         </div>
-
         {showConfirmDialog && (
           <div className="confirm-modal">
             <p>정말로 포인트를 초기화하겠습니까?</p>
