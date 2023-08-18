@@ -6,19 +6,22 @@
 }
 
 .containerAdmin {
-  width: 1440px;
+  width: 1920px;
   min-width: 1440px;
-  height: 1024px;
+  height: 1080px;
   z-index: -5;
-  display: block;
-  float: left;
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  justify-content: center;
+
   margin-left: 50px;
   background-color: rgb(216, 228, 236, 0.25);
 }
 
 .sidebar {
   width: 277px;
-  height: 1024px;
+  height: 1080px;
   background: #4478c6;
   position: absolute;
   z-index: 5;
@@ -31,16 +34,21 @@
   margin: 12px 10px 10px 15px;
 }
 
+.pointBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .box {
-  width: 540px;
+  width: 450px;
   height: 212px;
   display: block;
   float: right;
   text-align: left;
-  padding: 20px;
   margin: 6px;
+  margin-bottom: 20px;
   border: solid white 0px;
-  position: relative;
   background-color: white;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
@@ -49,7 +57,7 @@
 
 .main {
   width: 1115px;
-  height: 612px;
+  height: 930px;
   display: block;
   float: right;
   text-align: left;
@@ -59,6 +67,65 @@
   border-radius: 25px;
   vertical-align: middle;
   padding: 50px;
+}
+
+.sortBox {
+  border: solid rgb(216, 228, 236, 0.25) 1px;
+  font-size: 20px;
+  font-family: 'Tmoney';
+}
+
+.rankBox {
+  width: 450px;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 6px;
+  margin-bottom: 20px;
+  border: solid white 0px;
+  background-color: white;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.rankDetail {
+  width: 380px;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin: 6px;
+  margin-bottom: 20px;
+  border: solid white 0px;
+  background-color: white;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.ranking {
+  font-size: 25px;
+  margin-right: 20px;
+}
+
+.rankname {
+  display: flex;
+  align-items: flex-end;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.rankscore {
+  display: flex;
+  align-items: flex-end;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.scaleDown {
+  transform: scale(1);
 }
 
 .sidebarImage {

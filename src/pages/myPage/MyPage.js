@@ -42,7 +42,7 @@ function MyPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div className={`${styles.title} ft20 fw600 ml24 mb17`}>
+      <div className={`${styles.title} ft20 fw600 ml24 mb17 mt30`}>
         <div>내 포인트</div>
       </div>
 
