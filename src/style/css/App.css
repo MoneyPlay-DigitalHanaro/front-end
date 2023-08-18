@@ -22,6 +22,7 @@
   width: 375px;
   min-width: 375px;
   height: 812px;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -49,6 +50,7 @@
 .title {
   display: block;
   font-size: 18px;
+  width: 116.48px;
 }
 
 span {
@@ -85,6 +87,15 @@ span {
 .ft14 {
   font-size: 14px;
 }
+
+.ft15 {
+  font-size: 15px;
+}
+
+.ft18 {
+  font-size: 18px;
+}
+
 .ft20 {
   font-size: 20px;
 }
@@ -131,9 +142,11 @@ span {
   margin-right: 15px;
 }
 
+
 .mgr20 {
-  margin-right: 15px;
+  margin-right: 20px;
 }
+
 
 .mgr24 {
   margin-right: 24px;
@@ -159,6 +172,7 @@ span {
   margin-top: -50px;
 }
 
+
 .mt_10 {
   margin-top: -10px;
 }
@@ -175,17 +189,20 @@ span {
   margin-top: 15px;
 }
 
+
 .mt20 {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .mt30 {
   margin-top: 30px;
 }
 
+
 .mt40 {
   margin-top: 40px;
 }
+
 
 .mt45 {
   margin-top: 45px;
