@@ -42,7 +42,7 @@ function MyPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div className={`${styles.title} ft20 fw600 ml24 mb17`}>
+      <div className={`${styles.title} ft20 fw600 ml24 mb17 mt30`}>
         <div>내 포인트</div>
       </div>
 
@@ -126,7 +126,7 @@ function MyPage() {
                 <div className={`${styles.savingBox} ft18 mb20`}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <b className={`${styles.savingName} ft18 ml20`}>짱구</b>
-                    <img src={saving1} className="img_saving" />
+                    <img src={saving1} className="img_saving ml_12 mt_10" />
                   </div>
                   <div className="ft14 fw400 mgr_15">
                     <div>현재금액</div>

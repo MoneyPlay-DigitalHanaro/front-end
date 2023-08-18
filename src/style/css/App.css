@@ -100,6 +100,18 @@ span {
   font-size: 20px;
 }
 
+.ft15 {
+  font-size: 15px;
+}
+
+.ft18 {
+  font-size: 18px;
+}
+
+.ft20 {
+  font-size: 20px;
+}
+
 .ft22 {
   font-size: 22px;
 }
@@ -130,6 +142,12 @@ span {
   margin-right: 15px;
 }
 
+
+.mgr20 {
+  margin-right: 20px;
+}
+
+
 .mgr24 {
   margin-right: 24px;
 }
@@ -154,6 +172,11 @@ span {
   margin-top: -50px;
 }
 
+
+.mt_10 {
+  margin-top: -10px;
+}
+
 .mt7 {
   margin-top: 7px;
 }
@@ -166,9 +189,20 @@ span {
   margin-top: 15px;
 }
 
+
+.mt20 {
+  margin-top: 20px;
+}
+
 .mt30 {
   margin-top: 30px;
 }
+
+
+.mt40 {
+  margin-top: 40px;
+}
+
 
 .mt45 {
   margin-top: 45px;
@@ -180,6 +214,14 @@ span {
 
 .mt80 {
   margin-top: 80px;
+}
+
+.ml_30 {
+  margin-left: -30px;
+}
+
+.ml_12 {
+  margin-left: -12px;
 }
 
 .ml0 {
@@ -203,6 +245,10 @@ span {
 }
 .ml24 {
   margin-left: 24px;
+}
+
+.ml30 {
+  margin-left: 30px;
 }
 
 .ml60 {
@@ -291,6 +337,13 @@ span {
 
 .inline {
   display: inline-block;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  position: relative;
 }
 
 nav {
