@@ -126,7 +126,8 @@ function MyPage() {
                 <div className={`${styles.savingBox} ft18 mb20`}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <b className={`${styles.savingName} ft18 ml20`}>짱구</b>
-                    <img src={saving1} className="img_saving" />
+                    <img src={saving1} className="img_saving ml_12 mt_10" />
+
                   </div>
                   <div className="ft14 fw400 mgr_15">
                     <div>현재금액</div>

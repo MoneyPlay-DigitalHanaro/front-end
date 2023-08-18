@@ -100,6 +100,18 @@ span {
   font-size: 20px;
 }
 
+.ft15 {
+  font-size: 15px;
+}
+
+.ft18 {
+  font-size: 18px;
+}
+
+.ft20 {
+  font-size: 20px;
+}
+
 .ft22 {
   font-size: 22px;
 }
@@ -154,6 +166,10 @@ span {
   margin-top: -50px;
 }
 
+.mt_10 {
+  margin-top: -10px;
+}
+
 .mt7 {
   margin-top: 7px;
 }
@@ -180,6 +196,10 @@ span {
 
 .mt80 {
   margin-top: 80px;
+}
+
+.ml_12 {
+  margin-left: -12px;
 }
 
 .ml0 {
