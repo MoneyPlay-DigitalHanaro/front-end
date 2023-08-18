@@ -7,7 +7,6 @@
 //     headers: {'Content-Type': 'application/json'}
 // });
 
-
 // instance.interceptors.request.use((config) => {
 //     const token = localStorage.getItem('jwtToken');
 //     if (token) {
