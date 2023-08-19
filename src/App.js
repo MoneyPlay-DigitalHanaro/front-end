@@ -33,7 +33,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/admin" element={<Admin />} />
-        <Route path="/test3" element={<Admin3 />} />
+        <Route path="/student" element={<AutoLayoutSizingExample2 />} />
+                  <Route path="/test3" element={<Admin3 />} />
       </Routes>
       {location.pathname !== '/admin' && location.pathname !== '/student' ? (
         <div className="App-container">
@@ -44,10 +45,10 @@ function App() {
             <Route path="/join" element={<Join />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/news/detail" element={<NewsDetail />} />
-            <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/additionalInfo" element={<AdditionalInfo />} />
-            <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
+                        <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/additionalInfo" element={<AdditionalInfo />} />
+          <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}

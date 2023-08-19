@@ -13,7 +13,6 @@ function Admin() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-
   const [tableData, setTableData] = useState([
     { id: 1, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
     { id: 2, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
