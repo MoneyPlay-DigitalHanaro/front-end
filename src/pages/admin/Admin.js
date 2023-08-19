@@ -8,6 +8,12 @@ import axios from 'axios';
 import AdminChart from '../../component/AdminChart.js';
 
 function Admin() {
+  const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
+  const [ID, setID] = useState([]);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [tableData, setTableData] = useState([
     { id: 1, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
     { id: 2, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
@@ -46,10 +52,24 @@ function Admin() {
 
     // ... 나머지 데이터
   ]);
-  const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
-  const [ID, setID] = useState([]);
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const ITEMS_PER_PAGE = 8; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
+  const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
+
+  // 3. 페이지네이션 버튼을 누르면 현재 페이지를 업데이트하는 함수를 추가합니다.
+  const gotoPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  // 4. 현재 페이지에 따라 아이템 목록을 나누는 로직을 추가합니다.
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작을 중지
@@ -110,22 +130,6 @@ function Admin() {
     } else {
       setID(ID.filter((studentId) => studentId !== id));
     }
-  };
-
-  const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
-  const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
-
-  // 3. 페이지네이션 버튼을 누르면 현재 페이지를 업데이트하는 함수를 추가합니다.
-  const gotoPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const prevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  const nextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
   // 4. 현재 페이지에 따라 아이템 목록을 나누는 로직을 추가합니다.
