@@ -154,11 +154,9 @@ span {
   margin-right: 15px;
 }
 
-
 .mgr20 {
   margin-right: 20px;
 }
-
 
 .mgr24 {
   margin-right: 24px;
@@ -200,7 +198,6 @@ span {
   margin-top: 15px;
 }
 
-
 .mt20 {
   margin-top: 20px;
 }
@@ -223,6 +220,10 @@ span {
 
 .mt80 {
   margin-top: 80px;
+}
+
+.ml_75 {
+  margin-left: -75px;
 }
 
 .ml_30 {
@@ -353,15 +354,19 @@ span {
   flex-direction: column;
   margin-top: 10px;
   position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 nav {
   width: 1440px;
   height: 84px;
   margin-left: 277px;
-  vertical-align: middle;
   text-align: right;
   z-index: 6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .mgtop50 {
