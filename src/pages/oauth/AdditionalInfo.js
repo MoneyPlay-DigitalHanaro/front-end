@@ -1,68 +1,131 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import './StudentForm.css';
+import styles from '../../style/css/MyPage.module.css';
 
-function AdditionalInfo() {
-  const [userInfo, setUserInfo] = useState({
-    studentNumber: '',
-    studentName: '',
-    eMail: '',
-    isTeacher: false,
-    studentProfile: '',
-    schoolId: '', // 학교 ID를 선택 또는 입력받게 합니다.
-    classRoomId: '', // 반 ID를 선택 또는 입력받게 합니다.
-    // ... 다른 필요한 정보
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo({
-      ...userInfo,
-      [name]: value,
+function StudentForm() {
+    const [formData, setFormData] = useState({
+        studentGrade: '',
+        studentClass: '',
+        schoolName: '',
+        email: '',
+        isTeacher: '',
+        studentNumber: '',
+        studentProfile: '',
+        studentName: '',
+        image: '',
+        nickname: '',
+        kakao_id: '',
+        myRole: 'MEMBER'
     });
-  };
+    const [currentStep, setCurrentStep] = useState(0);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // 백엔드 API로 사용자 정보를 전송합니다.
-      await axios.post('/api/register/kakao', userInfo);
-      alert('정보가 저장되었습니다.');
-    } catch (error) {
-      console.error('Error saving user info:', error);
-    }
-  };
+    const steps = [
+        'isStudent',   // 추가된 부분
+        'schoolName',
+        'studentClass',
+        'studentNumber',
+        'studentName'
+    ];
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="studentName"
-        value={userInfo.studentName}
-        onChange={handleChange}
-        placeholder="학생 이름"
-      />
-      <input type="text" name="schoolId" value={userInfo.schoolId} onChange={handleChange} placeholder="학교" />
-      <input type="text" name="studentGrade" value={userInfo.studentGrade} onChange={handleChange} placeholder="학년" />
-      <input type="text" name="studentClass" value={userInfo.studentClass} onChange={handleChange} placeholder="반" />
-      <input
-        type="text"
-        name="studentNumber"
-        value={userInfo.studentNumber}
-        onChange={handleChange}
-        placeholder="번호"
-      />
-      <input type="text" name="eMail" value={userInfo.eMail} onChange={handleChange} placeholder="이메일" />
-      <input
-        type="text"
-        name="studentProfile"
-        value={userInfo.studentProfile}
-        onChange={handleChange}
-        placeholder="상태메시지"
-      />
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // 서버에 formData를 전송하는 로직
+        console.log(formData);
+    };
 
-      <button type="submit">제출</button>
-    </form>
-  );
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({ ...prevState, [name]: value }));
+    };
+
+    const handleNext = () => {
+        // 만약 현재 스텝이 "isStudent"이고, 선택되지 않았다면 경고 표시
+        if (currentStep === 0 && (!formData.isStudent || formData.isStudent === "")) {
+            alert("빈칸을 채워주세요!");
+            return;
+        }
+    
+        // 다른 스텝에 대한 검증
+        if (formData[steps[currentStep]]) {
+            setCurrentStep(prevStep => prevStep + 1);
+        } else {
+            alert("빈칸을 채워주세요!");
+        }
+    };
+
+    return (        
+        <div className="form-container">
+            <h2>추가정보입력</h2>
+            <div>
+        <form onSubmit={handleSubmit}>
+            {currentStep === 0 && (
+                <label>
+                학생이신가요?
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            name="isStudent"
+                            value="yes"
+                            checked={formData.isStudent === "yes"}
+                            onChange={handleChange}
+                        />
+                        네
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="isStudent"
+                            value="no"
+                            checked={formData.isStudent === "no"}
+                            onChange={handleChange}
+                        />
+                        아니요
+                    </label>
+                </div>
+            </label>
+            )}
+            {currentStep === 1 && (
+                <label>
+                    학교 이름:
+                    <input type="text" name="schoolName" value={formData.schoolName} onChange={handleChange} required />
+                </label>
+            )}
+            {currentStep === 2 && (
+                <label>
+                    학년:
+                    <input type="text" name="studentClass" value={formData.studentClass} onChange={handleChange} required />
+                </label>
+            )}
+            {currentStep === 3 && (
+                <label>
+                    반:
+                    <input type="text" name="studentNumber" value={formData.studentNumber} onChange={handleChange} required />
+                </label>
+            )}
+            {currentStep === 4 && (
+                <label>
+                    학생 이름이 뭔가요?:
+                    <input type="text" name="studentName" value={formData.studentName} onChange={handleChange} required />
+                </label>
+            )}
+            
+            <br />
+
+            <div className="button-container">
+                    {currentStep < steps.length - 1 ? (
+                        <button type="button" onClick={handleNext} className="next-button">다음</button>
+                    ) : (
+                        <input type="submit" value="제출" className="submit-button" />
+                    )}
+                </div>
+            
+        </form>
+        </div>
+        </div>
+
+    );
 }
 
-export default AdditionalInfo;
+export default StudentForm;
