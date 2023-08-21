@@ -13,6 +13,7 @@ const NewsListContainer = styled.div`
 `;
 
 const NewsList = () => {
+    
     const [newsArray,setNewsArray] = useState([])
     useEffect(()=>{
         axios.get("http://localhost:8080/news").then((response)=>{

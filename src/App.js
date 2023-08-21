@@ -1,10 +1,9 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style/css/Admin.module.css';
-
+import axios from 'axios';
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
-
 import Admin from './pages/admin/Admin';
 import NavBar from './component/Navbar.js';
 import SideBar from './component/Sidebar';
@@ -24,9 +23,21 @@ import Join from './pages/Join/Join';
 import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
+import Stock from './pages/stock/Stock';
+import PurchaseStock from './pages/stock/PurchaseStock';
+
 
 
 function App() {
+
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem('Authorization');
+    if (authToken) {
+      axios.defaults.headers.common['Authorization'] = authToken;
+    }
+  }, []);
+
   return (
     <div className="App">
       <Routes>
@@ -43,6 +54,8 @@ function App() {
           <Route path="/news/detail" element={<NewsDetail />} />
           <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
           <Route path='/login' element={<Login/>}/>
+          <Route path='/stock' element={<Stock/>}/>
+          <Route path='/purchaseStock' element={<PurchaseStock/>}/>
         <Route path='/additionalInfo' element={<AdditionalInfo/>}/>
                     <Route
                         exact

@@ -40,14 +40,16 @@ function Main() {
     // 토큰을 이용하여 사용자 이름을 가져옵니다
     const fetchUsername = async () => {
       try {
-        const response = await axios.post('http://localhost:8080/decodeToken', { token });
+        const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
         setUsername(response.data.username);
       } catch (error) {
         console.error(error);
+        console.log(tokenOnly);
       }
     };
-    const token = localStorage.getItem('token');
-    if (token) {
+    const authToken = localStorage.getItem('Authorization');
+    const tokenOnly = authToken.split(" ")[1];
+    if (tokenOnly) {
       fetchUsername();
     }
   }, []);

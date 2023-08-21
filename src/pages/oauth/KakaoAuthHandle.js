@@ -8,8 +8,9 @@ const KakaoAuthHandle = (props) => {
         axios
         .get(`http://localhost:8080/api/login/oauth2/code/kakao?code=${code}`)
         .then((res) => {
+          const authToken = res.data.authorization;
           console.log(res);
-          localStorage.setItem('token', res.headers["authorization"]); // Corrected header access
+          localStorage.setItem('Authorization', authToken);  // Corrected header access
           localStorage.setItem('token_body', JSON.stringify(res.data)); // Storing response data in JSON format
           window.location.href = "/";
         })
