@@ -1,8 +1,8 @@
 /* eslint-disable */
+import React, { useState, useEffect } from 'react';
 import CardMenu from '../../component/Card.js';
 import '../../style/css/App.css';
 import styled from 'styled-components';
-import { useState } from 'react';
 import Maindata from './MainData.js';
 import person from '../../image/Main/Person.png';
 import coin from '../../image/Main/Coin.png';
@@ -12,6 +12,7 @@ import Globe from '../../image/Main/Globe.png';
 import Money from '../../image/Main/Money.png';
 import QR from '../../image/Main/QrCode.png';
 import Footer from '../../component/Footer.js';
+import axios from 'axios';
 
 let MenuBtn = styled.button`
   background: ${(props) => props.bg};
@@ -33,13 +34,32 @@ let MenuBtn = styled.button`
 
 function Main() {
   const [user, setUser] = useState(Maindata);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    // 토큰을 이용하여 사용자 이름을 가져옵니다
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.post('http://localhost:8080/decodeToken', { token });
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchUsername();
+    }
+  }, []);
+
 
   return (
-    <div className="main mt80">
+    <div className="main mt50">
+
       <div className="rowbox" style={{ height: '138px' }}>
         <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
           <p style={{}}>
-            <b className="title">{Maindata[0].username}님은</b>
+            <b className="title">{username ? `${username}님은` : ''}</b>
             <span>
               <img src={coin} style={{ position: 'relative', display: 'inline-block', marginLeft: '10px' }} />
               <b>{Maindata[0].price}</b>
@@ -94,8 +114,6 @@ function Main() {
               <b>2등 {Maindata[3].username}</b>
               <span>{Maindata[3].asset}</span>
             </div>
-
-            {/* <div style="display: flex; flex-direction: row; justify-content: space-between; width: 142px; margin-bottom: 7px;"></div> */}
 
             <div
               style={{

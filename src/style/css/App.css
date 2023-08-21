@@ -22,6 +22,7 @@
   width: 375px;
   min-width: 375px;
   height: 812px;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -49,6 +50,7 @@
 .title {
   display: block;
   font-size: 18px;
+  width: 116.48px;
 }
 
 span {
@@ -74,6 +76,10 @@ span {
   font-weight: 500;
 }
 
+.fw600 {
+  font-weight: 600;
+}
+
 .ft12 {
   font-size: 12px;
 }
@@ -81,12 +87,37 @@ span {
 .ft14 {
   font-size: 14px;
 }
+
+.ft15 {
+  font-size: 15px;
+}
+
+.ft18 {
+  font-size: 18px;
+}
+
+.ft20 {
+  font-size: 20px;
+}
+
+.ft15 {
+  font-size: 15px;
+}
+
+.ft18 {
+  font-size: 18px;
+}
+
 .ft20 {
   font-size: 20px;
 }
 
 .ft22 {
   font-size: 22px;
+}
+
+.ft24 {
+  font: size 24px;
 }
 
 .ft30 {
@@ -97,9 +128,25 @@ span {
   margin: 15px;
 }
 
+.mgr_50 {
+  margin-right: -50px;
+}
+.mgr_20 {
+  margin-right: -20px;
+}
+
 .mgr10 {
   margin-right: 10px;
 }
+.mgr15 {
+  margin-right: 15px;
+}
+
+
+.mgr20 {
+  margin-right: 20px;
+}
+
 
 .mgr24 {
   margin-right: 24px;
@@ -117,6 +164,19 @@ span {
   margin-left: 50px;
 }
 
+.mt_50 {
+  margin-top: -50px;
+}
+
+.mgt_50 {
+  margin-top: -50px;
+}
+
+
+.mt_10 {
+  margin-top: -10px;
+}
+
 .mt7 {
   margin-top: 7px;
 }
@@ -129,6 +189,21 @@ span {
   margin-top: 15px;
 }
 
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.mt30 {
+  margin-top: 30px;
+}
+
+
+.mt40 {
+  margin-top: 40px;
+}
+
+
 .mt45 {
   margin-top: 45px;
 }
@@ -139,6 +214,14 @@ span {
 
 .mt80 {
   margin-top: 80px;
+}
+
+.ml_30 {
+  margin-left: -30px;
+}
+
+.ml_12 {
+  margin-left: -12px;
 }
 
 .ml0 {
@@ -164,6 +247,10 @@ span {
   margin-left: 24px;
 }
 
+.ml30 {
+  margin-left: 30px;
+}
+
 .ml60 {
   margin-left: 60px;
 }
@@ -186,9 +273,24 @@ span {
 .mb15 {
   margin-bottom: 15px;
 }
+.mb17 {
+  margin-bottom: 15px;
+}
 
 .mb20 {
   margin-bottom: 20px;
+}
+
+.mb32 {
+  margin-bottom: 32px;
+}
+
+.mb40 {
+  margin-bottom: 40px;
+}
+
+.mb50 {
+  margin-bottom: 50px;
 }
 
 .firstgrade {
@@ -235,6 +337,13 @@ span {
 
 .inline {
   display: inline-block;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  position: relative;
 }
 
 nav {
