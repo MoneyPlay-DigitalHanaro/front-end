@@ -126,17 +126,9 @@ function StudentForm() {
                     다음
                   </button>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '30px' }}>
-                  <img
-                    src={person1}
-                    className="person1"
-                    style={{ position: 'absolute', bottom: '567px', right: '640px' }}
-                  />
-                  <img
-                    src={person2}
-                    className="person2"
-                    style={{ position: 'absolute', bottom: '567px', right: '577px' }}
-                  />
+                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '200px' }}>
+                  <img src={person1} className="person1 mgr_100" />
+                  <img src={person2} className="person2" />
                 </div>
               </div>
             ) : (
@@ -144,17 +136,9 @@ function StudentForm() {
                 <div>
                   <input type="submit" value="제출" className="submit-button" />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '30px' }}>
-                  <img
-                    src={person1}
-                    className="person1"
-                    style={{ position: 'absolute', bottom: '567px', right: '640px' }}
-                  />
-                  <img
-                    src={person2}
-                    className="person2"
-                    style={{ position: 'absolute', bottom: '567px', right: '577px' }}
-                  />
+                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '200px' }}>
+                  <img src={person1} className="person1 mgr_100" />
+                  <img src={person2} className="person2" />
                 </div>
               </div>
             )}

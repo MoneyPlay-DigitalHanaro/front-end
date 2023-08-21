@@ -140,6 +140,10 @@ span {
   margin: 15px;
 }
 
+.mgr_100 {
+  margin-right: -100px;
+}
+
 .mgr_50 {
   margin-right: -50px;
 }

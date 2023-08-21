@@ -35,7 +35,6 @@
   background-color: #70c3ff;
 }
 
-.person1 {
-  position: absolute;
-  bottom: 0;
+img {
+  position: relative;
 }
