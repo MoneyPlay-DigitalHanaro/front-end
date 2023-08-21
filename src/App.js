@@ -26,7 +26,8 @@ import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
 import AdminStudent from './pages/admin/AdminStudent';
 import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
-import PurchaseStock from './pages/stock/PurchaseStock'
+import PurchaseStock from './pages/stock/PurchaseStock';
+import Stock from './pages/stock/Stock';
 
 function App() {
   // useEffect(() => {
@@ -50,7 +51,8 @@ function App() {
             <Route path="*" element={<Main />} />
             <Route path="/" element={<Main />} />
             <Route path="/news" element={<NewsList />} />
-            <Route path="/stock" element={<PurchaseStock />} />
+            <Route path="/stock" element={<Stock />} />
+            <Route path="/purchase" element={<PurchaseStock />} />
             <Route path="/test" element={<AutoLayoutSizingExample />} />
             <Route path="/join" element={<Join />} />
             <Route path="/mypage" element={<MyPage />} />

@@ -58,7 +58,7 @@ function PurchaseStock() {
             <img src={plus}></img>{' '}
           </button>
         </div>
-
+          
         <div style={{ marginTop: '30px' }}>
           <button className={`${styles.stockButton}`} onClick={buyStock}>
             사기
