@@ -28,3 +28,14 @@
   align-self: center;
   padding: 25px;
 }
+
+.nextButton {
+  width: 80px;
+  height: 40px;
+  background-color: #70c3ff;
+}
+
+.person1 {
+  position: absolute;
+  bottom: 0;
+}

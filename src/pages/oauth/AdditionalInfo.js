@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import './StudentForm.css';
 import styles from '../../style/css/Login.module.css';
 import { column } from 'stylis';
+import person1 from '../../image/Login/person1.png';
+import person2 from '../../image/Login/person2.png';
+import { left } from '@popperjs/core';
 
 function StudentForm() {
   const [formData, setFormData] = useState({
@@ -64,7 +67,7 @@ function StudentForm() {
           {currentStep === 0 && (
             <label className={`${styles.subtitle}  mb30`}>
               학생이신가요?
-              <div className={`${styles.subtitle} mt20 mb30`}>
+              <div className={`${styles.subtitle} mt20 mb15`}>
                 <label className={`${styles.subtitle} mgr15`}>
                   <input
                     type="radio"
@@ -117,11 +120,43 @@ function StudentForm() {
 
           <div>
             {currentStep < steps.length - 1 ? (
-              <button type="button" onClick={handleNext} className="next-button">
-                다음
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div>
+                  <button type="button" onClick={handleNext} className="next-button">
+                    다음
+                  </button>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '30px' }}>
+                  <img
+                    src={person1}
+                    className="person1"
+                    style={{ position: 'absolute', bottom: '567px', right: '640px' }}
+                  />
+                  <img
+                    src={person2}
+                    className="person2"
+                    style={{ position: 'absolute', bottom: '567px', right: '577px' }}
+                  />
+                </div>
+              </div>
             ) : (
-              <input type="submit" value="제출" className="submit-button" />
+              <div>
+                <div>
+                  <input type="submit" value="제출" className="submit-button" />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '30px' }}>
+                  <img
+                    src={person1}
+                    className="person1"
+                    style={{ position: 'absolute', bottom: '567px', right: '640px' }}
+                  />
+                  <img
+                    src={person2}
+                    className="person2"
+                    style={{ position: 'absolute', bottom: '567px', right: '577px' }}
+                  />
+                </div>
+              </div>
             )}
           </div>
         </form>

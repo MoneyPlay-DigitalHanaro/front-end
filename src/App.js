@@ -43,11 +43,12 @@ function App() {
         <Route path="/student" element={<AdminStudent />} />
         <Route path="/test3" element={<Admin3 />} />
       </Routes>
-      {location.pathname !== '/admin' && location.pathname !== '/student' && location.pathname !== '/adminjoin' ? (
+      {location.pathname !== '/admin' && location.pathname !== '/student' ? (
         <div className="App-container">
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/news" element={<NewsList />} />
+            {/* <Route path="/stock" element={<PurchaseStock />} /> */}
             <Route path="/test" element={<AutoLayoutSizingExample />} />
             <Route path="/join" element={<Join />} />
             <Route path="/mypage" element={<MyPage />} />
