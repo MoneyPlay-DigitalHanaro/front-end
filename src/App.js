@@ -27,6 +27,7 @@ import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
 import AdminStudent from './pages/admin/AdminStudent';
 import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
+import AdminJoin from './pages/admin/AdminJoin';
 
 function App() {
   const location = useLocation();
@@ -36,9 +37,10 @@ function App() {
       <Routes>
         <Route path="/admin" element={<Admin />} />
         <Route path="/student" element={<AdminStudent />} />
+        <Route path="/adminjoin" element={<AdminJoin />} />
         <Route path="/test3" element={<Admin3 />} />
       </Routes>
-      {location.pathname !== '/admin' && location.pathname !== '/student' ? (
+      {location.pathname !== '/admin' && location.pathname !== '/student' && location.pathname !== '/adminjoin' ? (
         <div className="App-container">
           <Routes>
             <Route path="/" element={<Main />} />
