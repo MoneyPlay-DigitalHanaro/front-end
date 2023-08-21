@@ -10,7 +10,6 @@ import NavBar from './component/Navbar.js';
 import SideBar from './component/Sidebar';
 import NewsList from './pages/NewsPage/NewsList';
 import NewsDetail from './pages/NewsPage/NewsDetail';
-
 import Login from './pages/oauth/Login';
 import AdditionalInfo from './pages/oauth/AdditionalInfo';
 import KakaoAuthHandle from './pages/oauth/KakaoAuthHandle';
@@ -27,15 +26,16 @@ import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
 import AdminStudent from './pages/admin/AdminStudent';
 import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
+import PurchaseStock from './pages/stock/PurchaseStock'
 
 function App() {
-  useEffect(() => {
-    // 로컬 스토리지에서 토큰 가져오기
-    const authToken = localStorage.getItem('Authorization');
-    if (authToken) {
-      axios.defaults.headers.common['Authorization'] = authToken;
-    }
-  }, []);
+  // useEffect(() => {
+  //   // 로컬 스토리지에서 토큰 가져오기
+  //   const authToken = localStorage.getItem('Authorization');
+  //   if (authToken) {
+  //     axios.defaults.headers.common['Authorization'] = authToken;
+  //   }
+  // }, []);
 
   return (
     <div className="App">
@@ -47,8 +47,10 @@ function App() {
       {location.pathname !== '/admin' && location.pathname !== '/student' ? (
         <div className="App-container">
           <Routes>
+            <Route path="*" element={<Main />} />
             <Route path="/" element={<Main />} />
             <Route path="/news" element={<NewsList />} />
+            <Route path="/stock" element={<PurchaseStock />} />
             <Route path="/test" element={<AutoLayoutSizingExample />} />
             <Route path="/join" element={<Join />} />
             <Route path="/mypage" element={<MyPage />} />
