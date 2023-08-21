@@ -25,6 +25,7 @@ import Join from './pages/Join/Join';
 import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
+import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
 
 function App() {
   const location = useLocation();
