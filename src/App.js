@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React from 'react';
-import './style/css/Admin.module.css';
+// import './style/css/Admin.module.css';
 
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
-import Admin from './pages/admin/Admin';
+// import Admin from './pages/admin/Admin';
 import NavBar from './component/Navbar.js';
 import SideBar from './component/Sidebar';
 import NewsList from './pages/NewsPage/NewsList';
@@ -25,7 +25,10 @@ import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
 import AdminStudent from './pages/admin/AdminStudent';
+import Admin from './pages/admin/Admin.js';
 import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
+import { useEffect } from 'react';
+import axios from 'axios';
 import PurchaseStock from './pages/stock/PurchaseStock'
 
 function App() {
