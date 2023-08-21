@@ -20,6 +20,7 @@ import QrCode from './pages/QR_Student/qrStudent';
 import Join from './pages/Join/Join';
 import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
+import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/join" element={<Join />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/news/detail" element={<NewsDetail />} />
+          <Route path="/saving" element={<InstallmentSavings />} />
         </Routes>
         <Footer></Footer>
       </div>
