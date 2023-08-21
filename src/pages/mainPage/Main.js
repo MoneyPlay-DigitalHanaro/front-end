@@ -36,44 +36,49 @@ function Main() {
   const [user, setUser] = useState(Maindata);
   const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    // 토큰을 이용하여 사용자 이름을 가져옵니다
-    const fetchUsername = async () => {
-      try {
-        const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
-        setUsername(response.data.username);
-      } catch (error) {
-        console.error(error);
-        console.log(tokenOnly);
-      }
-    };
-    const authToken = localStorage.getItem('Authorization');
-    const tokenOnly = authToken.split(" ")[1];
-    if (tokenOnly) {
-      fetchUsername();
-    }
-  }, []);
+  // useEffect(() => {
+  //   // 토큰을 이용하여 사용자 이름을 가져옵니다
+  //   const fetchUsername = async () => {
+  //     try {
+  //       const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
+  //       setUsername(response.data.username);
+  //     } catch (error) {
+  //       console.error(error);
+  //       console.log(tokenOnly);
+  //     }
+  //   };
+  //   const authToken = localStorage.getItem('Authorization');
+  //   const tokenOnly = authToken.split(" ")[1];
+  //   if (tokenOnly) {
+  //     fetchUsername();
+  //   }
+  // }, []);
 
   return (
     <div className="main mt50">
       <div className="rowbox" style={{ height: '138px' }}>
-        <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
-          <p style={{}}>
-            <b className="title">{username ? `${username}님은` : ''}</b>
-            <span>
-              <img src={coin} style={{ position: 'relative', display: 'inline-block', marginLeft: '10px' }} />
-              <b>{Maindata[0].price}</b>
-              <br /> 가지고 있어요
-            </span>
-            <img src={person} className="imgMain" />
-          </p>
-        </MenuBtn>
-        <MenuBtn bg="rgba(255, 223, 142, 0.5);" width="95px" height="118px">
-          <p>
-            <b className="title">QR</b>
-            <img src={QR} className="qr imgMain" />
-          </p>
-        </MenuBtn>
+        <a href="/mypage" style={{ textDecoration: 'none' }}>
+          <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
+            <p style={{}}>
+              <b className="title">{username ? `${username}님은` : ''}</b>
+              <span>
+                <img src={coin} style={{ position: 'relative', display: 'inline-block', marginLeft: '10px' }} />
+                <b>{Maindata[0].price}</b>
+                <br /> 가지고 있어요
+              </span>
+              <img src={person} className="imgMain" />
+            </p>
+          </MenuBtn>
+        </a>
+
+        <a href="/QR" style={{ textDecoration: 'none' }}>
+          <MenuBtn bg="rgba(255, 223, 142, 0.5);" width="95px" height="118px">
+            <p>
+              <b className="title">QR</b>
+              <img src={QR} className="qr imgMain" />
+            </p>
+          </MenuBtn>
+        </a>
       </div>
       <div className="rowbox">
         <MenuBtn bg="rgba(255, 237, 203, 0.5);">
