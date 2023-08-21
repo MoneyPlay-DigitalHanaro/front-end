@@ -147,6 +147,10 @@ span {
   margin-right: -20px;
 }
 
+.mgr5 {
+  margin-right: 5px;
+}
+
 .mgr10 {
   margin-right: 10px;
 }
@@ -293,6 +297,10 @@ span {
 
 .mb20 {
   margin-bottom: 20px;
+}
+
+.mb30 {
+  margin-bottom: 30px;
 }
 
 .mb32 {

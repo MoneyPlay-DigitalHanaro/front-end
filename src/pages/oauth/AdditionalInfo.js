@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import './StudentForm.css';
-import styles from '../../style/css/MyPage.module.css';
+import styles from '../../style/css/Login.module.css';
+import { column } from 'stylis';
 
 function StudentForm() {
   const [formData, setFormData] = useState({
@@ -56,15 +57,15 @@ function StudentForm() {
   };
 
   return (
-    <div className="form-container">
-      <h2>추가정보입력</h2>
-      <div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center' }}>
+      <div className={`${styles.title} mb50`}>추가정보입력</div>
+      <div className={`${styles.loginBox} `}>
         <form onSubmit={handleSubmit}>
           {currentStep === 0 && (
-            <label>
+            <label className={`${styles.subtitle}  mb30`}>
               학생이신가요?
-              <div>
-                <label>
+              <div className={`${styles.subtitle} mt20 mb30`}>
+                <label className={`${styles.subtitle} mgr15`}>
                   <input
                     type="radio"
                     name="isStudent"
@@ -72,7 +73,7 @@ function StudentForm() {
                     checked={formData.isStudent === 'yes'}
                     onChange={handleChange}
                   />
-                  네
+                  <label style={{ marginLeft: '5px' }}>네</label>
                 </label>
                 <label>
                   <input
@@ -82,39 +83,39 @@ function StudentForm() {
                     checked={formData.isStudent === 'no'}
                     onChange={handleChange}
                   />
-                  아니요
+                  <label style={{ marginLeft: '5px' }}>아니요</label>
                 </label>
               </div>
             </label>
           )}
           {currentStep === 1 && (
-            <label>
-              학교 이름:
+            <label className={`${styles.subtitle}  mb30`}>
+              <div className={`${styles.subtitle}  mb20`}>학교 이름:</div>
               <input type="text" name="schoolName" value={formData.schoolName} onChange={handleChange} required />
             </label>
           )}
           {currentStep === 2 && (
-            <label>
-              학년:
+            <label className={`${styles.subtitle}  mb30`}>
+              <div className={`${styles.subtitle}  mb20`}>학년:</div>
               <input type="text" name="studentClass" value={formData.studentClass} onChange={handleChange} required />
             </label>
           )}
           {currentStep === 3 && (
-            <label>
-              반:
+            <label className={`${styles.subtitle}  mb30`}>
+              <div className={`${styles.subtitle}  mb20`}>반:</div>
               <input type="text" name="studentNumber" value={formData.studentNumber} onChange={handleChange} required />
             </label>
           )}
           {currentStep === 4 && (
-            <label>
-              학생 이름이 뭔가요?:
+            <label className={`${styles.subtitle}  mb30`}>
+              <div className={`${styles.subtitle}  mb20`}>학생 이름이 뭔가요?:</div>
               <input type="text" name="studentName" value={formData.studentName} onChange={handleChange} required />
             </label>
           )}
 
           <br />
 
-          <div className="button-container">
+          <div>
             {currentStep < steps.length - 1 ? (
               <button type="button" onClick={handleNext} className="next-button">
                 다음
