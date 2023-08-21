@@ -1,6 +1,8 @@
-import axios from 'axios'
-import { useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
+/* eslint-disable */
+
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const KakaoAuthHandle = (props) => {
     useEffect(() => {
       let code = new URL(window.location.href).searchParams.get('code');
