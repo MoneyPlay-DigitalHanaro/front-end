@@ -55,18 +55,6 @@ function App() {
           {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}
         </div>
       ) : null}
-      <div className="App-container">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/news" element={<NewsList />} />
-          <Route path="/test" element={<AutoLayoutSizingExample />} />  
-          <Route path="/join" element={<Join />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/news/detail" element={<NewsDetail />} />
-          <Route path="/saving" element={<InstallmentSavings />} />
-        </Routes>
-        <Footer></Footer>
-      </div>
     </div>
   );
 }
