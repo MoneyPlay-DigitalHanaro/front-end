@@ -26,6 +26,7 @@ import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
 import AdminStudent from './pages/admin/AdminStudent';
+import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
 
 function App() {
   const location = useLocation();
