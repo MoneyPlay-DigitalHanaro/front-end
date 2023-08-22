@@ -1,52 +1,131 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
-import NavBar from '../../component/Navbar.js';
-import SideBar from '../../component/Sidebar.js';
-import styles from '../../style/css/Admin.module.css';
-import axios from 'axios';
-import AdminChart from '../../component/AdminChart.js';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import AdminDetailChart from '../../component/AdminDetailChart.js';
+import React, { useState, useEffect } from "react";
+import NavBar from "../../component/Navbar.js";
+import SideBar from "../../component/Sidebar.js";
+import styles from "../../style/css/Admin.module.css";
+import axios from "axios";
+import AdminChart from "../../component/AdminChart.js";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import AdminDetailChart from "../../component/AdminDetailChart.js";
 
 function AdminStudent() {
-  const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
+  const [plusPoint, setPlusPoint] = useState(""); // useState를 사용하여 plusPoint 상태 설정
   const [ID, setID] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([
-    { id: 1, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
-    { id: 2, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
-    { id: 3, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
-    { id: 4, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
-    { id: 5, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
-    { id: 6, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
-    { id: 7, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
-    { id: 8, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
-    { id: 9, name: '김영희', email: 'younghee1@naver.com', points: '9,250,000' },
-    { id: 10, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
-    { id: 11, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
-    { id: 12, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
-    { id: 13, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
-    { id: 14, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
-    { id: 15, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
-    { id: 16, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
-    { id: 44, name: '특별해', email: 'minjae8@naver.com', points: '6,980,000' },
-    { id: 17, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
-    { id: 28, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
-    { id: 39, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
-    { id: 40, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
-    { id: 50, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
-    { id: 68, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
-    { id: 77, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
-    { id: 85, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
-    { id: 93, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
-    { id: 101, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
-    { id: 112, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
-    { id: 122, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
-    { id: 133, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
-    { id: 64, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
-    { id: 75, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
-    { id: 86, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
-    { id: 55, name: '특별해', email: 'minjae8@naver.com', points: '6,980,000' },
+    {
+      id: 1,
+      name: "김영희",
+      email: "younghee1@naver.com",
+      points: "8,250,000",
+    },
+    { id: 2, name: "이철수", email: "cheolsu2@naver.com", points: "5,750,000" },
+    { id: 3, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
+    { id: 4, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
+    {
+      id: 5,
+      name: "정은경",
+      email: "eunkyung5@naver.com",
+      points: "4,250,000",
+    },
+    { id: 6, name: "백현진", email: "hyunjin6@naver.com", points: "7,910,000" },
+    { id: 7, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
+    { id: 8, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
+    {
+      id: 9,
+      name: "김영희",
+      email: "younghee1@naver.com",
+      points: "9,250,000",
+    },
+    {
+      id: 10,
+      name: "이철수",
+      email: "cheolsu2@naver.com",
+      points: "5,750,000",
+    },
+    { id: 11, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
+    { id: 12, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
+    {
+      id: 13,
+      name: "정은경",
+      email: "eunkyung5@naver.com",
+      points: "4,250,000",
+    },
+    {
+      id: 14,
+      name: "백현진",
+      email: "hyunjin6@naver.com",
+      points: "7,910,000",
+    },
+    { id: 15, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
+    { id: 16, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
+    { id: 44, name: "특별해", email: "minjae8@naver.com", points: "6,980,000" },
+    {
+      id: 17,
+      name: "김영희",
+      email: "younghee1@naver.com",
+      points: "8,250,000",
+    },
+    {
+      id: 28,
+      name: "이철수",
+      email: "cheolsu2@naver.com",
+      points: "5,750,000",
+    },
+    { id: 39, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
+    { id: 40, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
+    {
+      id: 50,
+      name: "정은경",
+      email: "eunkyung5@naver.com",
+      points: "4,250,000",
+    },
+    {
+      id: 68,
+      name: "백현진",
+      email: "hyunjin6@naver.com",
+      points: "7,910,000",
+    },
+    { id: 77, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
+    { id: 85, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
+    {
+      id: 93,
+      name: "김영희",
+      email: "younghee1@naver.com",
+      points: "8,250,000",
+    },
+    {
+      id: 101,
+      name: "이철수",
+      email: "cheolsu2@naver.com",
+      points: "5,750,000",
+    },
+    { id: 112, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
+    { id: 122, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
+    {
+      id: 133,
+      name: "정은경",
+      email: "eunkyung5@naver.com",
+      points: "4,250,000",
+    },
+    {
+      id: 64,
+      name: "백현진",
+      email: "hyunjin6@naver.com",
+      points: "7,910,000",
+    },
+    { id: 75, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
+    { id: 86, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
+    { id: 55, name: "특별해", email: "minjae8@naver.com", points: "6,980,000" },
 
     // ... 나머지 데이터
   ]);
@@ -65,11 +144,14 @@ function AdminStudent() {
   // 수정된 데이터를 서버에 보내는 함수
   const updateRowData = async () => {
     try {
-      await axios.put(`https://sss.naver.com/updateStudent/${editedRow.id}`, editedRow);
-      alert('데이터가 성공적으로 수정되었습니다.');
+      await axios.put(
+        `https://sss.naver.com/updateStudent/${editedRow.id}`,
+        editedRow
+      );
+      alert("데이터가 성공적으로 수정되었습니다.");
     } catch (error) {
-      console.error('Error updating data:', error);
-      alert('데이터 수정 중 오류가 발생했습니다.');
+      console.error("Error updating data:", error);
+      alert("데이터 수정 중 오류가 발생했습니다.");
     }
   };
 
@@ -93,20 +175,26 @@ function AdminStudent() {
   // 4. 테이블데이터 정렬
 
   const sortedData = [...tableData].sort(
-    (a, b) => parseInt(b.points.replace(/,/g, ''), 10) - parseInt(a.points.replace(/,/g, ''), 10)
+    (a, b) =>
+      parseInt(b.points.replace(/,/g, ""), 10) -
+      parseInt(a.points.replace(/,/g, ""), 10)
   );
   const top3 = sortedData.slice(0, 3);
 
-  const [sortOption, setSortOption] = useState('id');
+  const [sortOption, setSortOption] = useState("id");
   const sortData = (data) => {
     let sortedData = [...data];
     switch (sortOption) {
-      case 'id':
+      case "id":
         return sortedData.sort((a, b) => a.id - b.id);
-      case 'name':
+      case "name":
         return sortedData.sort((a, b) => a.name.localeCompare(b.name));
-      case 'points':
-        return sortedData.sort((a, b) => parseInt(b.points.replace(/,/g, '')) - parseInt(a.points.replace(/,/g, '')));
+      case "points":
+        return sortedData.sort(
+          (a, b) =>
+            parseInt(b.points.replace(/,/g, "")) -
+            parseInt(a.points.replace(/,/g, ""))
+        );
       default:
         return sortedData;
     }
@@ -129,30 +217,14 @@ function AdminStudent() {
       <div>
         <div className={`${styles.detailTitle} mb50`}>학생 세부 정보</div>
         <div className={`${styles.studentDetail}`}>
-          {isEditing ? (
-            <>
-              <p>ID: {data.id}</p>
-              <p>
-                이름 : <input value={data.name} onChange={(e) => handleEditChange(e, 'name')} />{' '}
-              </p>
-              <p>
-                이메일 : <input value={data.email} onChange={(e) => handleEditChange(e, 'email')} />{' '}
-              </p>
-              <p>
-                포인트 : <input value={data.points} onChange={(e) => handleEditChange(e, 'points')} />
-              </p>
-              <div className="mb10">금액변동상황 :</div>
-            </>
-          ) : (
-            <>
-              <p>ID: {data.id}</p>
-              <p>이름: {data.name}</p>
-              <p>이메일: {data.email}</p>
-              <p>포인트: {data.points}</p>
-              <p>금액변동상황 : </p>
-              <p></p>
-            </>
-          )}{' '}
+          <>
+            <p>ID: {data.id}</p>
+            <p>이름: {data.name}</p>
+            <p>이메일: {data.email}</p>
+            <p>포인트: {data.points}</p>
+            <p>금액변동상황 : </p>
+            <p></p>
+          </>
         </div>
       </div>
     );
@@ -169,16 +241,19 @@ function AdminStudent() {
 
   // 4. 현재 페이지에 따라 아이템 목록을 나누는 로직을 추가합니다.
   const sortedItems = sortData(tableData);
-  const currentItems = sortedItems.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  const currentItems = sortedItems.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   return (
     <div className={styles.containerAdmin}>
       <NavBar />
       <SideBar />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
         <div className={`ml290 `}>
           <div className={`${styles.main} mgr24 `}>
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <label htmlFor="sort">정렬 : </label>
               <select
                 className={`${styles.sortBox} ml20`}
@@ -204,7 +279,11 @@ function AdminStudent() {
               </thead>
               <tbody>
                 {currentItems.map((row) => (
-                  <tr key={row.id} className={styles.rowHover} onClick={() => setSelectedRow(row)}>
+                  <tr
+                    key={row.id}
+                    className={styles.rowHover}
+                    onClick={() => setSelectedRow(row)}
+                  >
                     <td className={styles.fadedText}>{row.id}</td>
                     <td className={styles.fadedText}>{row.name}</td>
                     <td className={styles.fadedText}>{row.email}</td>
@@ -221,7 +300,9 @@ function AdminStudent() {
                 <button
                   key={idx}
                   onClick={() => gotoPage(idx + 1)}
-                  className={`${currentPage === idx + 1 ? styles.activePage : ''}`}
+                  className={`${
+                    currentPage === idx + 1 ? styles.activePage : ""
+                  }`}
                 >
                   {idx + 1}
                 </button>
@@ -235,22 +316,6 @@ function AdminStudent() {
         <div className={`${styles.detailBox}`}>
           <DetailsPane data={selectedRow} />
           <AdminDetailChart data={selectedRow} />
-          {selectedRow && (
-            <div>
-              <button
-                onClick={() => {
-                  if (isEditing) {
-                    updateRowData();
-                    setIsEditing(false);
-                  } else {
-                    setIsEditing(true);
-                  }
-                }}
-              >
-                {isEditing ? '수정완료' : '수정하기'}
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>
