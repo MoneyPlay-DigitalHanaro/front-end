@@ -26,6 +26,7 @@ import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
 import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
+import InstallmentSavingsJoin from './pages/installmentSavings/InstallmentSavingsJoin';
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/additionalInfo" element={<AdditionalInfo />} />
           <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
+          <Route path="/savings" element={<InstallmentSavings />} />
+          <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}
