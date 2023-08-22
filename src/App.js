@@ -31,6 +31,7 @@ import PurchaseStock from './pages/stock/PurchaseStock';
 import Stock from './pages/stock/Stock';
 import { useEffect } from 'react';
 import axios from 'axios';
+import InstallmentSavingsJoin from './pages/installmentSavings/InstallmentSavingsJoin';
 
 function App() {
   useEffect(() => {
@@ -64,6 +65,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/additionalInfo" element={<AdditionalInfo />} />
             <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
+            <Route path="/savings" element={<InstallmentSavings />} />
+            <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}
