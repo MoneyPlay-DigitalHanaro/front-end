@@ -9,7 +9,7 @@ import saving2 from '../../image/App/Savings/Saving2.png';
 import saving3 from '../../image/App/Savings/Saving3.png';
 import saving4 from '../../image/App/Savings/Saving4.png';
 
-function MyPage() {
+function Stock() {
   const [selectedTab, setSelectedTab] = useState('주식');
   const SavingBoxes = () => {
     // 각 박스마다 적용될 배경색과 이미지를 배열로 정의
@@ -135,4 +135,4 @@ function MyPage() {
     
   );
 }
-export default MyPage;
+export default Stock;

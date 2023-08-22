@@ -36,23 +36,23 @@ function Main() {
   const [user, setUser] = useState(Maindata);
   const [username, setUsername] = useState('');
 
-  // useEffect(() => {
-  //   // 토큰을 이용하여 사용자 이름을 가져옵니다
-  //   const fetchUsername = async () => {
-  //     try {
-  //       const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
-  //       setUsername(response.data.username);
-  //     } catch (error) {
-  //       console.error(error);
-  //       console.log(tokenOnly);
-  //     }
-  //   };
-  //   const authToken = localStorage.getItem('Authorization');
-  //   const tokenOnly = authToken.split(" ")[1];
-  //   if (tokenOnly) {
-  //     fetchUsername();
-  //   }
-  // }, []);
+  useEffect(() => {
+    // 토큰을 이용하여 사용자 이름을 가져옵니다
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error(error);
+        console.log(tokenOnly);
+      }
+    };
+    const authToken = localStorage.getItem('Authorization');
+    const tokenOnly = authToken.split(" ")[1];
+    if (tokenOnly) {
+      fetchUsername();
+    }
+  }, []);
 
   return (
     <div className="main mt50">

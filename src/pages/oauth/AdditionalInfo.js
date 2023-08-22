@@ -7,37 +7,80 @@ import { column } from 'stylis';
 import person1 from '../../image/Login/person1.png';
 import person2 from '../../image/Login/person2.png';
 import { left } from '@popperjs/core';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function StudentForm() {
+  const navigate = useNavigate();
+  // Authorization에서 값을 추출
+  const authValue = localStorage.getItem('Authorization');
+  const emailPattern = /.+@.+\.com/; // 이메일 패턴
+  const email = authValue.match(emailPattern)[0]; // 이메일 추출
+  
+  const remaining = authValue.replace(email, ''); // 이메일 부분을 제외한 문자열
+  
+  // remaining에서 문자 부분과 숫자 부분 분리
+  const namePattern = /[가-힣]+/; // 한글 이름 패턴
+  const nickname = remaining.match(namePattern)[0]; // 이름 추출
+  
+  const kakaoIdPattern = /\d+/; // 숫자 패턴
+  const kakao_id = remaining.match(kakaoIdPattern)[0]; // kakao_id 추출
+  
+  // URL (이미지 링크) 추출
+  const urlPattern = /http[s]?:\/\/[^ ]+/; // URL 패턴
+  const image = remaining.match(urlPattern)[0]; // 이미지 URL 추출
+  
+  // 이제 email, nickname, kakao_id, image 변수에 각각의 값을 할당했습니다.
+  
+
+  // formData 초기값 설정
   const [formData, setFormData] = useState({
-    studentGrade: '',
-    studentClass: '',
-    schoolName: '',
-    email: '',
-    isTeacher: '',
-    studentNumber: '',
-    studentProfile: '',
-    studentName: '',
-    image: '',
-    nickname: '',
-    kakao_id: '',
-    myRole: 'MEMBER',
+      studentGrade: '',
+      studentClass: '',
+      schoolName: '',
+      email: email, // 추출한 이메일 값을 초기값으로 설정
+      isTeacher: '0',
+      studentNumber: '',
+      studentProfile: '',
+      studentName: '',
+      image: image,
+      nickname: nickname, // 추출한 nickname 값을 초기값으로 설정
+      kakao_id: kakao_id, // 추출한 kakao_id 값을 초기값으로 설정
+      myRole: 'MEMBER'
   });
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = [
-    'isStudent', // 추가된 부분
+    'isStudent',
     'schoolName',
+    'studentGrade',
     'studentClass',
     'studentNumber',
     'studentName',
-  ];
+    'studentProfile',
+];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // 서버에 formData를 전송하는 로직
-    console.log(formData);
-  };
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await axios.post('http://localhost:8080/api/register/kakao', formData, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    // 응답 처리
+    console.log(response.data);
+    navigate('/login');
+  } catch (error) {
+    console.error("데이터 전송 중 오류가 발생했습니다:", error);
+  }
+};
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +100,7 @@ function StudentForm() {
     } else {
       alert('빈칸을 채워주세요!');
     }
+
   };
 
   return (
@@ -100,19 +144,31 @@ function StudentForm() {
           {currentStep === 2 && (
             <label className={`${styles.subtitle}  mb30`}>
               <div className={`${styles.subtitle}  mb20`}>학년:</div>
-              <input type="text" name="studentClass" value={formData.studentClass} onChange={handleChange} required />
+              <input type="text" name="studentGrade" value={formData.studentGrade} onChange={handleChange} required />
             </label>
           )}
           {currentStep === 3 && (
             <label className={`${styles.subtitle}  mb30`}>
               <div className={`${styles.subtitle}  mb20`}>반:</div>
-              <input type="text" name="studentNumber" value={formData.studentNumber} onChange={handleChange} required />
+              <input type="text" name="studentClass" value={formData.studentClass} onChange={handleChange} required />
             </label>
           )}
           {currentStep === 4 && (
             <label className={`${styles.subtitle}  mb30`}>
+              <div className={`${styles.subtitle}  mb20`}>번호:</div>
+              <input type="text" name="studentNumber" value={formData.studentNumber} onChange={handleChange} required />
+            </label>
+          )}
+          {currentStep === 5 && (
+            <label className={`${styles.subtitle}  mb30`}>
               <div className={`${styles.subtitle}  mb20`}>학생 이름이 뭔가요?:</div>
               <input type="text" name="studentName" value={formData.studentName} onChange={handleChange} required />
+            </label>
+          )}
+          {currentStep === 6 && (
+            <label className={`${styles.subtitle}  mb30`}>
+              <div className={`${styles.subtitle}  mb20`}>학생의 각오!:</div>
+              <input type="text" name="studentProfile" value={formData.studentProfile} onChange={handleChange} required />
             </label>
           )}
 
