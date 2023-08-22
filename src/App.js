@@ -33,13 +33,13 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 function App() {
-  // useEffect(() => {
-  //   // 로컬 스토리지에서 토큰 가져오기
-  //   const authToken = localStorage.getItem('Authorization');
-  //   if (authToken) {
-  //     axios.defaults.headers.common['Authorization'] = authToken;
-  //   }
-  // }, []);
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem('Authorization');
+    if (authToken) {
+      axios.defaults.headers.common['Authorization'] = authToken;
+    }
+  }, []);
 
   return (
     <div className="App">
