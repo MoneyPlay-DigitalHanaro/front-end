@@ -67,72 +67,66 @@ function Stock() {
           <div className={`${styles.detailPoint} `}>
             <div className="mb5">493,812</div>
             <div className="mb5">600,000</div>
-
           </div>
           <div className={`${styles.detailPoint} mgr_50 `}>
             <img src={isNegativeDifference ? rocket90 : rocket} style={{ marginTop: '-50px' }} />
           </div>
         </div>
 
-      
-
-
-          
-            <div className={styles.stockListContainer}>
+        <div className={styles.stockListContainer}>
+          <div>
+            <div className={`${styles.stockBox} ft18 mb20`}>
+              <b className={`${styles.stockName} ft18`}>삼성전자</b>
               <div>
-                <div className={`${styles.stockBox} ft18 mb20`}>
-                  <b className={`${styles.stockName} ft18`}>삼성전자</b>
-                  <div>
-                    <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
-                      <div className="mb_3">50,000</div>
-                      <div className={`${styles.totalPointDefferance} ft14`} style={{ color: 'black' }}>
-                        2주
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
-                      <div className="mb_3">100,000</div>
-                      <div
-                        className={`${styles.detailPointDefferance}`}
-                        style={{ color: isDetailNegativeDifference ? 'blue' : 'red' }}
-                      >
-                        {DetailPointDifferenceValue} ( -10.3% )
-                      </div>
-                    </div>
+                <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
+                  <div className="mb_3">50,000</div>
+                  <div className={`${styles.totalPointDefferance} ft14`} style={{ color: 'black' }}>
+                    2주
                   </div>
                 </div>
-              </div>   
+              </div>
+              <div>
+                <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
+                  <div className="mb_3">100,000</div>
+                  <div
+                    className={`${styles.detailPointDefferance}`}
+                    style={{ color: isDetailNegativeDifference ? 'blue' : 'red' }}
+                  >
+                    {DetailPointDifferenceValue} ( -10.3% )
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className={styles.stockListContainer}>
+          <div>
+            <div className={`${styles.stockBox} ft18 mb20`}>
+              <b className={`${styles.stockName} ft18`}>삼성전자</b>
               <div>
-                <div className={`${styles.stockBox} ft18 mb20`}>
-                  <b className={`${styles.stockName} ft18`}>삼성전자</b>
-                  <div>
-                    <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
-                      <div className="mb_3">50,000</div>
-                      <div className={`${styles.totalPointDefferance} ft14`} style={{ color: 'black' }}>
-                        2주
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
-                      <div className="mb_3">100,000</div>
-                      <div
-                        className={`${styles.detailPointDefferance}`}
-                        style={{ color: isDetailNegativeDifference ? 'blue' : 'red' }}
-                      >
-                        {DetailPointDifferenceValue} ( -10.3% )
-                      </div>
-                    </div>
+                <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
+                  <div className="mb_3">50,000</div>
+                  <div className={`${styles.totalPointDefferance} ft14`} style={{ color: 'black' }}>
+                    2주
                   </div>
                 </div>
-              </div>   
+              </div>
+              <div>
+                <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
+                  <div className="mb_3">100,000</div>
+                  <div
+                    className={`${styles.detailPointDefferance}`}
+                    style={{ color: isDetailNegativeDifference ? 'blue' : 'red' }}
+                  >
+                    {DetailPointDifferenceValue} ( -10.3% )
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    
   );
 }
 export default Stock;
