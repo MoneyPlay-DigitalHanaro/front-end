@@ -32,15 +32,17 @@ import Stock from './pages/stock/Stock';
 import { useEffect } from 'react';
 import axios from 'axios';
 import InstallmentSavingsJoin from './pages/installmentSavings/InstallmentSavingsJoin';
+import WordQuiz from './pages/wordQuiz/WordQuiz';
+import Board from './pages/board/Board';
 
 function App() {
-  useEffect(() => {
-    // 로컬 스토리지에서 토큰 가져오기
-    const authToken = localStorage.getItem('Authorization');
-    if (authToken) {
-      axios.defaults.headers.common['Authorization'] = authToken;
-    }
-  }, []);
+  // useEffect(() => {
+  //   // 로컬 스토리지에서 토큰 가져오기
+  //   const authToken = localStorage.getItem('Authorization');
+  //   if (authToken) {
+  //     axios.defaults.headers.common['Authorization'] = authToken;
+  //   }
+  // }, []);
 
   return (
     <div className="App">
@@ -49,7 +51,7 @@ function App() {
         <Route path="/student" element={<AdminStudent />} />
         <Route path="/test3" element={<Admin3 />} />
       </Routes>
-      {location.pathname !== '/admin' && location.pathname !== '/student' ? (
+      {location.pathname !== '/admin' && location.pathname !== '/student' && location.pathname !== '/adminjoin' ? (
         <div className="App-container">
           <Routes>
             <Route path="*" element={<Main />} />
@@ -67,6 +69,8 @@ function App() {
             <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
             <Route path="/savings" element={<InstallmentSavings />} />
             <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
+            <Route path="/wordQuiz" element={<WordQuiz />} />
+            <Route path="/board" element={<Board />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}
