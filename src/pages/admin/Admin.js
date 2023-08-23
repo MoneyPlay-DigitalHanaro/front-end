@@ -1,16 +1,17 @@
 /* eslint-disable */
-import React, { useState } from "react"; // useState를 가져오기
+import React, { useState, useEffect } from "react"; // useState를 가져오기
 import NavBar from "../../component/Navbar.js";
 import SideBar from "../../component/Sidebar.js";
 import styles from "../../style/css/Admin.module.css";
 import axios from "axios";
 import AdminChart from "../../component/AdminChart.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
 function Admin() {
   const [plusPoint, setPlusPoint] = useState(""); // useState를 사용하여 plusPoint 상태 설정
   const [ID, setID] = useState([]);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([
     {
@@ -121,6 +122,24 @@ function Admin() {
     // ... 나머지 데이터
   ]);
 
+  // 테이블 및 그래프에 올 데이터 요청하는 함수
+  // useEffect(() => {
+  //   // API 요청을 수행하는 함수
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get('YOUR_API_ENDPOINT_HERE');
+
+  //       if (response.data) {
+  //         setTableData(response.data);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData(); // 함수 호출
+  // }, []); // 빈 의존성 배열을 통해 컴포넌트가 마운트될 때 한 번만 fetchData가 실행되도록 합니다.
+
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
 
@@ -160,6 +179,7 @@ function Admin() {
     }
   };
 
+  // <<<<<<< 포인트 초기화 <<<<<<<<<
   const resetPoints = () => {
     const updatedData = tableData.map((item) => ({
       ...item,
@@ -176,13 +196,31 @@ function Admin() {
     setShowConfirmDialog(false);
   };
 
+  // <<<<<<<< 데이터 정렬 <<<<<<<<<<
   const sortedData = [...tableData].sort(
     (a, b) =>
-      parseInt(b.points.replace(/,/g, ""), 10) -
-      parseInt(a.points.replace(/,/g, ""), 10)
+      parseInt(
+        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
+        10
+      ) -
+      parseInt(
+        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
+        10
+      )
   );
-  const top3 = sortedData.slice(0, 3);
 
+  // 0이 된 데이터 서버에 보내기
+  const postData = async () => {
+    try {
+      const response = await axios.post("YOUR_API_ENDPOINT_HERE", updatedData);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+  };
+
+  // 랭킹 맥이기
+  const top3 = sortedData.slice(0, 3);
   const [sortOption, setSortOption] = useState("id");
   const sortData = (data) => {
     let sortedData = [...data];
@@ -273,7 +311,7 @@ function Admin() {
               </tbody>
             </table>
 
-            {/* 5. 페이지네이션 컴포넌트를 렌더링하는 로직을 추가합니다. */}
+            {/* 5. 페이지네이션 컴포넌트를 렌더링하는 로직을 추가 */}
             <div className={`${styles.pagination} mt40`}>
               <button onClick={prevPage} disabled={currentPage <= 1}>
                 이전
@@ -344,17 +382,26 @@ function Admin() {
           {showConfirmDialog && (
             <div className="confirm-modal">
               <p>정말로 포인트를 초기화하겠습니까?</p>
-              <button
+              <Button
+                variant="primary"
                 onClick={() => {
                   resetPoints();
+                  postData();
                   // 초기화 로직
                   console.log("포인트 초기화됨");
                   handleCloseDialog();
                 }}
+                style={{ fontSize: "20px", marginRight: "10px" }}
               >
                 확인
-              </button>
-              <button onClick={handleCloseDialog}>취소</button>
+              </Button>
+              <Button
+                onClick={handleCloseDialog}
+                variant="light"
+                style={{ fontSize: "20px" }}
+              >
+                취소
+              </Button>
             </div>
           )}
 
