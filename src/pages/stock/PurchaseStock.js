@@ -7,6 +7,14 @@ import axios from "axios";
 import ChartStock from "../../component/ChartStock";
 
 function PurchaseStock() {
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("Authorization");
+    if (authToken) {
+      axios.defaults.headers.common["Authorization"] = authToken;
+    }
+  }, []);
+
   const [stockCount, setStockCount] = useState(5);
 
   function decreaseStock() {
