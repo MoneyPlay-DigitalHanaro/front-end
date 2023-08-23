@@ -150,3 +150,10 @@
 .img_saving {
   display: flex;
 }
+.StockBox {
+  width: 330px;
+  height: 195px;
+  background-color: #ffe070;
+  border-radius: 15px;
+  padding-top: 30px;
+}

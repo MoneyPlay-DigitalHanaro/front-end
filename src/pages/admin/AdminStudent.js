@@ -1,17 +1,25 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react"; // useState를 가져오기
+import React, { useState, useEffect } from "react";
 import NavBar from "../../component/Navbar.js";
 import SideBar from "../../component/Sidebar.js";
 import styles from "../../style/css/Admin.module.css";
 import axios from "axios";
 import AdminChart from "../../component/AdminChart.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import AdminDetailChart from "../../component/AdminDetailChart.js";
 
-function Admin() {
+function AdminStudent() {
   const [plusPoint, setPlusPoint] = useState(""); // useState를 사용하여 plusPoint 상태 설정
   const [ID, setID] = useState([]);
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([
     {
@@ -121,26 +129,34 @@ function Admin() {
 
     // ... 나머지 데이터
   ]);
+  // 데이터 수정하기버튼 눌렀을시
+  const [editableData, setEditableData] = useState(tableData); // 기존 tableData를 수정가능한 상태로 만듭니다.
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
 
-  // 테이블 및 그래프에 올 데이터 요청하는 함수
-  // useEffect(() => {
-  //   // API 요청을 수행하는 함수
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('YOUR_API_ENDPOINT_HERE');
+  const handleSave = async () => {
+    setIsEditing(false);
+    // 서버에 변경된 데이터를 전송하거나 필요한 작업을 수행하실 수 있습니다.
+    updateRowData();
+  };
 
-  //       if (response.data) {
-  //         setTableData(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+  // 수정된 데이터를 서버에 보내는 함수
+  const updateRowData = async () => {
+    try {
+      await axios.put(
+        `https://sss.naver.com/updateStudent/${editedRow.id}`,
+        editedRow
+      );
+      alert("데이터가 성공적으로 수정되었습니다.");
+    } catch (error) {
+      console.error("Error updating data:", error);
+      alert("데이터 수정 중 오류가 발생했습니다.");
+    }
+  };
 
-  //   fetchData(); // 함수 호출
-  // }, []); // 빈 의존성 배열을 통해 컴포넌트가 마운트될 때 한 번만 fetchData가 실행되도록 합니다.
-
-  const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
+  // 페이지네이션 부분
+  const ITEMS_PER_PAGE = 15; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
 
   // 3. 페이지네이션 버튼을 누르면 현재 페이지를 업데이트하는 함수를 추가합니다.
@@ -156,71 +172,15 @@ function Admin() {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  // 4. 현재 페이지에 따라 아이템 목록을 나누는 로직을 추가합니다.
+  // 4. 테이블데이터 정렬
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // 기본 폼 제출 동작을 중지
-    console.log("plusPoint:", plusPoint); // 입력값 확인
-    console.log("ID:", ID);
-
-    try {
-      const response = await axios.post(
-        "https://codingapple1.github.io/shop/data2.json",
-        {
-          ID: ID,
-          plusPoint: plusPoint,
-        }
-      );
-
-      console.log(response.data); // 서버로부터의 응답을 확인
-      // 여기서 필요한 다른 로직을 추가하십시오.
-    } catch (error) {
-      console.error("Error submitting data:", error);
-    }
-  };
-
-  // <<<<<<< 포인트 초기화 <<<<<<<<<
-  const resetPoints = () => {
-    const updatedData = tableData.map((item) => ({
-      ...item,
-      points: 0,
-    }));
-    setTableData(updatedData);
-  };
-
-  const handleOpenDialog = () => {
-    setShowConfirmDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setShowConfirmDialog(false);
-  };
-
-  // <<<<<<<< 데이터 정렬 <<<<<<<<<<
   const sortedData = [...tableData].sort(
     (a, b) =>
-      parseInt(
-        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
-        10
-      ) -
-      parseInt(
-        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
-        10
-      )
+      parseInt(b.points.replace(/,/g, ""), 10) -
+      parseInt(a.points.replace(/,/g, ""), 10)
   );
-
-  // 0이 된 데이터 서버에 보내기
-  const postData = async () => {
-    try {
-      const response = await axios.post("YOUR_API_ENDPOINT_HERE", updatedData);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error sending data:", error);
-    }
-  };
-
-  // 랭킹 맥이기
   const top3 = sortedData.slice(0, 3);
+
   const [sortOption, setSortOption] = useState("id");
   const sortData = (data) => {
     let sortedData = [...data];
@@ -239,6 +199,37 @@ function Admin() {
         return sortedData;
     }
   };
+
+  // 각 행에 커서 올려놓았을시 이벤트 + 수정하기버튼
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedRow, setEditedRow] = useState(null);
+
+  function handleEditChange(event, field) {
+    setSelectedRow({ ...SelectedRow, [field]: event.target.value });
+  }
+
+  // 오른쪽에 세부정보 뜨는 내용 박스
+  function DetailsPane({ data }) {
+    if (!data) return <div>선택된 항목이 없습니다.</div>;
+
+    return (
+      <div>
+        <div className={`${styles.detailTitle} mb50`}>학생 세부 정보</div>
+        <div className={`${styles.studentDetail}`}>
+          <>
+            <p>ID: {data.id}</p>
+            <p>이름: {data.name}</p>
+            <p>이메일: {data.email}</p>
+            <p>포인트: {data.points}</p>
+            <p>금액변동상황 : </p>
+            <p></p>
+          </>
+        </div>
+      </div>
+    );
+  }
+
   // ID 찾기
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
@@ -259,11 +250,9 @@ function Admin() {
     <div className={styles.containerAdmin}>
       <NavBar />
       <SideBar />
-
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div className={`ml290 `}>
           <div className={`${styles.main} mgr24 `}>
-            <AdminChart />
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <label htmlFor="sort">정렬 : </label>
               <select
@@ -282,7 +271,6 @@ function Admin() {
             <table className="table">
               <thead>
                 <tr>
-                  <th>&nbsp;&nbsp;선택</th>
                   <th>ID</th>
                   <th>이름</th>
                   <th>이메일</th>
@@ -291,17 +279,11 @@ function Admin() {
               </thead>
               <tbody>
                 {currentItems.map((row) => (
-                  <tr key={row.id}>
-                    <th scope="row">
-                      <input
-                        type="checkbox"
-                        aria-label="Checkbox for following text input"
-                        onChange={(e) =>
-                          handleCheckboxChange(row.id, e.target.checked)
-                        }
-                        className="checkbox ml20"
-                      />
-                    </th>
+                  <tr
+                    key={row.id}
+                    className={styles.rowHover}
+                    onClick={() => setSelectedRow(row)}
+                  >
                     <td className={styles.fadedText}>{row.id}</td>
                     <td className={styles.fadedText}>{row.name}</td>
                     <td className={styles.fadedText}>{row.email}</td>
@@ -310,8 +292,6 @@ function Admin() {
                 ))}
               </tbody>
             </table>
-
-            {/* 5. 페이지네이션 컴포넌트를 렌더링하는 로직을 추가 */}
             <div className={`${styles.pagination} mt40`}>
               <button onClick={prevPage} disabled={currentPage <= 1}>
                 이전
@@ -333,97 +313,13 @@ function Admin() {
             </div>
           </div>
         </div>
-
-        <div className={`${styles.pointBox}`}>
-          <div className={`${styles.box}`}>
-            <b>포인트 초기화</b>
-            <p>
-              <button
-                type="button"
-                class="btn btn-primary btn-lg mt15 ml24"
-                onClick={handleOpenDialog}
-                style={{ borderRadius: "20px" }}
-              >
-                일괄 초기화
-              </button>
-            </p>
-          </div>
-
-          <div className={`${styles.box}`}>
-            <b>포인트 주기</b>
-            <div className="mb20">
-              <form className={styles.form} onSubmit={handleSubmit}>
-                <span
-                  className="ft20 mt15 fw500 mb5"
-                  style={{ display: "block" }}
-                >
-                  지급 금액{" "}
-                </span>
-                <input
-                  className={`${styles.inputbox} mgr10`}
-                  type="text"
-                  name="plusPoint"
-                  value={plusPoint}
-                  onChange={(e) => setPlusPoint(e.target.value)} // 입력값 변화에 따라 plusPoint 상태 업데이트
-                />
-
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-lg"
-                  style={{ borderRadius: "20px" }}
-                >
-                  일괄 지급
-                </button>
-              </form>
-            </div>
-          </div>
-
-          {/* 포인트 초기화  */}
-          {showConfirmDialog && (
-            <div className="confirm-modal">
-              <p>정말로 포인트를 초기화하겠습니까?</p>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  resetPoints();
-                  postData();
-                  // 초기화 로직
-                  console.log("포인트 초기화됨");
-                  handleCloseDialog();
-                }}
-                style={{ fontSize: "20px", marginRight: "10px" }}
-              >
-                확인
-              </Button>
-              <Button
-                onClick={handleCloseDialog}
-                variant="light"
-                style={{ fontSize: "20px" }}
-              >
-                취소
-              </Button>
-            </div>
-          )}
-
-          <div className={`${styles.rankBox}`}>
-            <b>이달의 랭킹</b>
-            {top3.map((student, index) => (
-              <div key={student.id} className={`${styles.rankDetail}`}>
-                <div className={`${styles.ranking} ml30`}>{index + 1}등</div>
-                <div className={`${styles.rankname} mgr20`}>
-                  {" "}
-                  {student.name}
-                </div>
-                <div className={`${styles.rankscore} mgr20`}>
-                  {student.points}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className={`${styles.detailBox}`}>
+          <DetailsPane data={selectedRow} />
+          <AdminDetailChart data={selectedRow} />
         </div>
       </div>
     </div>
   );
 }
 
-export default Admin;
+export default AdminStudent;

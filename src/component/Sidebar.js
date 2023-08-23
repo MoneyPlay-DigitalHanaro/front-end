@@ -22,7 +22,7 @@ function SideBar() {
 
         <li>
           <img src={process.env.PUBLIC_URL + '/childface.png'} className={`${styles.sidebarImage} mgr10 `} />
-          <a href="/admin" className={styles.menuItem}>
+          <a href="/student" className={styles.menuItem}>
             학생 관리
           </a>
         </li>

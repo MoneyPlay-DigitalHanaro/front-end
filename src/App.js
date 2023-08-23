@@ -1,16 +1,15 @@
 /* eslint-disable */
 import React from 'react';
-import './style/css/Admin.module.css';
+// import './style/css/Admin.module.css';
 
 // import Navbar from 'react-bootstrap/Navbar';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 
-import Admin from './pages/admin/Admin';
+// import Admin from './pages/admin/Admin';
 import NavBar from './component/Navbar.js';
 import SideBar from './component/Sidebar';
 import NewsList from './pages/NewsPage/NewsList';
 import NewsDetail from './pages/NewsPage/NewsDetail';
-
 import Login from './pages/oauth/Login';
 import AdditionalInfo from './pages/oauth/AdditionalInfo';
 import KakaoAuthHandle from './pages/oauth/KakaoAuthHandle';
@@ -25,30 +24,53 @@ import Join from './pages/Join/Join';
 import Footer from './component/Footer';
 import MyPage from './pages/myPage/MyPage';
 import Admin3 from './pages/test.js';
+import AdminStudent from './pages/admin/AdminStudent';
+import Admin from './pages/admin/Admin.js';
+import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
+import PurchaseStock from './pages/stock/PurchaseStock';
+import Stock from './pages/stock/Stock';
+import { useEffect } from 'react';
+import axios from 'axios';
+import InstallmentSavingsJoin from './pages/installmentSavings/InstallmentSavingsJoin';
+import WordQuiz from './pages/wordQuiz/WordQuiz';
+import Board from './pages/board/Board';
 
 function App() {
-  const location = useLocation();
+  // useEffect(() => {
+  //   // 로컬 스토리지에서 토큰 가져오기
+  //   const authToken = localStorage.getItem('Authorization');
+  //   if (authToken) {
+  //     axios.defaults.headers.common['Authorization'] = authToken;
+  //   }
+  // }, []);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/admin" element={<Admin />} />
-        <Route path="/student" element={<AutoLayoutSizingExample2 />} />
-                  <Route path="/test3" element={<Admin3 />} />
+        <Route path="/student" element={<AdminStudent />} />
+        <Route path="/test3" element={<Admin3 />} />
       </Routes>
-      {location.pathname !== '/admin' && location.pathname !== '/student' ? (
+      {location.pathname !== '/admin' && location.pathname !== '/student' && location.pathname !== '/adminjoin' ? (
         <div className="App-container">
           <Routes>
+            <Route path="*" element={<Main />} />
             <Route path="/" element={<Main />} />
             <Route path="/news" element={<NewsList />} />
+            <Route path="/stock" element={<Stock />} />
+            <Route path="/purchase" element={<PurchaseStock />} />
             <Route path="/test" element={<AutoLayoutSizingExample />} />
             <Route path="/join" element={<Join />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/news/detail" element={<NewsDetail />} />
-                        <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/additionalInfo" element={<AdditionalInfo />} />
-          <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
+            <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/additionalInfo" element={<AdditionalInfo />} />
+            <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
+            <Route path="/savings" element={<InstallmentSavings />} />
+            <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
+            <Route path="/wordQuiz" element={<WordQuiz />} />
+            <Route path="/board" element={<Board />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}
