@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import instance from '../oauth/instance';
+
 const WordQuiz = () => {
     const [words, setWords] = useState([]);
     useEffect(() => {
