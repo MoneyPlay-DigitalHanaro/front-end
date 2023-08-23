@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 @font-face {
-  font-family: "Tmoney";
-  src: url("../font/TmoneyRoundWindRegular.ttf") format("woff");
+  font-family: 'Tmoney';
+  src: url('../font/TmoneyRoundWindRegular.ttf') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -11,7 +11,7 @@
   text-align: center;
   /* padding-left: 50px; */
   font-size: 20px;
-  font-family: "Tmoney";
+  font-family: 'Tmoney';
   color: black;
   letter-spacing: -1px;
   text-align: center;
@@ -61,19 +61,7 @@ span {
   position: absolute; /* 절대적 위치를 설정하여 부모 요소를 기준으로 배치합니다. */
   top: -50%; /* 상단에 위치 */
   left: 50%; /* 중앙에 위치 */
-  transform: translateX(
-    -50%
-  ); /* 이미지의 중앙을 정확히 부모의 중앙으로 이동시킵니다. */
-  z-index: 3; /* footer 박스의 아래에 배치합니다. */
-}
-
-.FooterText {
-  position: absolute; /* 절대적 위치를 설정하여 부모 요소를 기준으로 배치합니다. */
-  top: -15%; /* 상단에 위치 */
-  left: 50%; /* 중앙에 위치 */
-  transform: translateX(
-    -50%
-  ); /* 이미지의 중앙을 정확히 부모의 중앙으로 이동시킵니다. */
+  transform: translateX(-50%); /* 이미지의 중앙을 정확히 부모의 중앙으로 이동시킵니다. */
   z-index: 3; /* footer 박스의 아래에 배치합니다. */
 }
 
@@ -124,18 +112,6 @@ span {
   font-size: 20px;
 }
 
-.ft15 {
-  font-size: 15px;
-}
-
-.ft18 {
-  font-size: 18px;
-}
-
-.ft20 {
-  font-size: 20px;
-}
-
 .ft22 {
   font-size: 22px;
 }
@@ -152,19 +128,11 @@ span {
   margin: 15px;
 }
 
-.mgr_100 {
-  margin-right: -100px;
-}
-
 .mgr_50 {
   margin-right: -50px;
 }
 .mgr_20 {
   margin-right: -20px;
-}
-
-.mgr5 {
-  margin-right: 5px;
 }
 
 .mgr10 {
@@ -174,9 +142,11 @@ span {
   margin-right: 15px;
 }
 
+
 .mgr20 {
   margin-right: 20px;
 }
+
 
 .mgr24 {
   margin-right: 24px;
@@ -202,6 +172,7 @@ span {
   margin-top: -50px;
 }
 
+
 .mt_10 {
   margin-top: -10px;
 }
@@ -218,6 +189,7 @@ span {
   margin-top: 15px;
 }
 
+
 .mt20 {
   margin-top: 20px;
 }
@@ -226,9 +198,11 @@ span {
   margin-top: 30px;
 }
 
+
 .mt40 {
   margin-top: 40px;
 }
+
 
 .mt45 {
   margin-top: 45px;
@@ -240,10 +214,6 @@ span {
 
 .mt80 {
   margin-top: 80px;
-}
-
-.ml_75 {
-  margin-left: -75px;
 }
 
 .ml_30 {
@@ -285,10 +255,6 @@ span {
   margin-left: 60px;
 }
 
-.ml100 {
-  margin-left: 100px;
-}
-
 .ml290 {
   margin-left: 290px;
 }
@@ -308,15 +274,11 @@ span {
   margin-bottom: 15px;
 }
 .mb17 {
-  margin-bottom: 17px;
+  margin-bottom: 15px;
 }
 
 .mb20 {
   margin-bottom: 20px;
-}
-
-.mb30 {
-  margin-bottom: 30px;
 }
 
 .mb32 {
@@ -382,26 +344,22 @@ span {
   flex-direction: column;
   margin-top: 10px;
   position: relative;
-  justify-content: flex-start;
-  align-items: flex-start;
 }
 
 nav {
   width: 1440px;
   height: 84px;
   margin-left: 277px;
+  vertical-align: middle;
   text-align: right;
   z-index: 6;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
 }
 
 .mgtop50 {
   margin-top: 50px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   transform: scale(1.5); /* 1.5배 크기로 확대 */
   margin-right: 10px; /* 체크박스와 라벨 사이의 간격 조정 */
 }

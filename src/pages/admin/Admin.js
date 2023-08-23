@@ -1,144 +1,116 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react"; // useState를 가져오기
-import NavBar from "../../component/Navbar.js";
-import SideBar from "../../component/Sidebar.js";
-import styles from "../../style/css/Admin.module.css";
-import axios from "axios";
-import AdminChart from "../../component/AdminChart.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import React, { useState } from 'react'; // useState를 가져오기
+import { Container } from 'react-bootstrap';
+import NavBar from '../../component/Navbar.js';
+import SideBar from '../../component/Sidebar.js';
+import styles from '../../style/css/Admin.module.css';
+import axios from 'axios';
+import AdminChart from '../../component/AdminChart.js';
 
 function Admin() {
-  const [plusPoint, setPlusPoint] = useState(""); // useState를 사용하여 plusPoint 상태 설정
+  const [plusPoint, setPlusPoint] = useState(''); // useState를 사용하여 plusPoint 상태 설정
   const [ID, setID] = useState([]);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([
-    {
-      id: 1,
-      name: "김영희",
-      email: "younghee1@naver.com",
-      points: "8,250,000",
-    },
-    { id: 2, name: "이철수", email: "cheolsu2@naver.com", points: "5,750,000" },
-    { id: 3, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-    { id: 4, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-    {
-      id: 5,
-      name: "정은경",
-      email: "eunkyung5@naver.com",
-      points: "4,250,000",
-    },
-    { id: 6, name: "백현진", email: "hyunjin6@naver.com", points: "7,910,000" },
-    { id: 7, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-    { id: 8, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-    {
-      id: 9,
-      name: "김영희",
-      email: "younghee1@naver.com",
-      points: "9,250,000",
-    },
-    {
-      id: 10,
-      name: "이철수",
-      email: "cheolsu2@naver.com",
-      points: "5,750,000",
-    },
-    { id: 11, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-    { id: 12, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-    {
-      id: 13,
-      name: "정은경",
-      email: "eunkyung5@naver.com",
-      points: "4,250,000",
-    },
-    {
-      id: 14,
-      name: "백현진",
-      email: "hyunjin6@naver.com",
-      points: "7,910,000",
-    },
-    { id: 15, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-    { id: 16, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-    { id: 44, name: "특별해", email: "minjae8@naver.com", points: "6,980,000" },
-    {
-      id: 17,
-      name: "김영희",
-      email: "younghee1@naver.com",
-      points: "8,250,000",
-    },
-    {
-      id: 28,
-      name: "이철수",
-      email: "cheolsu2@naver.com",
-      points: "5,750,000",
-    },
-    { id: 39, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-    { id: 40, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-    {
-      id: 50,
-      name: "정은경",
-      email: "eunkyung5@naver.com",
-      points: "4,250,000",
-    },
-    {
-      id: 68,
-      name: "백현진",
-      email: "hyunjin6@naver.com",
-      points: "7,910,000",
-    },
-    { id: 77, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-    { id: 85, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-    {
-      id: 93,
-      name: "김영희",
-      email: "younghee1@naver.com",
-      points: "8,250,000",
-    },
-    {
-      id: 101,
-      name: "이철수",
-      email: "cheolsu2@naver.com",
-      points: "5,750,000",
-    },
-    { id: 112, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-    { id: 122, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-    {
-      id: 133,
-      name: "정은경",
-      email: "eunkyung5@naver.com",
-      points: "4,250,000",
-    },
-    {
-      id: 64,
-      name: "백현진",
-      email: "hyunjin6@naver.com",
-      points: "7,910,000",
-    },
-    { id: 75, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-    { id: 86, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-    { id: 55, name: "특별해", email: "minjae8@naver.com", points: "6,980,000" },
+    { id: 1, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
+    { id: 2, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
+    { id: 3, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
+    { id: 4, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
+    { id: 5, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
+    { id: 6, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
+    { id: 7, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
+    { id: 8, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
+    { id: 9, name: '김영희', email: 'younghee1@naver.com', points: '9,250,000' },
+    { id: 10, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
+    { id: 11, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
+    { id: 12, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
+    { id: 13, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
+    { id: 14, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
+    { id: 15, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
+    { id: 16, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
+    { id: 44, name: '특별해', email: 'minjae8@naver.com', points: '6,980,000' },
+    { id: 17, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
+    { id: 28, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
+    { id: 39, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
+    { id: 40, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
+    { id: 50, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
+    { id: 68, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
+    { id: 77, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
+    { id: 85, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
+    { id: 93, name: '김영희', email: 'younghee1@naver.com', points: '8,250,000' },
+    { id: 101, name: '이철수', email: 'cheolsu2@naver.com', points: '5,750,000' },
+    { id: 112, name: '박지수', email: 'jisoo3@naver.com', points: '6,150,000' },
+    { id: 122, name: '최민호', email: 'minho4@naver.com', points: '3,500,000' },
+    { id: 133, name: '정은경', email: 'eunkyung5@naver.com', points: '4,250,000' },
+    { id: 64, name: '백현진', email: 'hyunjin6@naver.com', points: '7,910,000' },
+    { id: 75, name: '서유리', email: 'yuri7@naver.com', points: '5,780,000' },
+    { id: 86, name: '이민재', email: 'minjae8@naver.com', points: '6,980,000' },
+    { id: 55, name: '특별해', email: 'minjae8@naver.com', points: '6,980,000' },
 
     // ... 나머지 데이터
   ]);
 
-  // 테이블 및 그래프에 올 데이터 요청하는 함수
-  // useEffect(() => {
-  //   // API 요청을 수행하는 함수
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('YOUR_API_ENDPOINT_HERE');
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // 기본 폼 제출 동작을 중지
+    console.log('plusPoint:', plusPoint); // 입력값 확인
+    console.log('ID:', ID);
 
-  //       if (response.data) {
-  //         setTableData(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+    try {
+      const response = await axios.post('https://codingapple1.github.io/shop/data2.json', {
+        ID: ID,
+        plusPoint: plusPoint,
+      });
 
-  //   fetchData(); // 함수 호출
-  // }, []); // 빈 의존성 배열을 통해 컴포넌트가 마운트될 때 한 번만 fetchData가 실행되도록 합니다.
+      console.log(response.data); // 서버로부터의 응답을 확인
+      // 여기서 필요한 다른 로직을 추가하십시오.
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
+  };
+
+  const resetPoints = () => {
+    const updatedData = tableData.map((item) => ({
+      ...item,
+      points: 0,
+    }));
+    setTableData(updatedData);
+  };
+
+  const handleOpenDialog = () => {
+    setShowConfirmDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setShowConfirmDialog(false);
+  };
+
+  const sortedData = [...tableData].sort(
+    (a, b) => parseInt(b.points.replace(/,/g, ''), 10) - parseInt(a.points.replace(/,/g, ''), 10)
+  );
+  const top3 = sortedData.slice(0, 3);
+
+  const [sortOption, setSortOption] = useState('id');
+  const sortData = (data) => {
+    let sortedData = [...data];
+    switch (sortOption) {
+      case 'id':
+        return sortedData.sort((a, b) => a.id - b.id);
+      case 'name':
+        return sortedData.sort((a, b) => a.name.localeCompare(b.name));
+      case 'points':
+        return sortedData.sort((a, b) => parseInt(b.points.replace(/,/g, '')) - parseInt(a.points.replace(/,/g, '')));
+      default:
+        return sortedData;
+    }
+  };
+  const handleCheckboxChange = (id, isChecked) => {
+    if (isChecked) {
+      setID([...ID, id]);
+    } else {
+      setID(ID.filter((studentId) => studentId !== id));
+    }
+  };
 
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
@@ -157,114 +129,19 @@ function Admin() {
   };
 
   // 4. 현재 페이지에 따라 아이템 목록을 나누는 로직을 추가합니다.
-
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // 기본 폼 제출 동작을 중지
-    console.log("plusPoint:", plusPoint); // 입력값 확인
-    console.log("ID:", ID);
-
-    try {
-      const response = await axios.post(
-        "https://codingapple1.github.io/shop/data2.json",
-        {
-          ID: ID,
-          plusPoint: plusPoint,
-        }
-      );
-
-      console.log(response.data); // 서버로부터의 응답을 확인
-      // 여기서 필요한 다른 로직을 추가하십시오.
-    } catch (error) {
-      console.error("Error submitting data:", error);
-    }
-  };
-
-  // <<<<<<< 포인트 초기화 <<<<<<<<<
-  const resetPoints = () => {
-    const updatedData = tableData.map((item) => ({
-      ...item,
-      points: 0,
-    }));
-    setTableData(updatedData);
-  };
-
-  const handleOpenDialog = () => {
-    setShowConfirmDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setShowConfirmDialog(false);
-  };
-
-  // <<<<<<<< 데이터 정렬 <<<<<<<<<<
-  const sortedData = [...tableData].sort(
-    (a, b) =>
-      parseInt(
-        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
-        10
-      ) -
-      parseInt(
-        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
-        10
-      )
-  );
-
-  // 0이 된 데이터 서버에 보내기
-  const postData = async () => {
-    try {
-      const response = await axios.post("YOUR_API_ENDPOINT_HERE", updatedData);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error sending data:", error);
-    }
-  };
-
-  // 랭킹 맥이기
-  const top3 = sortedData.slice(0, 3);
-  const [sortOption, setSortOption] = useState("id");
-  const sortData = (data) => {
-    let sortedData = [...data];
-    switch (sortOption) {
-      case "id":
-        return sortedData.sort((a, b) => a.id - b.id);
-      case "name":
-        return sortedData.sort((a, b) => a.name.localeCompare(b.name));
-      case "points":
-        return sortedData.sort(
-          (a, b) =>
-            parseInt(b.points.replace(/,/g, "")) -
-            parseInt(a.points.replace(/,/g, ""))
-        );
-      default:
-        return sortedData;
-    }
-  };
-  // ID 찾기
-  const handleCheckboxChange = (id, isChecked) => {
-    if (isChecked) {
-      setID([...ID, id]);
-    } else {
-      setID(ID.filter((studentId) => studentId !== id));
-    }
-  };
-
-  // 4. 현재 페이지에 따라 아이템 목록을 나누는 로직을 추가합니다.
   const sortedItems = sortData(tableData);
-  const currentItems = sortedItems.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const currentItems = sortedItems.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <div className={styles.containerAdmin}>
       <NavBar />
       <SideBar />
 
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div className={`ml290 `}>
           <div className={`${styles.main} mgr24 `}>
             <AdminChart />
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <label htmlFor="sort">정렬 : </label>
               <select
                 className={`${styles.sortBox} ml20`}
@@ -296,9 +173,7 @@ function Admin() {
                       <input
                         type="checkbox"
                         aria-label="Checkbox for following text input"
-                        onChange={(e) =>
-                          handleCheckboxChange(row.id, e.target.checked)
-                        }
+                        onChange={(e) => handleCheckboxChange(row.id, e.target.checked)}
                         className="checkbox ml20"
                       />
                     </th>
@@ -311,7 +186,7 @@ function Admin() {
               </tbody>
             </table>
 
-            {/* 5. 페이지네이션 컴포넌트를 렌더링하는 로직을 추가 */}
+            {/* 5. 페이지네이션 컴포넌트를 렌더링하는 로직을 추가합니다. */}
             <div className={`${styles.pagination} mt40`}>
               <button onClick={prevPage} disabled={currentPage <= 1}>
                 이전
@@ -320,9 +195,7 @@ function Admin() {
                 <button
                   key={idx}
                   onClick={() => gotoPage(idx + 1)}
-                  className={`${
-                    currentPage === idx + 1 ? styles.activePage : ""
-                  }`}
+                  className={`${currentPage === idx + 1 ? styles.activePage : ''}`}
                 >
                   {idx + 1}
                 </button>
@@ -342,7 +215,7 @@ function Admin() {
                 type="button"
                 class="btn btn-primary btn-lg mt15 ml24"
                 onClick={handleOpenDialog}
-                style={{ borderRadius: "20px" }}
+                style={{ borderRadius: '20px' }}
               >
                 일괄 초기화
               </button>
@@ -353,11 +226,8 @@ function Admin() {
             <b>포인트 주기</b>
             <div className="mb20">
               <form className={styles.form} onSubmit={handleSubmit}>
-                <span
-                  className="ft20 mt15 fw500 mb5"
-                  style={{ display: "block" }}
-                >
-                  지급 금액{" "}
+                <span className="ft20 mt15 fw500 mb5" style={{ display: 'block' }}>
+                  지급 금액{' '}
                 </span>
                 <input
                   className={`${styles.inputbox} mgr10`}
@@ -367,11 +237,7 @@ function Admin() {
                   onChange={(e) => setPlusPoint(e.target.value)} // 입력값 변화에 따라 plusPoint 상태 업데이트
                 />
 
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-lg"
-                  style={{ borderRadius: "20px" }}
-                >
+                <button type="submit" className="btn btn-primary btn-lg" style={{ borderRadius: '20px' }}>
                   일괄 지급
                 </button>
               </form>
@@ -382,26 +248,17 @@ function Admin() {
           {showConfirmDialog && (
             <div className="confirm-modal">
               <p>정말로 포인트를 초기화하겠습니까?</p>
-              <Button
-                variant="primary"
+              <button
                 onClick={() => {
                   resetPoints();
-                  postData();
                   // 초기화 로직
-                  console.log("포인트 초기화됨");
+                  console.log('포인트 초기화됨');
                   handleCloseDialog();
                 }}
-                style={{ fontSize: "20px", marginRight: "10px" }}
               >
                 확인
-              </Button>
-              <Button
-                onClick={handleCloseDialog}
-                variant="light"
-                style={{ fontSize: "20px" }}
-              >
-                취소
-              </Button>
+              </button>
+              <button onClick={handleCloseDialog}>취소</button>
             </div>
           )}
 
@@ -410,13 +267,8 @@ function Admin() {
             {top3.map((student, index) => (
               <div key={student.id} className={`${styles.rankDetail}`}>
                 <div className={`${styles.ranking} ml30`}>{index + 1}등</div>
-                <div className={`${styles.rankname} mgr20`}>
-                  {" "}
-                  {student.name}
-                </div>
-                <div className={`${styles.rankscore} mgr20`}>
-                  {student.points}
-                </div>
+                <div className={`${styles.rankname} mgr20`}> {student.name}</div>
+                <div className={`${styles.rankscore} mgr20`}>{student.points}</div>
               </div>
             ))}
           </div>
