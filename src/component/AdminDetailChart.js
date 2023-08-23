@@ -1,13 +1,27 @@
 /* eslint-disable */
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import axios from 'axios';
-import monthlyData from './AdminDetailChartData';
+import React, { useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import axios from "axios";
+import monthlyData from "./AdminDetailChartData";
 
 function AdminDetailChart({ data: selectedData }) {
   if (!selectedData) return <div></div>;
 
-  const filteredData = monthlyData.filter((item) => item.id === selectedData.id);
+  const filteredData = monthlyData.filter(
+    (item) => item.id === selectedData.id
+  );
+
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
 
   return (
     <ResponsiveContainer width="125%" height="40%" className="ml_75">
@@ -26,7 +40,13 @@ function AdminDetailChart({ data: selectedData }) {
         <XAxis dataKey="month" />
         <YAxis tick={false} />
         <Tooltip />
-        <Line type="monotone" dataKey="point" stroke="#8884d8" activeDot={{ r: 8 }} strokeWidth={4} />
+        <Line
+          type="monotone"
+          dataKey="point"
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
+          strokeWidth={4}
+        />
       </LineChart>
     </ResponsiveContainer>
   );
