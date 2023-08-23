@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import instance from '../oauth/instance';
 const WordQuiz = () => {
     const [words, setWords] = useState([]);
     useEffect(() => {
@@ -7,7 +8,7 @@ const WordQuiz = () => {
     }, []);
     const fetchWords = async () => {
         try {
-            const response = await axios.get('/word');
+            const response = await instance.get('/word');
             setWords(response.data);
         } catch (error) {
             console.error('Error fetching words:', error);
