@@ -11,7 +11,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-
 function StudentForm() {
   const navigate = useNavigate();
   // Authorization에서 값을 추출

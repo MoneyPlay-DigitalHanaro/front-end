@@ -51,7 +51,7 @@ function App() {
         <Route path="/student" element={<AdminStudent />} />
         <Route path="/test3" element={<Admin3 />} />
       </Routes>
-      {location.pathname !== '/admin' && location.pathname !== '/student' ? (
+      {location.pathname !== '/admin' && location.pathname !== '/student' && location.pathname !== '/adminjoin' ? (
         <div className="App-container">
           <Routes>
             <Route path="*" element={<Main />} />
