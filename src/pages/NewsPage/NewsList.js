@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import News from '../../component/News';
 import styled from 'styled-components';
+import instance from '../oauth/instance';
 
 const NewsListContainer = styled.div`
     width: 375px;
@@ -16,7 +17,7 @@ const NewsList = () => {
     
     const [newsArray,setNewsArray] = useState([])
     useEffect(()=>{
-        axios.get("http://localhost:8080/news").then((response)=>{
+        instance.get("http://localhost:8080/news").then((response)=>{
         // console.log(response.data) 
         setNewsArray(response.data);
     })

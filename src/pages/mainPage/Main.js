@@ -13,6 +13,7 @@ import Money from '../../image/Main/Money.png';
 import QR from '../../image/Main/QrCode.png';
 import Footer from '../../component/Footer.js';
 import axios from 'axios';
+import Logo from '../../image/Main/IecoLogo.png';
 
 let MenuBtn = styled.button`
   background: ${(props) => props.bg};
@@ -32,30 +33,43 @@ let MenuBtn = styled.button`
   justify-content: flex-start;
 `;
 
+const LogoBox = styled.div`
+  text-align: left;
+  padding: 10px 15px;
+`;
+
 function Main() {
   const [user, setUser] = useState(Maindata);
   const [username, setUsername] = useState('');
 
-  // useEffect(() => {
-  //   // 토큰을 이용하여 사용자 이름을 가져옵니다
-  //   const fetchUsername = async () => {
-  //     try {
-  //       const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
-  //       setUsername(response.data.username);
-  //     } catch (error) {
-  //       console.error(error);
-  //       console.log(tokenOnly);
-  //     }
-  //   };
-  //   const authToken = localStorage.getItem('Authorization');
-  //   const tokenOnly = authToken.split(" ")[1];
-  //   if (tokenOnly) {
-  //     fetchUsername();
-  //   }
-  // }, []);
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem('Authorization');
+    if (authToken) {
+      axios.defaults.headers.common['Authorization'] = authToken;
+    }
+    // 토큰을 이용하여 사용자 이름을 가져옵니다
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.post('http://localhost:8080/decodeToken', { tokenOnly });
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error(error);
+        console.log(tokenOnly);
+      }
+    };
+    // const authToken = localStorage.getItem('Authorization');
+    const tokenOnly = authToken.split(" ")[1];
+    if (tokenOnly) {
+      fetchUsername();
+    }
+  }, []);
 
-  return (
-    <div className="main mt50">
+  return ( 
+    <div className="main">
+      <LogoBox>
+        <img src={Logo} />
+      </LogoBox>
       <div className="rowbox" style={{ height: '138px' }}>
         <a href="/mypage" style={{ textDecoration: 'none' }}>
           <MenuBtn bg="white" boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);" width="238px" height="118px">
