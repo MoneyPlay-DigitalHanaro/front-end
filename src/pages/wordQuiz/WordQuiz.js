@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import instance from '../oauth/instance';
 import styled from 'styled-components';
 import Word from '../../component/Word';

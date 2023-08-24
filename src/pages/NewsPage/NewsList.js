@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import instance from '../oauth/instance';
 
 const NewsListContainer = styled.div`
-    width: 375px;
-    max-height: 812px;
-    box-sizing: border-box;
-    overflow: auto;
-    margin-left: auto;
-    margin-right: auto;
+  width: 375px;
+  max-height: 812px;
+  box-sizing: border-box;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const NewsList = () => {
