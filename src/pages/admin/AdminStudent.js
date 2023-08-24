@@ -127,8 +127,8 @@ function AdminStudent() {
         <div className={`${styles.detailTitle} mb50`}>학생 세부 정보</div>
         <div className={`${styles.studentDetail}`}>
           <>
-            <p>ID: {data.id}</p>
-            <p>이름: {data.name}</p>
+            <p>ID: {data.userId}</p>
+            <p>이름: {data.studentName}</p>
             <p>이메일: {data.email}</p>
             <p>포인트: {data.points}</p>
             <p>금액변동상황 : </p>
