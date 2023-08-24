@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+import { useNavigate } from "react-router-dom";
 import styles from "../../style/css/MyPage.module.css";
 import rocket from "../../image/App/rocket.png";
 import rocket90 from "../../image/App/rocket90.png";
@@ -18,6 +18,7 @@ function Stock() {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
   }, []);
+  const navigate = useNavigate();
 
   const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
@@ -121,7 +122,10 @@ function Stock() {
             const isNegativeDifference =
               stock.previousComparePrice.startsWith("-");
             return (
-              <div key={stock.name}>
+              <div
+                key={stock.name}
+                onClick={() => navigate(`/stock/${stock.name}`)}
+              >
                 <div className={`${styles.stockBox} ft18 mb20`}>
                   <b className={`${styles.stockName} ft18`}>{stock.name}</b>
                   <div>

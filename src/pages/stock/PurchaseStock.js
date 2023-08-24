@@ -5,6 +5,7 @@ import minus from "../../image/Stock/minus.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ChartStock from "../../component/ChartStock";
+import { useParams } from "react-router-dom";
 
 function PurchaseStock() {
   useEffect(() => {
@@ -14,6 +15,7 @@ function PurchaseStock() {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
   }, []);
+  const { stockName } = useParams();
 
   const [stockCount, setStockCount] = useState(5);
 
@@ -37,7 +39,7 @@ function PurchaseStock() {
   const [stockChartData, setStockChartData] = useState(null);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/stock/삼성전자")
+      .get(`http://localhost:8080/stock/${stockName}`)
       .then((response) => {
         setStockData(response.data.stockDetailData);
         setStockChartData(response.data.dayChartData);
@@ -45,7 +47,7 @@ function PurchaseStock() {
       .catch((error) => {
         console.error("에러", error);
       });
-  }, []);
+  }, [stockName]);
 
   if (!stockData) return <div>Loading...</div>;
 

@@ -1,39 +1,45 @@
 /* eslint-disable */
-import React from 'react';
+import React from "react";
 // import './style/css/Admin.module.css';
 
 // import Navbar from 'react-bootstrap/Navbar';
-import { Button, Navbar, Container, Nav } from 'react-bootstrap';
+import { Button, Navbar, Container, Nav } from "react-bootstrap";
 
 // import Admin from './pages/admin/Admin';
-import NavBar from './component/Navbar.js';
-import SideBar from './component/Sidebar';
-import NewsList from './pages/NewsPage/NewsList';
-import NewsDetail from './pages/NewsPage/NewsDetail';
-import Login from './pages/oauth/Login';
-import AdditionalInfo from './pages/oauth/AdditionalInfo';
-import KakaoAuthHandle from './pages/oauth/KakaoAuthHandle';
+import NavBar from "./component/Navbar.js";
+import SideBar from "./component/Sidebar";
+import NewsList from "./pages/NewsPage/NewsList";
+import NewsDetail from "./pages/NewsPage/NewsDetail";
+import Login from "./pages/oauth/Login";
+import AdditionalInfo from "./pages/oauth/AdditionalInfo";
+import KakaoAuthHandle from "./pages/oauth/KakaoAuthHandle";
 
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Main from './pages/mainPage/Main.js';
-import AutoLayoutSizingExample from './pages/test';
-import AutoLayoutSizingExample2 from './pages/test2';
-import QrCode from './pages/QR_Student/qrStudent';
-import Join from './pages/Join/Join';
-import Footer from './component/Footer';
-import MyPage from './pages/myPage/MyPage';
-import Admin3 from './pages/test.js';
-import AdminStudent from './pages/admin/AdminStudent';
-import Admin from './pages/admin/Admin.js';
-import InstallmentSavings from './pages/installmentSavings/InstallmentSavings';
-import PurchaseStock from './pages/stock/PurchaseStock';
-import Stock from './pages/stock/Stock';
-import { useEffect } from 'react';
-import axios from 'axios';
-import InstallmentSavingsJoin from './pages/installmentSavings/InstallmentSavingsJoin';
-import WordQuiz from './pages/wordQuiz/WordQuiz';
-import Board from './pages/board/Board';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useLocation,
+} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Main from "./pages/mainPage/Main.js";
+import AutoLayoutSizingExample from "./pages/test";
+import AutoLayoutSizingExample2 from "./pages/test2";
+import QrCode from "./pages/QR_Student/qrStudent";
+import Join from "./pages/Join/Join";
+import Footer from "./component/Footer";
+import MyPage from "./pages/myPage/MyPage";
+import Admin3 from "./pages/test.js";
+import AdminStudent from "./pages/admin/AdminStudent";
+import Admin from "./pages/admin/Admin.js";
+import InstallmentSavings from "./pages/installmentSavings/InstallmentSavings";
+import PurchaseStock from "./pages/stock/PurchaseStock";
+import Stock from "./pages/stock/Stock";
+import { useEffect } from "react";
+import axios from "axios";
+import InstallmentSavingsJoin from "./pages/installmentSavings/InstallmentSavingsJoin";
+import WordQuiz from "./pages/wordQuiz/WordQuiz";
+import Board from "./pages/board/Board";
 
 function App() {
   // useEffect(() => {
@@ -51,14 +57,16 @@ function App() {
         <Route path="/student" element={<AdminStudent />} />
         <Route path="/test3" element={<Admin3 />} />
       </Routes>
-      {location.pathname !== '/admin' && location.pathname !== '/student' && location.pathname !== '/adminjoin' ? (
+      {location.pathname !== "/admin" &&
+      location.pathname !== "/student" &&
+      location.pathname !== "/adminjoin" ? (
         <div className="App-container">
           <Routes>
             <Route path="*" element={<Main />} />
             <Route path="/" element={<Main />} />
             <Route path="/news" element={<NewsList />} />
             <Route path="/stock" element={<Stock />} />
-            <Route path="/purchase" element={<PurchaseStock />} />
+            <Route path="/stock/:stockName" element={<PurchaseStock />} />
             <Route path="/test" element={<AutoLayoutSizingExample />} />
             <Route path="/join" element={<Join />} />
             <Route path="/mypage" element={<MyPage />} />
@@ -66,14 +74,19 @@ function App() {
             <Route path="/testadmin" element={<AutoLayoutSizingExample2 />} />
             <Route path="/login" element={<Login />} />
             <Route path="/additionalInfo" element={<AdditionalInfo />} />
-            <Route exact path="/api/login/oauth2/code/kakao" element={<KakaoAuthHandle />} />
+            <Route
+              exact
+              path="/api/login/oauth2/code/kakao"
+              element={<KakaoAuthHandle />}
+            />
             <Route path="/savings" element={<InstallmentSavings />} />
             <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
             <Route path="/wordQuiz" element={<WordQuiz />} />
             <Route path="/board" element={<Board />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
-          {location.pathname !== '/admin' && location.pathname !== '/testadmin' && <Footer />}
+          {location.pathname !== "/admin" &&
+            location.pathname !== "/testadmin" && <Footer />}
         </div>
       ) : null}
     </div>
