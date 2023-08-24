@@ -43,7 +43,9 @@ const WordQuiz = () => {
                     <strong>{word.wordTodayName}</strong>: {word.todaycontent}</li>
                 ))}
             </ul> */}
-            <Word></Word>
+            <Word />
+            <Word backgroundColor="rgba(225, 224, 112, 0.5)" borderColor="rgba(225, 224, 112, 0.5)" />
+            <Word backgroundColor="rgba(30, 114, 255, 0.5)" borderColor="rgba(30, 114, 255, 0.5)" />
         </div>
     );
 };
