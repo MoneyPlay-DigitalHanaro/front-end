@@ -40,6 +40,7 @@ import axios from "axios";
 import InstallmentSavingsJoin from "./pages/installmentSavings/InstallmentSavingsJoin";
 import WordQuiz from "./pages/wordQuiz/WordQuiz";
 import Board from "./pages/board/Board";
+import AssetPlus from "./pages/assetPlus/AssetPlus.js";
 
 function App() {
   // useEffect(() => {
@@ -79,6 +80,7 @@ function App() {
               path="/api/login/oauth2/code/kakao"
               element={<KakaoAuthHandle />}
             />
+            <Route path="/asset" element={<AssetPlus />} />
             <Route path="/savings" element={<InstallmentSavings />} />
             <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
             <Route path="/wordQuiz" element={<WordQuiz />} />
