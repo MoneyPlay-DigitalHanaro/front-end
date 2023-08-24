@@ -21,7 +21,7 @@ const ChartStock = ({ data }) => {
         type="monotone"
         dataKey="stockClosePrice"
         stroke="#8884d8"
-        dot={false}
+        // dot={false}
       />
     </LineChart>
   );
