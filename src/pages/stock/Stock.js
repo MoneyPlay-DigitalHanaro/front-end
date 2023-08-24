@@ -11,6 +11,14 @@ import saving4 from "../../image/App/Savings/Saving4.png";
 import axios from "axios";
 
 function Stock() {
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("Authorization");
+    if (authToken) {
+      axios.defaults.headers.common["Authorization"] = authToken;
+    }
+  }, []);
+
   const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
     // 각 박스마다 적용될 배경색과 이미지를 배열로 정의

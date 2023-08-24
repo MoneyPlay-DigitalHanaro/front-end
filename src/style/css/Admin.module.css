@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Tmoney';
-  src: url('../font/TmoneyRoundWindRegular.ttf') format('woff');
+  font-family: "Tmoney";
+  src: url("../font/TmoneyRoundWindRegular.ttf") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -91,7 +91,7 @@
 .sortBox {
   border: solid rgb(216, 228, 236, 0.25) 1px;
   font-size: 20px;
-  font-family: 'Tmoney';
+  font-family: "Tmoney";
 }
 
 .rankBox {
@@ -127,6 +127,8 @@
 .ranking {
   font-size: 25px;
   margin-right: 20px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .rankname {
@@ -247,6 +249,14 @@
 .flexContainer {
   display: flex;
   align-items: center; /* 텍스트와 이미지를 수평의 중앙에 정렬 */
+}
+
+.zeroButton {
+  width: 60px;
+  height: 40px;
+  background-color: #4478c6;
+  color: white;
+  border: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
