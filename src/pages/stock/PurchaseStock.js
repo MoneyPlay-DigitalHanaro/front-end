@@ -28,7 +28,22 @@ function PurchaseStock() {
   }
 
   function buyStock() {
-    alert(stockCount + " 주의 주식을 구매하였습니다.");
+    const postData = {
+      name: stockName,
+      stockPresentPrice: stockData.stockPresentPrice,
+      buyAmount: stockCount,
+      tradeType: "매수",
+    };
+    axios
+      .post("http://localhost:8080/stock/buy", postData)
+      .then((response) => {
+        // 성공적으로 요청이 처리되었을 때 처리할 로직
+        alert(stockCount + " 주의 주식을 구매하였습니다.");
+      })
+      .catch((error) => {
+        console.error("주식 구매 중 에러 발생:", error);
+        // 에러 처리를 원하시면 여기에 로직을 추가하세요.
+      });
   }
 
   function sellStock() {
