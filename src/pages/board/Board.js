@@ -1,9 +1,17 @@
 /* eslint-disable */
-import styles from "../../style/css/Board.module.css";
-import Send from "../../image/Board/send3.png";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "../../style/css/Board.module.css";
+import Send from "../../image/Board/send3.png";
 const BoardPage = () => {
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("Authorization");
+    if (authToken) {
+      axios.defaults.headers.common["Authorization"] = authToken;
+    }
+  }, []);
+
   const [boardData, setBoardData] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {
@@ -28,16 +36,8 @@ const BoardPage = () => {
     }
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flexWrap: "nowrap",
-        paddingLeft: "15px",
-        paddingRight: "15px",
-      }}
-    >
-      <div style={{ fontSize: "25px" }}>서로 이야기 해요</div>
+    <div>
+      <h1>Board Page</h1>
       <ul>
         {boardData.map((board) => (
           <li key={board.boardId}>
@@ -45,36 +45,15 @@ const BoardPage = () => {
           </li>
         ))}
       </ul>
-      <div>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-end",
-          }}
-        >
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className={`${styles.textBox}`}
-          />
-          <button
-            type="submit"
-            style={{
-              backgroundColor: "#edf5fb",
-              border: "none",
-              color: "none",
-              borderRadius: "10px",
-              height: "55px",
-              marginBottom: "10px",
-            }}
-          >
-            <img src={Send} className={`${styles.sendImg}`} />
-          </button>
-        </form>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };
+
 export default BoardPage;

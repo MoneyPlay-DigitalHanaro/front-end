@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import News from '../../component/NewsDetail.js';
 import styled from 'styled-components';
+import instance from '../oauth/instance.js';
 
 const NewsDetailContainer = styled.div`
     width: 375px;
@@ -20,7 +21,7 @@ const NewsDetail = () => {
 
     const [newsDetail, setNewsDetail] = useState(null);
     useEffect(()=>{
-        axios.get(`http://localhost:8080/news/detail?index=${index}`).then((response)=>{
+        instance.get(`http://localhost:8080/news/detail?index=${index}`).then((response)=>{
         // console.log(response.data)
         setNewsDetail(response.data);
     })
