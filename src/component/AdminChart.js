@@ -1,5 +1,5 @@
-/* eslint-disable */
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   LineChart,
   Line,
@@ -10,68 +10,32 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import styles from "../style/css/Admin.module.css";
 
-function AdminChart() {
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1;
+function AdminChart({ data }) {
+  const [chartData, setChartData] = useState([]);
 
-  const data = [
-    {
-      month: `1월`,
-      uv: 4000,
-      point: 2400,
-      amt: 2400,
-    },
-    {
-      month: `3월`,
-      uv: 3000,
-      point: 1398,
-      amt: 2210,
-    },
-    {
-      month: `4월`,
-      uv: 2000,
-      point: 9800,
-      amt: 2290,
-    },
-    {
-      month: `5월`,
-      uv: 2780,
-      point: 3908,
-      amt: 2000,
-    },
-    {
-      month: `6월`,
-      uv: 1890,
-      point: 4800,
-      amt: 2181,
-    },
-    {
-      month: `7월`,
-      uv: 2390,
-      point: 3800,
-      amt: 2500,
-    },
-    {
-      month: `8월`,
-      uv: 3490,
-      point: 4300,
-      amt: 2100,
-    },
-  ];
-
-  const lastSixMonthsData = data.filter((item) => {
-    const monthNum = parseInt(item.month.replace("월", ""), 10);
-    return monthNum <= currentMonth && monthNum > currentMonth - 6;
-  });
+  useEffect(() => {
+    // 데이터가 props로 제공되지 않을 경우 API 호출
+    if (!data) {
+      axios
+        .get("http://localhost:8080/admin")
+        .then((response) => {
+          setChartData(response.data.classDailyPoint);
+        })
+        .catch((error) => {
+          console.error("데이터를 가져오는데 실패했습니다.", error);
+        });
+    } else {
+      setChartData(data.classDailyPoint);
+    }
+  }, [data]);
 
   return (
-    <ResponsiveContainer width="85%" height="50%" className="ml30">
+    <ResponsiveContainer width="85%" height="50%">
       <LineChart
         width={500}
         height={300}
-        data={lastSixMonthsData}
+        data={chartData}
         margin={{
           top: 5,
           right: 30,
@@ -80,14 +44,13 @@ function AdminChart() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" />
+        <XAxis dataKey="localDate" />
         <YAxis />
         <Tooltip />
         <Legend />
-
         <Line
           type="monotone"
-          dataKey="point"
+          dataKey="totalPoint"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
           strokeWidth={4}

@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+import { useNavigate } from "react-router-dom";
 import styles from "../../style/css/MyPage.module.css";
 import rocket from "../../image/App/rocket.png";
 import rocket90 from "../../image/App/rocket90.png";
@@ -18,6 +18,7 @@ function Stock() {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
   }, []);
+  const navigate = useNavigate();
 
   const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
@@ -51,11 +52,13 @@ function Stock() {
   }, [DetailPointDifferenceValue]);
 
   const [stockData, setStockData] = useState(null);
+  const [myStockInfo, setMyStockInfo] = useState(null);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/stock/삼성전자")
+      .get("http://localhost:8080/stock/")
       .then((response) => {
-        setStockData(response.data.stockDetailData);
+        setStockData(response.data.stockDataList);
+        setMyStockInfo(response.data.myStockInfoDto);
       })
       .catch((error) => {
         console.error("에러", error);
@@ -81,15 +84,18 @@ function Stock() {
         <div className={`${styles.StockBox} mb40`}>
           <div className={`${styles.totalPoint} mb20`}>
             <div className="mb_3">
-              1,293,182
+              {myStockInfo?.totalStockValue}
               <span style={{ color: "#FFA502", fontWeight: 400 }}> ⓟ</span>
             </div>
 
             <div
               className={`${styles.totalPointDefferance}`}
-              style={{ color: isNegativeDifference ? "blue" : "red" }}
+              style={{
+                color: myStockInfo?.totalChangeStockValue < 0 ? "blue" : "red",
+              }}
             >
-              {totalPointDifferenceValue} ( 20.3% )
+              {myStockInfo?.totalChangeStockValue} ({" "}
+              {myStockInfo?.totalChangeStockRate}% )
             </div>
           </div>
 
@@ -98,80 +104,60 @@ function Stock() {
             <div className="mb5">총 주식 포인트</div>
           </div>
 
-          <div className={`${styles.detailPoint} `}>
-            <div className="mb5">493,812</div>
-            <div className="mb5">600,000</div>
+          <div className={`${styles.detailPoint}`}>
+            <div className="mb5">{myStockInfo?.availablePoint}</div>
+            <div className="mb5">{myStockInfo?.totalBuyStockPoint}</div>
           </div>
+
           <div className={`${styles.detailPoint} mgr_50 `}>
             <img
-              src={isNegativeDifference ? rocket90 : rocket}
+              src={myStockInfo?.totalChangeStockValue < 0 ? rocket90 : rocket}
               style={{ marginTop: "-50px" }}
             />
           </div>
         </div>
 
         <div className={styles.stockListContainer}>
-          <div>
-            <div className={`${styles.stockBox} ft18 mb20`}>
-              <b className={`${styles.stockName} ft18`}>삼성전자</b>
-              <div>
-                <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
-                  <div className="mb_3">{`${stockData.stockPresentPrice}`}</div>
-                  {/* 현재 가격으로 일단 넣어놈 */}
-                  <div
-                    className={`${styles.totalPointDefferance} ft14`}
-                    style={{ color: "black" }}
-                  >
-                    2주
+          {stockData?.map((stock) => {
+            const isNegativeDifference =
+              stock.previousComparePrice.startsWith("-");
+            return (
+              <div
+                key={stock.name}
+                onClick={() => navigate(`/stock/${stock.name}`)}
+              >
+                <div className={`${styles.stockBox} ft18 mb20`}>
+                  <b className={`${styles.stockName} ft18`}>{stock.name}</b>
+                  <div>
+                    <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
+                      <div className="mb_3">{stock.stockPresentPrice}</div>
+                      {/* 현재 가격으로 일단 넣어놈 */}
+                      <div
+                        className={`${styles.totalPointDefferance} ft14`}
+                        style={{ color: "black" }}
+                      >
+                        1주
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
+                      <div className="mb_3">{stock.previousComparePrice}</div>
+                      <div
+                        className={`${styles.detailPointDefferance}`}
+                        style={{
+                          color: isNegativeDifference ? "blue" : "red",
+                        }}
+                      >
+                        {stock.previousCompareRate} ({" "}
+                        {stock.previousCompareRate}% )
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div>
-                <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
-                  <div className="mb_3">100,000</div>
-                  <div
-                    className={`${styles.detailPointDefferance}`}
-                    style={{
-                      color: isDetailNegativeDifference ? "blue" : "red",
-                    }}
-                  >
-                    {DetailPointDifferenceValue} ( -10.3% )
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.stockListContainer}>
-          <div>
-            <div className={`${styles.stockBox} ft18 mb20`}>
-              <b className={`${styles.stockName} ft18`}>삼성전자</b>
-              <div>
-                <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
-                  <div className="mb_3">50,000</div>
-                  <div
-                    className={`${styles.totalPointDefferance} ft14`}
-                    style={{ color: "black" }}
-                  >
-                    2주
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
-                  <div className="mb_3">100,000</div>
-                  <div
-                    className={`${styles.detailPointDefferance}`}
-                    style={{
-                      color: isDetailNegativeDifference ? "blue" : "red",
-                    }}
-                  >
-                    {DetailPointDifferenceValue} ( -10.3% )
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>
