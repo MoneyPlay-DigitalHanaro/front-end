@@ -8,6 +8,7 @@ import saving1 from "../../image/App/Savings/Saving1.png";
 import saving2 from "../../image/App/Savings/Saving2.png";
 import saving3 from "../../image/App/Savings/Saving3.png";
 import saving4 from "../../image/App/Savings/Saving4.png";
+import dogAndPerson from "../../image/Stock/dogAndperson.png";
 import axios from "axios";
 
 function Stock() {
@@ -19,6 +20,10 @@ function Stock() {
     }
   }, []);
   const navigate = useNavigate();
+  // 3자리수마다 쉼표
+  function Commas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
@@ -69,8 +74,8 @@ function Stock() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <div className={`${styles.title} ft20 fw600 ml24 mb17`}>
-        <div>나의 주식</div>
+      <div className={`${styles.title} ft20 fw600 ml24 mb5`}>
+        <div style={{ fontSize: "22px" }}>나의 주식</div>
       </div>
 
       <div
@@ -81,16 +86,29 @@ function Stock() {
           alignItems: "center",
         }}
       >
-        <div className={`${styles.StockBox} mb40`}>
-          <div className={`${styles.totalPoint} mb20`}>
+        <div className={`${styles.StockBox2} mb40`}>
+          <div className={`${styles.totalPoint} mb10`}>
             <div className="mb_3">
-              {myStockInfo?.totalStockValue}
-              <span style={{ color: "#FFA502", fontWeight: 400 }}> ⓟ</span>
+              {Commas(myStockInfo?.totalStockValue)}
+              <span
+                style={{
+                  color: "#FFA502",
+                  fontWeight: 400,
+                  marginRight: "3px",
+                }}
+              >
+                {" "}
+                ⓟ
+              </span>
+              를 벌었어요!
             </div>
 
             <div
               className={`${styles.totalPointDefferance}`}
               style={{
+                marginTop: "10px",
+                fontSize: "20px",
+                fontWeight: 600,
                 color: myStockInfo?.totalChangeStockValue < 0 ? "blue" : "red",
               }}
             >
@@ -99,22 +117,53 @@ function Stock() {
             </div>
           </div>
 
-          <div className={`${styles.detailPoint} mgr15`}>
-            <div className="mb5">사용 가능 포인트</div>
-            <div className="mb5">총 주식 포인트</div>
+          <div
+            className={`${styles.detailPoint} mgr15`}
+            style={{ justifyContent: "flex-start", alignContent: "flex-start" }}
+          >
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              총 주식 포인트
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              투자한 포인트
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              사용 가능 포인트
+            </div>
           </div>
 
           <div className={`${styles.detailPoint}`}>
-            <div className="mb5">{myStockInfo?.availablePoint}</div>
-            <div className="mb5">{myStockInfo?.totalBuyStockPoint}</div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              {Commas(myStockInfo?.availablePoint)}
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              {Commas(myStockInfo?.totalBuyStockPoint)}
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              {Commas(
+                myStockInfo?.availablePoint - myStockInfo?.totalBuyStockPoint
+              )}
+            </div>
           </div>
 
           <div className={`${styles.detailPoint} mgr_50 `}>
             <img
-              src={myStockInfo?.totalChangeStockValue < 0 ? rocket90 : rocket}
-              style={{ marginTop: "-50px" }}
+              src={dogAndPerson}
+              style={{ marginTop: "-50px", marginRight: "30px" }}
             />
           </div>
+        </div>
+
+        <div
+          style={{
+            alignSelf: "flex-start",
+            fontSize: "22px",
+            fontweight: 600,
+            marginLeft: "25px",
+            marginBottom: "20px",
+          }}
+        >
+          오늘 가장 많이 오른 종목
         </div>
 
         <div className={styles.stockListContainer}>
