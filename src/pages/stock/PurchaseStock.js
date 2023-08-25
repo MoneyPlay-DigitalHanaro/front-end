@@ -1,7 +1,5 @@
 /* eslint-disable */
 import styles from "../../style/css/Stock.module.css";
-import plus from "../../image/Stock/plus.png";
-import minus from "../../image/Stock/minus.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ChartStock from "../../component/ChartStock";
@@ -80,22 +78,8 @@ function PurchaseStock() {
         <div className={`${styles.titleNumber} `}>005930</div>
       </div>
       <div className={`${styles.stockContainer} `}>
-        <div
-          style={{
-            border: "1px solid black",
-            width: "300px",
-            height: "200px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "20px 0",
-          }}
-        >
-          {/* 이곳에 실제 주식 그래프를 표현하는 코드나 이미지를 넣어주세요. */}
-          <span>
-            <ChartStock data={stockChartData} />
-          </span>
-        </div>
+          {/* 이곳에 실제 주식 그래프를 표현하는 코드나 이미지를 넣어주세요. */ }
+        <ChartStock data={stockChartData} />
         <div
           className={`${styles.title}`}
         >{`${stockData.stockPresentPrice}원`}</div>
@@ -114,25 +98,23 @@ function PurchaseStock() {
         >
           <button
             onClick={decreaseStock}
-            style={{ border: "0px", backgroundColor: "white" }}
-          >
-            <img src={minus}></img>
+            style={{ width: "34px", height: "34px", border: "none", backgroundColor: "rgba(112, 195, 255, 0.5)", borderRadius: "30px", margin: "1px 6px", boxShadow: "2px 2px 2px 0 rgba(0, 0, 0, 0.25" }}
+          ><span>-</span>
           </button>
-          <span className={`${styles.title}`}>{stockCount}</span> 주
+          <span className={`${styles.title}`} style={{fontSize: "20px"}}>{stockCount}</span> 주
           <button
             onClick={increaseStock}
-            style={{ border: "0px", backgroundColor: "white" }}
-          >
-            <img src={plus}></img>{" "}
+            style={{ width: "34px", height: "34px", border: "none", backgroundColor: "rgba(255, 30, 30, 0.5)", borderRadius: "30px", margin: "1px 6px", boxShadow: "2px 2px 2px 0 rgba(0, 0, 0, 0.25"}}
+          ><span>+</span>
           </button>
         </div>
 
         <div style={{ marginTop: "30px" }}>
           <button className={`${styles.stockButton}`} onClick={buyStock}>
-            사기
+            <b>사기</b>
           </button>
           <button className={`${styles.stockButton}`} onClick={sellStock}>
-            팔기
+            <b>팔기</b>
           </button>
         </div>
       </div>
