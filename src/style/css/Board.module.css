@@ -1,18 +1,56 @@
 .textBox {
-  width: 270px;
-  height: 77px;
-  border: solid black 0px;
+  width: 300px;
+  height: 50px;
+  border: solid #1e90ff 1px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
-  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  margin: 10px;
+  margin-left: -5px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.yourChat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 532px;
+  padding-left: 1px;
+  overflow-y: auto;
 }
 
 .yellowButtton {
   background-color: yellow !important;
   border: none;
   color: black;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.chatBox {
+  min-width: 111px;
+  min-height: 31px;
+  width: auto;
+  height: auto;
+  max-width: 250px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  text-align: left;
+  padding: 10px;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
 }
