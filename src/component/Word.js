@@ -15,6 +15,7 @@ const WordItem = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 18px;
 `;
 
 const WordMeaning = styled.div`
@@ -23,7 +24,7 @@ const WordMeaning = styled.div`
     height: 150px;
     border: 3px solid ${({ borderColor }) => borderColor || 'rgba(112, 195, 255, 0.5)'};
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
     font-weight: normal;
     font-size: 16px;
     display: flex;
@@ -31,11 +32,11 @@ const WordMeaning = styled.div`
     align-items: center;
 `;
 
-const Word = ({ backgroundColor, borderColor }) => {
+const Word = ({ wordSpelling, wordMean, backgroundColor, borderColor }) => {
     return (
         <WordCard>
-            <WordItem backgroundColor={backgroundColor}>적금</WordItem>
-            <WordMeaning borderColor={borderColor}>일정 기간 동안 돈을 모아 이자를 받는 저축 상품입니다.</WordMeaning>
+            <WordItem backgroundColor={backgroundColor}> { wordSpelling } </WordItem>
+            <WordMeaning borderColor={borderColor}> { wordMean } </WordMeaning>
         </WordCard>
     );
 };

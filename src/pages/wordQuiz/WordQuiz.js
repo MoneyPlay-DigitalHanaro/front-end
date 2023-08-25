@@ -20,6 +20,12 @@ const WordUpdate = styled.h5`
     margin-left: 20px;
 `;
 
+const colorOptions = [
+    { backgroundColor: "rgba(112, 195, 255, 0.5)", borderColor: "rgba(112, 195, 255, 0.5)" },
+    { backgroundColor: "rgba(225, 224, 112, 0.5)", borderColor: "rgba(225, 224, 112, 0.5)" },
+    { backgroundColor: "rgba(30, 114, 255, 0.5)", borderColor: "rgba(30, 114, 255, 0.5)" }
+];
+
 const WordQuiz = () => {
     const [words, setWords] = useState([]);
     useEffect(() => {
@@ -27,7 +33,7 @@ const WordQuiz = () => {
     }, []);
     const fetchWords = async () => {
         try {
-            const response = await instance.get('/word');
+            const response = await instance.get("http://localhost:8080/word");
             setWords(response.data);
         } catch (error) {
             console.error('Error fetching words:', error);
@@ -37,15 +43,11 @@ const WordQuiz = () => {
         <div>
             <WordTitle>매일 3개의 경제 단어를 학습해 보세요</WordTitle>
             <WordUpdate>밤 12시 업데이트</WordUpdate>
-            {/* <ul>
-                {words.map((word) => (
-                    <li key={word.wordTodayId}>
-                    <strong>{word.wordTodayName}</strong>: {word.todaycontent}</li>
-                ))}
-            </ul> */}
-            <Word />
-            <Word backgroundColor="rgba(225, 224, 112, 0.5)" borderColor="rgba(225, 224, 112, 0.5)" />
-            <Word backgroundColor="rgba(30, 114, 255, 0.5)" borderColor="rgba(30, 114, 255, 0.5)" />
+            {words.map((word, index) => (
+                <Word key={word.wordTodayId} wordSpelling={ word.wordTodayName } wordMean={ word.todaycontent} 
+                    {...colorOptions[index % colorOptions.length]}
+                />
+            ))}
         </div>
     );
 };
