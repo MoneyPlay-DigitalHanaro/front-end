@@ -43,9 +43,24 @@ function PurchaseStock() {
         // 에러 처리를 원하시면 여기에 로직을 추가하세요.
       });
   }
-
   function sellStock() {
-    alert(stockCount + " 주의 주식을 판매하였습니다.");
+    const postData = {
+      name: stockName,
+      stockPresentPrice: stockData.stockPresentPrice,
+      sellAmount: stockCount,
+      tradeType: "매도",
+    };
+    console.log(postData);
+    axios
+      .post("http://localhost:8080/stock/sell", postData)
+      .then((response) => {
+        // 성공적으로 요청이 처리되었을 때 처리할 로직
+        alert(stockCount + " 주의 주식을 판매하였습니다.");
+      })
+      .catch((error) => {
+        console.error("주식 판매 중 에러 발생:", error);
+        // 에러 처리를 원하시면 여기에 로직을 추가하세요.
+      });
   }
 
   const [stockData, setStockData] = useState(null);
@@ -78,7 +93,7 @@ function PurchaseStock() {
         <div className={`${styles.titleNumber} `}>005930</div>
       </div>
       <div className={`${styles.stockContainer} `}>
-          {/* 이곳에 실제 주식 그래프를 표현하는 코드나 이미지를 넣어주세요. */ }
+        {/* 이곳에 실제 주식 그래프를 표현하는 코드나 이미지를 넣어주세요. */}
         <ChartStock data={stockChartData} />
         <div
           className={`${styles.title}`}
@@ -98,14 +113,35 @@ function PurchaseStock() {
         >
           <button
             onClick={decreaseStock}
-            style={{ width: "34px", height: "34px", border: "none", backgroundColor: "rgba(112, 195, 255, 0.5)", borderRadius: "30px", margin: "1px 6px", boxShadow: "2px 2px 2px 0 rgba(0, 0, 0, 0.25" }}
-          ><span>-</span>
+            style={{
+              width: "34px",
+              height: "34px",
+              border: "none",
+              backgroundColor: "rgba(112, 195, 255, 0.5)",
+              borderRadius: "30px",
+              margin: "1px 6px",
+              boxShadow: "2px 2px 2px 0 rgba(0, 0, 0, 0.25",
+            }}
+          >
+            <span>-</span>
           </button>
-          <span className={`${styles.title}`} style={{fontSize: "20px"}}>{stockCount}</span> 주
+          <span className={`${styles.title}`} style={{ fontSize: "20px" }}>
+            {stockCount}
+          </span>{" "}
+          주
           <button
             onClick={increaseStock}
-            style={{ width: "34px", height: "34px", border: "none", backgroundColor: "rgba(255, 30, 30, 0.5)", borderRadius: "30px", margin: "1px 6px", boxShadow: "2px 2px 2px 0 rgba(0, 0, 0, 0.25"}}
-          ><span>+</span>
+            style={{
+              width: "34px",
+              height: "34px",
+              border: "none",
+              backgroundColor: "rgba(255, 30, 30, 0.5)",
+              borderRadius: "30px",
+              margin: "1px 6px",
+              boxShadow: "2px 2px 2px 0 rgba(0, 0, 0, 0.25",
+            }}
+          >
+            <span>+</span>
           </button>
         </div>
 
