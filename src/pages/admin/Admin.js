@@ -22,133 +22,6 @@ function Admin() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [data, setData] = useState(null);
 
-  // const [tableData, setTableData] = useState([
-  //   {
-  //     id: 1,
-  //     name: "김영희",
-  //     email: "younghee1@naver.com",
-  //     points: "8,250,000",
-  //   },
-  //   { id: 2, name: "이철수", email: "cheolsu2@naver.com", points: "5,750,000" },
-  //   { id: 3, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-  //   { id: 4, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-  //   {
-  //     id: 5,
-  //     name: "정은경",
-  //     email: "eunkyung5@naver.com",
-  //     points: "4,250,000",
-  //   },
-  //   { id: 6, name: "백현진", email: "hyunjin6@naver.com", points: "7,910,000" },
-  //   { id: 7, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-  //   { id: 8, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-  //   {
-  //     id: 9,
-  //     name: "김영희",
-  //     email: "younghee1@naver.com",
-  //     points: "9,250,000",
-  //   },
-  //   {
-  //     id: 10,
-  //     name: "이철수",
-  //     email: "cheolsu2@naver.com",
-  //     points: "5,750,000",
-  //   },
-  //   { id: 11, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-  //   { id: 12, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-  //   {
-  //     id: 13,
-  //     name: "정은경",
-  //     email: "eunkyung5@naver.com",
-  //     points: "4,250,000",
-  //   },
-  //   {
-  //     id: 14,
-  //     name: "백현진",
-  //     email: "hyunjin6@naver.com",
-  //     points: "7,910,000",
-  //   },
-  //   { id: 15, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-  //   { id: 16, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-  //   { id: 44, name: "특별해", email: "minjae8@naver.com", points: "6,980,000" },
-  //   {
-  //     id: 17,
-  //     name: "김영희",
-  //     email: "younghee1@naver.com",
-  //     points: "8,250,000",
-  //   },
-  //   {
-  //     id: 28,
-  //     name: "이철수",
-  //     email: "cheolsu2@naver.com",
-  //     points: "5,750,000",
-  //   },
-  //   { id: 39, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-  //   { id: 40, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-  //   {
-  //     id: 50,
-  //     name: "정은경",
-  //     email: "eunkyung5@naver.com",
-  //     points: "4,250,000",
-  //   },
-  //   {
-  //     id: 68,
-  //     name: "백현진",
-  //     email: "hyunjin6@naver.com",
-  //     points: "7,910,000",
-  //   },
-  //   { id: 77, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-  //   { id: 85, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-  //   {
-  //     id: 93,
-  //     name: "김영희",
-  //     email: "younghee1@naver.com",
-  //     points: "8,250,000",
-  //   },
-  //   {
-  //     id: 101,
-  //     name: "이철수",
-  //     email: "cheolsu2@naver.com",
-  //     points: "5,750,000",
-  //   },
-  //   { id: 112, name: "박지수", email: "jisoo3@naver.com", points: "6,150,000" },
-  //   { id: 122, name: "최민호", email: "minho4@naver.com", points: "3,500,000" },
-  //   {
-  //     id: 133,
-  //     name: "정은경",
-  //     email: "eunkyung5@naver.com",
-  //     points: "4,250,000",
-  //   },
-  //   {
-  //     id: 64,
-  //     name: "백현진",
-  //     email: "hyunjin6@naver.com",
-  //     points: "7,910,000",
-  //   },
-  //   { id: 75, name: "서유리", email: "yuri7@naver.com", points: "5,780,000" },
-  //   { id: 86, name: "이민재", email: "minjae8@naver.com", points: "6,980,000" },
-  //   { id: 55, name: "특별해", email: "minjae8@naver.com", points: "6,980,000" },
-
-  //   // ... 나머지 데이터
-  // ]);
-
-  // 테이블 및 그래프에 올 데이터 요청하는 함수
-  // useEffect(() => {
-  //   // API 요청을 수행하는 함수
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('YOUR_API_ENDPOINT_HERE');
-
-  //       if (response.data) {
-  //         setTableData(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData(); // 함수 호출
-  // }, []); // 빈 의존성 배열을 통해 컴포넌트가 마운트될 때 한 번만 fetchData가 실행되도록 합니다.
-
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([]);
@@ -434,14 +307,14 @@ function Admin() {
           <div className={`${styles.rankBox}`}>
             <b>이달의 랭킹</b>
             {top3.map((student, index) => (
-              <div key={student.id} className={`${styles.rankDetail}`}>
+              <div key={student.userId} className={`${styles.rankDetail}`}>
                 <div className={`${styles.ranking} ml30`}>{index + 1}등</div>
                 <div className={`${styles.rankname} mgr20`}>
                   {" "}
-                  {student.name}
+                  {student.studentName}
                 </div>
                 <div className={`${styles.rankscore} mgr20`}>
-                  {student.points}
+                  {student.totalHoldingPoint}
                 </div>
               </div>
             ))}

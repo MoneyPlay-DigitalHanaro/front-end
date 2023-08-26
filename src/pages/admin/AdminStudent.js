@@ -130,8 +130,8 @@ function AdminStudent() {
             <p>ID: {data.userId}</p>
             <p>이름: {data.studentName}</p>
             <p>이메일: {data.email}</p>
-            <p>포인트: {data.points}</p>
-            <p>금액변동상황 : </p>
+            <p>포인트: {data.totalHoldingPoint}</p>
+            <p>금액변동상황 : {data.totalChangeStockRate}</p>
             <p></p>
           </>
         </div>
@@ -193,10 +193,12 @@ function AdminStudent() {
                     className={styles.rowHover}
                     onClick={() => setSelectedRow(row)}
                   >
-                    <td className={styles.fadedText}>{row.id}</td>
-                    <td className={styles.fadedText}>{row.name}</td>
+                    <td className={styles.fadedText}>{row.userId}</td>
+                    <td className={styles.fadedText}>{row.studentName}</td>
                     <td className={styles.fadedText}>{row.email}</td>
-                    <td className={styles.fadedText}>{row.points}</td>
+                    <td className={styles.fadedText}>
+                      {row.totalHoldingPoint}
+                    </td>
                   </tr>
                 ))}
               </tbody>

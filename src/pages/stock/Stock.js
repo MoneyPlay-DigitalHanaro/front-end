@@ -89,7 +89,7 @@ function Stock() {
         <div className={`${styles.StockBox2} mb40`}>
           <div className={`${styles.totalPoint} mb10`}>
             <div className="mb_3">
-              {Commas(myStockInfo?.totalStockValue)}
+              {Commas(myStockInfo?.totalChangeStockValue)}
               <span
                 style={{
                   color: "#FFA502",
@@ -134,15 +134,13 @@ function Stock() {
 
           <div className={`${styles.detailPoint}`}>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              {Commas(myStockInfo?.availablePoint)}
+              {Commas(myStockInfo?.totalStockValue)}
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
               {Commas(myStockInfo?.totalBuyStockPoint)}
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              {Commas(
-                myStockInfo?.availablePoint - myStockInfo?.totalBuyStockPoint
-              )}
+              {Commas(myStockInfo?.availablePoint)}
             </div>
           </div>
 
