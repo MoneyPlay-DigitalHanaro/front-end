@@ -10,7 +10,7 @@ function Footer() {
     <div className="footer">
       <img src={circle} className="FooterCircle" />
       <img src={Text} className='FooterText' />
-      <a href="/chat" style={{ textDecoration: 'none', color: 'black' }}>
+      <a href="/board" style={{ textDecoration: 'none', color: 'black' }}>
         <div>
           <img src={chat} className="iconChat" />
           <p className="ft12">채팅</p>
