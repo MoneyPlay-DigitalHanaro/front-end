@@ -15,9 +15,9 @@ const NewsDetailContainer = styled.div`
 `;
 
 const NewsDetail = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const index = searchParams.get('index');
-    setSearchParams({index: index});
+    // setSearchParams({index: index});
 
     const [newsDetail, setNewsDetail] = useState(null);
     useEffect(()=>{
