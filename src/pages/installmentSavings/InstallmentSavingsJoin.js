@@ -1,41 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
-import instance from '../oauth/instance';
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const SavingsName = styled.h5`
-    font-size: 15px;
-    color: #0E0E0E;
+  font-size: 15px;
+  color: #0e0e0e;
 `;
 
 const InfoContainer = styled.div`
-    text-align: left;
-    margin-left: 25px;
+  text-align: left;
+  margin-left: 25px;
 `;
 
 const TotalPoints = styled.h3`
-    font-size: 22px;
-    text-align: left;
-    font-weight: bold;
+  font-size: 22px;
+  text-align: left;
+  font-weight: bold;
 `;
 
 const PointsInfo = styled.span`
-    display: inline-block;
-    font-size: 18px;
-    margin-top: 15px;
-    border: 1px solid #0E0E0E;
-    border-radius: 15px;
-    padding: 3px 15px;
+  display: inline-block;
+  font-size: 18px;
+  margin-top: 15px;
+  border: 1px solid #0e0e0e;
+  border-radius: 15px;
+  padding: 3px 15px;
 `;
 
 const JoinContainer = styled.div`
-    margin-top: 30px;
-    height: 270px;
-    width: 374px;
-    border-radius: 15px 15px 0 0;
-    border-bottom: 1px solid #0E0E0E;
-    box-shadow: -2px -3px 4px -1px rgba(0, 0, 0, 0.25);
-    padding: 20px;
+  margin-top: 30px;
+  height: 270px;
+  width: 374px;
+  border-radius: 15px 15px 0 0;
+  border-bottom: 1px solid #0e0e0e;
+  box-shadow: -2px -3px 4px -1px rgba(0, 0, 0, 0.25);
+  padding: 20px;
 `;
 
 // const LabelContainer = styled.div`
@@ -45,12 +45,12 @@ const JoinContainer = styled.div`
 // `;
 
 const GaugeLabel = styled.span`
-    display: block;
-    font-size: 16px;
-    color: #0E0E0E;
-    font-weight: normal;
-    text-align: left;
-`
+  display: block;
+  font-size: 16px;
+  color: #0e0e0e;
+  font-weight: normal;
+  text-align: left;
+`;
 
 // const MoneyGauge = styled.input`
 //     -webkit-appearance: none;
@@ -105,132 +105,166 @@ const GaugeLabel = styled.span`
 // `;
 
 const JoinButton = styled.button`
-    width: 130px;
-    height: 40px;
-    border: none;
-    border-radius: 15px;
-    background-color: #70C3FF;
-    opacity: 0.8;
-    font-weight: bold;
-    margin-left: 30%;
+  width: 130px;
+  height: 40px;
+  border: none;
+  border-radius: 15px;
+  background-color: #70c3ff;
+  opacity: 0.8;
+  font-weight: bold;
+  margin-left: 30%;
 
-    &:hover {
-        background-color: #1E90FF;
-        opacity: 0.8;
-    }
+  &:hover {
+    background-color: #1e90ff;
+    opacity: 0.8;
+  }
 `;
 
 const DetailInfo = styled.div`
-    height: 40px;
-    border-bottom: 1px solid #0E0E0E;
-    padding-left: 20px;
-    text-align: left;
-    line-height: 35px;
+  height: 40px;
+  border-bottom: 1px solid #0e0e0e;
+  padding-left: 20px;
+  text-align: left;
+  line-height: 35px;
 `;
 
 const DetailLink = styled.a`
-    text-decoration: none;
-    color: #0E0E0E;
-    font-size: 16px;
-    font-weight: normal;
+  text-decoration: none;
+  color: #0e0e0e;
+  font-size: 16px;
+  font-weight: normal;
 `;
 const InputForm = styled.form`
-    text-align: left;
+  text-align: left;
 `;
 
 const InputBox = styled.input`
-    border: 3px solid rgba(112, 195, 255, 0.5);
-    border-radius: 15px;
-    width: 100px;
-    height: 45px;
-    margin: 5px 5px 15px 5px;
-    
-    &:focus {
-        -webkit-appearance: none;
-        outline: none;
-        border-color: #70C3FF;
-    }
+  border: 3px solid rgba(112, 195, 255, 0.5);
+  border-radius: 15px;
+  width: 100px;
+  height: 45px;
+  margin: 5px 5px 15px 5px;
+
+  &:focus {
+    -webkit-appearance: none;
+    outline: none;
+    border-color: #70c3ff;
+  }
 `;
 
 const InstallmentSavingsJoin = () => {
-    const [moneyValue, setmoneyValue] = useState(100);
-    const [durationValue, setDurationValue] = useState(4);
+  const [moneyValue, setmoneyValue] = useState(100);
+  const [durationValue, setDurationValue] = useState(4);
 
-    const handleMoneyInput = event => {
-        if (event.target.value !== moneyValue) {
-            setmoneyValue(event.target.value);
-        }
-    };
+  const handleMoneyInput = (event) => {
+    if (event.target.value !== moneyValue) {
+      setmoneyValue(event.target.value);
+    }
+  };
 
-    const handleDurationInput = e => {
-        if (e.target.value !== durationValue) {
-            setDurationValue(e.target.value);
-        }
-    }; 
+  const handleDurationInput = (e) => {
+    if (e.target.value !== durationValue) {
+      setDurationValue(e.target.value);
+    }
+  };
 
-    const [searchParams] = useSearchParams();
-    const index = searchParams.get('index');
+  const [searchParams] = useSearchParams();
+  const index = searchParams.get("index");
 
-    const [savingsInfo, setSavingsInfo] = useState(null);
-    useEffect(()=>{
-        instance.get(`http://localhost:8080/savings/join?index=${index}`).then((response)=>{
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("Authorization");
+    if (authToken) {
+      axios.defaults.headers.common["Authorization"] = authToken;
+    }
+  }, []);
+
+  const [savingsInfo, setSavingsInfo] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/savings/join?index=${index}`)
+      .then((response) => {
         // console.log(response.data)
         setSavingsInfo(response.data);
-    })
-    }, [index]);
+      });
+  }, [index]);
 
-    if (!savingsInfo) {
-        return <div>Loading...</div>;
-    }
+  if (!savingsInfo) {
+    return <div>Loading...</div>;
+  }
 
-    const totalMoney = new Intl.NumberFormat('en-US').format(moneyValue * 10000);
-    const calRate = (0.5 + (durationValue - 4)*0.1).toFixed(1);
-    const totalInterest = new Intl.NumberFormat('en-US').format(Math.floor(calRate * 0.01 * moneyValue * 10000));
+  const totalMoney = new Intl.NumberFormat("en-US").format(moneyValue * 10000);
+  const calRate = (0.5 + (durationValue - 4) * 0.1).toFixed(1);
+  const totalInterest = new Intl.NumberFormat("en-US").format(
+    Math.floor(calRate * 0.01 * moneyValue * 10000)
+  );
 
-    const day = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const today = day.toLocaleDateString('ko-KR', options);
+  const day = new Date();
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const today = day.toLocaleDateString("ko-KR", options);
 
-    const expiredDate = new Date(day);
-    expiredDate.setDate(day.getDate() + 7 * durationValue);
-    const expDate = expiredDate.toLocaleDateString('ko-KR', options);
+  const expiredDate = new Date(day);
+  expiredDate.setDate(day.getDate() + 7 * durationValue);
+  const expDate = expiredDate.toLocaleDateString("ko-KR", options);
 
-    return (
-        <div>
-            <InfoContainer>
-                <SavingsName>{savingsInfo.depositName}</SavingsName>
-                <TotalPoints>이렇게 모으면<br /> 이자 { totalInterest} 포인트</TotalPoints>
-                <PointsInfo> 원금 {totalMoney} 포인트 </PointsInfo><br />
-                <PointsInfo> 이율 {calRate}% </PointsInfo> <br />
-                <PointsInfo> 만기일 : {expDate}</PointsInfo>
-            </InfoContainer>
-            <JoinContainer>
-                {/* <TotalPoints>{moneyValue} 포인트를</TotalPoints> */}
-                {/* <LabelContainer> */}
-                    {/* <GaugeLabel>{minMoneyValue}포인트</GaugeLabel>
+  return (
+    <div>
+      <InfoContainer>
+        <SavingsName>{savingsInfo.depositName}</SavingsName>
+        <TotalPoints>
+          이렇게 모으면
+          <br /> 이자 {totalInterest} 포인트
+        </TotalPoints>
+        <PointsInfo> 원금 {totalMoney} 포인트 </PointsInfo>
+        <br />
+        <PointsInfo> 이율 {calRate}% </PointsInfo> <br />
+        <PointsInfo> 만기일 : {expDate}</PointsInfo>
+      </InfoContainer>
+      <JoinContainer>
+        {/* <TotalPoints>{moneyValue} 포인트를</TotalPoints> */}
+        {/* <LabelContainer> */}
+        {/* <GaugeLabel>{minMoneyValue}포인트</GaugeLabel>
                     <GaugeLabel>{maxMoneyValue}포인트</GaugeLabel> */}
-                    {/* <GaugeLabel>{savingsInfo.minAmount}포인트</GaugeLabel>
+        {/* <GaugeLabel>{savingsInfo.minAmount}포인트</GaugeLabel>
                     <GaugeLabel>{savingsInfo.maxAmount}포인트</GaugeLabel> */}
-                {/* </LabelContainer> */}
-                {/* <MoneyGauge type="range" min={savingsInfo.minAmount} max={savingsInfo.maxAmount} step="10000" sliderThumb value={moneyValue} onChange={handleMoneySlider}></MoneyGauge> */}
+        {/* </LabelContainer> */}
+        {/* <MoneyGauge type="range" min={savingsInfo.minAmount} max={savingsInfo.maxAmount} step="10000" sliderThumb value={moneyValue} onChange={handleMoneySlider}></MoneyGauge> */}
 
-                <InputForm method="post" action="/game/deposit">
-                    <GaugeLabel>{savingsInfo.minAmount / 10000}~{savingsInfo.maxAmount / 10000} 사이의 값을 입력해주세요</GaugeLabel>
-                    <InputBox type="text" name="increase_money" defaultValue="100" onChange={handleMoneyInput}/>만 포인트를 <br />
-                    <GaugeLabel>{savingsInfo.minMonth}~{savingsInfo.maxMonth} 사이의 값을 입력해주세요</GaugeLabel>
-                    <InputBox type="text" name="week" defaultValue="4" onChange={handleDurationInput}/>주 동안 예금하기
-                    <JoinButton>가입하기</JoinButton>
-                    <input type="hidden" name="depositId" value={index}></input>
-                </InputForm>
-            </JoinContainer>
-            <DetailInfo>
-                <DetailLink href="/savings/notice">상품 안내</DetailLink>
-            </DetailInfo>
-            <DetailInfo>
-                <DetailLink href="/savings/rate">금리 정보</DetailLink>
-            </DetailInfo>
-        </div>
-    );
+        <InputForm method="post" action="/game/deposit">
+          <GaugeLabel>
+            {savingsInfo.minAmount / 10000}~{savingsInfo.maxAmount / 10000}{" "}
+            사이의 값을 입력해주세요
+          </GaugeLabel>
+          <InputBox
+            type="text"
+            name="increase_money"
+            defaultValue="100"
+            onChange={handleMoneyInput}
+          />
+          만 포인트를 <br />
+          <GaugeLabel>
+            {savingsInfo.minMonth}~{savingsInfo.maxMonth} 사이의 값을
+            입력해주세요
+          </GaugeLabel>
+          <InputBox
+            type="text"
+            name="week"
+            defaultValue="4"
+            onChange={handleDurationInput}
+          />
+          주 동안 예금하기
+          <JoinButton>가입하기</JoinButton>
+          <input type="hidden" name="depositId" value={index}></input>
+        </InputForm>
+      </JoinContainer>
+      <DetailInfo>
+        <DetailLink href="/savings/notice">상품 안내</DetailLink>
+      </DetailInfo>
+      <DetailInfo>
+        <DetailLink href="/savings/rate">금리 정보</DetailLink>
+      </DetailInfo>
+    </div>
+  );
 };
 
 export default InstallmentSavingsJoin;

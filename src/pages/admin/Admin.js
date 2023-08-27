@@ -141,7 +141,6 @@ function Admin() {
   };
 
   // 랭킹 맥이기
-  const top3 = sortedData.slice(0, 3);
   const [sortOption, setSortOption] = useState("id");
   const sortData = (data) => {
     let sortedData = [...data];
@@ -160,6 +159,7 @@ function Admin() {
         return sortedData;
     }
   };
+  const top3 = sortedData.slice(0, 3);
   // ID 찾기
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
@@ -328,19 +328,19 @@ function Admin() {
               </Button>
             </div>
           )}
-
           <div className={`${styles.rankBox}`}>
             <b>현재 랭킹</b>
             {top3.map((student, index) => (
               <div key={student.id} className={`${styles.rankDetail}`}>
                 <div className={`${styles.ranking} ml30`}>{index + 1}등</div>
                 <div className={`${styles.rankname} mgr20`}>
-                  {" "}
-                  {student.name}
-                </div>
+                  {student.studentName}
+                </div>{" "}
+                {/* studentName 으로 이름 표시 */}
                 <div className={`${styles.rankscore} mgr20`}>
-                  {student.points}
-                </div>
+                  {student.totalHoldingPoint}
+                </div>{" "}
+                {/* totalHoldingPoint 으로 포인트 표시 */}
               </div>
             ))}
           </div>
