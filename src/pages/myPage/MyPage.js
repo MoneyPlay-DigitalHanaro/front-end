@@ -1,97 +1,174 @@
 /* eslint-disable */
 
-import styles from '../../style/css/MyPage.module.css';
-import rocket from '../../image/App/rocket.png';
-import rocket90 from '../../image/App/rocket90.png';
-import React, { useState, useEffect } from 'react';
-import saving1 from '../../image/App/Savings/Saving1.png';
-import saving2 from '../../image/App/Savings/Saving2.png';
-import saving3 from '../../image/App/Savings/Saving3.png';
-import saving4 from '../../image/App/Savings/Saving4.png';
+import styles from "../../style/css/MyPage.module.css";
+import rocket from "../../image/App/rocket.png";
+import rocket90 from "../../image/App/rocket90.png";
+import React, { useState, useEffect } from "react";
+import saving1 from "../../image/App/Savings/Saving1.png";
+import saving2 from "../../image/App/Savings/Saving2.png";
+import saving3 from "../../image/App/Savings/Saving3.png";
+import saving4 from "../../image/App/Savings/Saving4.png";
+import axios from "axios";
+import LogoutButton from "../oauth/Logout";
 
 function MyPage() {
-  const [selectedTab, setSelectedTab] = useState('주식');
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("Authorization");
+    if (authToken) {
+      axios.defaults.headers.common["Authorization"] = authToken;
+    }
+  }, []);
+  function Commas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
     // 각 박스마다 적용될 배경색과 이미지를 배열로 정의
     const boxStyles = [
-      { backgroundColor: 'rgba(112, 195, 255, 0.25)', image: saving1 },
-      { backgroundColor: '#FFE070', image: saving2 },
-      { backgroundColor: 'rgb(255, 120, 120, 0.25)', image: saving3 },
-      { backgroundColor: 'rgb(131, 252, 169, 0.25)', image: saving4 },
+      { backgroundColor: "rgba(112, 195, 255, 0.25)", image: saving1 },
+      { backgroundColor: "#FFE070", image: saving2 },
+      { backgroundColor: "rgb(255, 120, 120, 0.25)", image: saving3 },
+      { backgroundColor: "rgb(131, 252, 169, 0.25)", image: saving4 },
     ];
   };
   const [isNegativeDifference, setIsNegativeDifference] = useState(false);
-  const totalPointDifferenceValue = '- 293,182'; // 예시 값입니다.
+  const totalPointDifferenceValue = "- 293,182"; // 예시 값입니다.
   useEffect(() => {
-    if (totalPointDifferenceValue.startsWith('-')) {
+    if (totalPointDifferenceValue.startsWith("-")) {
       setIsNegativeDifference(true);
     } else {
       setIsNegativeDifference(false);
     }
   }, [totalPointDifferenceValue]);
 
-  const DetailPointDifferenceValue = '+ 2,000'; // 예시 값입니다.
-  const [isDetailNegativeDifference, setIsDetailNegativeDifference] = useState(false);
+  const DetailPointDifferenceValue = "+ 2,000"; // 예시 값입니다.
+  const [isDetailNegativeDifference, setIsDetailNegativeDifference] =
+    useState(false);
   useEffect(() => {
-    if (DetailPointDifferenceValue.startsWith('-')) {
+    if (DetailPointDifferenceValue.startsWith("-")) {
       setIsDetailNegativeDifference(true);
     } else {
       setIsDetailNegativeDifference(false);
     }
   }, [DetailPointDifferenceValue]);
 
+  const [stockData, setStockData] = useState(null);
+  const [myStockInfo, setMyStockInfo] = useState(null);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/stock/")
+      .then((response) => {
+        setStockData(response.data.stockDataList);
+        setMyStockInfo(response.data.myStockInfoDto);
+      })
+      .catch((error) => {
+        console.error("에러", error);
+      });
+  }, []);
+
+  if (!stockData) return <div>Loading...</div>;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <div className={`${styles.title} ft20 fw600 ml24 mb17 mt30`}>
         <div>내 포인트</div>
+        <LogoutButton></LogoutButton>
       </div>
 
-      <div className="high" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div
+        className="high"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <div className={`${styles.myPageBox} mb40`}>
           <div className={`${styles.totalPoint} mb20`}>
             <div className="mb_3">
-              1,293,182
-              <span style={{ color: '#FFA502', fontWeight: 400 }}> ⓟ</span>
+              {Commas(myStockInfo?.totalChangeStockValue)}
+              <span
+                style={{
+                  color: "#FFA502",
+                  fontWeight: 400,
+                  marginRight: "3px",
+                }}
+              >
+                {" "}
+                ⓟ
+              </span>
+              를 벌었어요!
             </div>
-
-            <div className={`${styles.totalPointDefferance}`} style={{ color: isNegativeDifference ? 'blue' : 'red' }}>
-              {totalPointDifferenceValue} ( 20.3% )
+            <div
+              className={`${styles.totalPointDefferance}`}
+              style={{
+                marginTop: "10px",
+                fontSize: "20px",
+                fontWeight: 600,
+                color: myStockInfo?.totalChangeStockValue < 0 ? "blue" : "red",
+              }}
+            >
+              {myStockInfo?.totalChangeStockValue} (
+              {parseFloat(myStockInfo?.totalChangeStockRate).toFixed(2)}% )
             </div>
           </div>
 
-          <div className={`${styles.detailPoint} mgr15`}>
-            <div className="mb5">사용 가능 포인트</div>
-            <div className="mb5">총 주식 포인트</div>
-            <div className="mb5">총 적금 포인트</div>
+          <div
+            className={`${styles.detailPoint} mgr15`}
+            style={{ justifyContent: "flex-start", alignContent: "flex-start" }}
+          >
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              총 주식 포인트
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              투자한 포인트
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              사용 가능 포인트
+            </div>
           </div>
-
-          <div className={`${styles.detailPoint} `}>
-            <div className="mb5">493,812</div>
-            <div className="mb5">600,000</div>
-            <div className="mb5">200,000</div>
+          <div className={`${styles.detailPoint}`}>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              {Commas(myStockInfo?.totalStockValue)}
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              {Commas(myStockInfo?.totalBuyStockPoint)}
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+              {Commas(myStockInfo?.availablePoint)}
+            </div>
           </div>
           <div className={`${styles.detailPoint} mgr_50 `}>
-            <img src={isNegativeDifference ? rocket90 : rocket} style={{ marginTop: '-50px' }} />
+            <img
+              src={isNegativeDifference ? rocket90 : rocket}
+              style={{ marginTop: "-50px" }}
+            />
           </div>
         </div>
 
         <div className={`${styles.tabBox} `}>
           <div className={`${styles.tabMenu} mb20`}>
             <button
-              className={selectedTab === '주식' ? styles.selectedTab : styles.tab}
-              onClick={() => setSelectedTab('주식')}
+              className={
+                selectedTab === "주식" ? styles.selectedTab : styles.tab
+              }
+              onClick={() => setSelectedTab("주식")}
             >
               주식
             </button>
             <button
-              className={selectedTab === '적금' ? styles.selectedTab : styles.tab}
-              onClick={() => setSelectedTab('적금')}
+              className={
+                selectedTab === "적금" ? styles.selectedTab : styles.tab
+              }
+              onClick={() => setSelectedTab("적금")}
             >
               적금
             </button>
           </div>
 
-          {selectedTab === '주식' && (
+          {selectedTab === "주식" && (
             <div className={styles.stockListContainer}>
               <div>
                 <div className={`${styles.stockBox} ft18 mb20`}>
@@ -99,7 +176,10 @@ function MyPage() {
                   <div>
                     <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
                       <div className="mb_3">50,000</div>
-                      <div className={`${styles.totalPointDefferance} ft14`} style={{ color: 'black' }}>
+                      <div
+                        className={`${styles.totalPointDefferance} ft14`}
+                        style={{ color: "black" }}
+                      >
                         2주
                       </div>
                     </div>
@@ -109,7 +189,9 @@ function MyPage() {
                       <div className="mb_3">100,000</div>
                       <div
                         className={`${styles.detailPointDefferance}`}
-                        style={{ color: isDetailNegativeDifference ? 'blue' : 'red' }}
+                        style={{
+                          color: isDetailNegativeDifference ? "blue" : "red",
+                        }}
                       >
                         {DetailPointDifferenceValue} ( -10.3% )
                       </div>
@@ -120,11 +202,17 @@ function MyPage() {
             </div>
           )}
 
-          {selectedTab === '적금' && (
+          {selectedTab === "적금" && (
             <div className={styles.savingListContainer}>
               <div>
                 <div className={`${styles.savingBox} ft18 mb20`}>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                    }}
+                  >
                     <b className={`${styles.savingName} ft18 ml20`}>짱구</b>
                     <img src={saving1} className="img_saving ml_12 mt_10" />
                   </div>

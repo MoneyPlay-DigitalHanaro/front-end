@@ -15,6 +15,23 @@ function Admin() {
     if (authToken) {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
+    // 토큰을 이용하여 사용자 이름을 가져옵니다
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.post("http://localhost:8080/decodeToken", {
+          tokenOnly,
+        });
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error(error);
+        console.log(tokenOnly);
+      }
+    };
+    // const authToken = localStorage.getItem('Authorization');
+    const tokenOnly = authToken.split(" ")[1];
+    if (tokenOnly) {
+      fetchUsername();
+    }
   }, []);
 
   const [plusPoint, setPlusPoint] = useState(""); // useState를 사용하여 plusPoint 상태 설정
@@ -25,6 +42,7 @@ function Admin() {
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([]);
+
   useEffect(() => {
     // API에서 데이터를 가져와서 tableData 상태를 설정하는 함수
     async function fetchData() {
@@ -94,17 +112,18 @@ function Admin() {
   };
 
   // <<<<<<<< 데이터 정렬 <<<<<<<<<<
-  const sortedData = [...tableData].sort(
-    (a, b) =>
-      parseInt(
-        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
-        10
-      ) -
-      parseInt(
-        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
-        10
-      )
-  );
+  const sortedData = [...tableData].sort((a, b) => {
+    const aPoints =
+      typeof a.points === "string"
+        ? parseInt(a.points.replace(/,/g, ""), 10)
+        : a.points;
+    const bPoints =
+      typeof b.points === "string"
+        ? parseInt(b.points.replace(/,/g, ""), 10)
+        : b.points;
+
+    return bPoints - aPoints;
+  });
 
   // 0이 된 데이터 서버에 보내기
   const postData = async () => {
