@@ -227,7 +227,7 @@ const InstallmentSavingsJoin = () => {
                 <DetailLink href="/savings/notice">상품 안내</DetailLink>
             </DetailInfo>
             <DetailInfo>
-                <DetailLink href="#">금리 정보</DetailLink>
+                <DetailLink href="/savings/rate">금리 정보</DetailLink>
             </DetailInfo>
         </div>
     );

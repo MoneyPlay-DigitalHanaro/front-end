@@ -16,6 +16,7 @@ const NoticeContent = styled.div`
     text-align: left;
     font-weight: normal;
     margin-bottom: 20px;
+    font-size: 18px;
 `;
 
 const InstallmentSavingsNotice = () => {
@@ -23,7 +24,9 @@ const InstallmentSavingsNotice = () => {
         <NoticeContainer>
             <NoticeTitle>가입대상</NoticeTitle>
             <NoticeContent>아이코를 가입한 실명의 개인<br />
-                ※ 동일 상품은 1인 1개만 가입 가능해요
+                ※ 동일 상품은 1인 1개만 가입 가능해요<br />
+                ※ 중도 해지는 불가능해요<br />
+                ※ 만기일이 되면 자동으로 만기돼요
             </NoticeContent>
             <NoticeTitle>적금종류</NoticeTitle>
             <NoticeContent>
