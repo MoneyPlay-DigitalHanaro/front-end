@@ -99,7 +99,7 @@ const InstallmentSavings = () => {
           <Savings
             key={sv.depositTypeId}
             savings_name={sv.depositName}
-            savings_rate={sv.depositInterestRate}
+            savings_rate="2.1"
             savings_minMonth={sv.minMonth}
             savings_maxMonth={sv.maxMonth}
             savings_id={sv.depositTypeId}

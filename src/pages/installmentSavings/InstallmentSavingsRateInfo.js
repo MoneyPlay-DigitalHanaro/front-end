@@ -46,15 +46,15 @@ const InstallmentSavingsRateInfo = () => {
                     <Head>금리</Head>
                 </Row>
                 <Row>
-                    <td>4개월</td>
+                    <td>4주일</td>
                     <td>0.5%</td>
                 </Row>
                 <Row>
-                    <td>5개월</td>
+                    <td>5주일</td>
                     <td>0.6%</td>
                 </Row>
                 <Row>
-                    <td>6개월</td>
+                    <td>6주일</td>
                     <td>0.7%</td>
                 </Row>
                 <Row>
@@ -62,15 +62,15 @@ const InstallmentSavingsRateInfo = () => {
                     <td>...</td>
                 </Row>
                 <Row>
-                    <td>18개월</td>
+                    <td>18주일</td>
                     <td>1.9%</td>
                 </Row>
                 <Row>
-                    <td>19개월</td>
+                    <td>19주일</td>
                     <td>2.0%</td>
                 </Row>
                 <Row>
-                    <td>20개월</td>
+                    <td>20주일</td>
                     <td>2.1%</td>
                 </Row>
             </InterestTable>
