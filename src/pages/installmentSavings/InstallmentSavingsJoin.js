@@ -153,8 +153,8 @@ const InputBox = styled.input`
 `;
 
 const InstallmentSavingsJoin = () => {
-    const [moneyValue, setmoneyValue] = useState(0);
-    const [durationValue, setDurationValue] = useState(0);
+    const [moneyValue, setmoneyValue] = useState(100);
+    const [durationValue, setDurationValue] = useState(4);
 
     const handleMoneyInput = event => {
         if (event.target.value !== moneyValue) {
@@ -184,7 +184,16 @@ const InstallmentSavingsJoin = () => {
     }
 
     const totalMoney = new Intl.NumberFormat('en-US').format(moneyValue * 10000);
-    const totalInterest = new Intl.NumberFormat('en-US').format(Math.floor(savingsInfo.depositInterestRate * 0.01 * moneyValue * 10000));
+    const calRate = (0.5 + (durationValue - 4)*0.1).toFixed(1);
+    const totalInterest = new Intl.NumberFormat('en-US').format(Math.floor(calRate * 0.01 * moneyValue * 10000));
+
+    const day = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const today = day.toLocaleDateString('ko-KR', options);
+
+    const expiredDate = new Date(day);
+    expiredDate.setDate(day.getDate() + 7 * durationValue);
+    const expDate = expiredDate.toLocaleDateString('ko-KR', options);
 
     return (
         <div>
@@ -192,8 +201,8 @@ const InstallmentSavingsJoin = () => {
                 <SavingsName>{savingsInfo.depositName}</SavingsName>
                 <TotalPoints>이렇게 모으면<br /> 이자 { totalInterest} 포인트</TotalPoints>
                 <PointsInfo> 원금 {totalMoney} 포인트 </PointsInfo><br />
-                <PointsInfo> 이율 {savingsInfo.depositInterestRate}% </PointsInfo> <br />
-                <PointsInfo> 만기일 : </PointsInfo>
+                <PointsInfo> 이율 {calRate}% </PointsInfo> <br />
+                <PointsInfo> 만기일 : {expDate}</PointsInfo>
             </InfoContainer>
             <JoinContainer>
                 {/* <TotalPoints>{moneyValue} 포인트를</TotalPoints> */}
@@ -207,15 +216,15 @@ const InstallmentSavingsJoin = () => {
 
                 <InputForm method="post" action="/game/deposit">
                     <GaugeLabel>{savingsInfo.minAmount / 10000}~{savingsInfo.maxAmount / 10000} 사이의 값을 입력해주세요</GaugeLabel>
-                    <InputBox type="text" name="increase_money" onChange={handleMoneyInput}/>만 포인트를 <br />
+                    <InputBox type="text" name="increase_money" defaultValue="100" onChange={handleMoneyInput}/>만 포인트를 <br />
                     <GaugeLabel>{savingsInfo.minMonth}~{savingsInfo.maxMonth} 사이의 값을 입력해주세요</GaugeLabel>
-                    <InputBox type="text" name="week" onChange={handleDurationInput}/>주 동안 예금하기
+                    <InputBox type="text" name="week" defaultValue="4" onChange={handleDurationInput}/>주 동안 예금하기
                     <JoinButton>가입하기</JoinButton>
                     <input type="hidden" name="depositId" value={index}></input>
                 </InputForm>
             </JoinContainer>
             <DetailInfo>
-                <DetailLink href="#">상품 안내</DetailLink>
+                <DetailLink href="/savings/notice">상품 안내</DetailLink>
             </DetailInfo>
             <DetailInfo>
                 <DetailLink href="#">금리 정보</DetailLink>

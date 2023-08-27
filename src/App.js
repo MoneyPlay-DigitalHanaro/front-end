@@ -41,6 +41,7 @@ import InstallmentSavingsJoin from "./pages/installmentSavings/InstallmentSaving
 import WordQuiz from "./pages/wordQuiz/WordQuiz";
 import Board from "./pages/board/Board";
 import AssetPlus from "./pages/assetPlus/AssetPlus.js";
+import InstallmentSavingsNotice from "./pages/installmentSavings/InstallmentSavingsNotice.js";
 
 function App() {
   // useEffect(() => {
@@ -85,6 +86,7 @@ function App() {
             <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
             <Route path="/wordQuiz" element={<WordQuiz />} />
             <Route path="/board" element={<Board />} />
+            <Route path="/savings/notice" element={<InstallmentSavingsNotice />} />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== "/admin" &&
