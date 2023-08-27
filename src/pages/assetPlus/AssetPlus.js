@@ -93,7 +93,7 @@ function AssetPlus() {
               보장하고 안정적인
             </div>
             <div style={{ fontSize: "22px", fontWeight: 600, font: "inter" }}>
-              적금
+              예금
             </div>
           </div>
         </MenuBtn>
