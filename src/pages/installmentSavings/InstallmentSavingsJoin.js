@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { useSearchParams } from "react-router-dom";
+import instance from "../oauth/instance";
 import axios from "axios";
 
 const SavingsName = styled.h5`
@@ -153,24 +154,6 @@ const InputBox = styled.input`
 `;
 
 const InstallmentSavingsJoin = () => {
-  const [moneyValue, setmoneyValue] = useState(100);
-  const [durationValue, setDurationValue] = useState(4);
-
-  const handleMoneyInput = (event) => {
-    if (event.target.value !== moneyValue) {
-      setmoneyValue(event.target.value);
-    }
-  };
-
-  const handleDurationInput = (e) => {
-    if (e.target.value !== durationValue) {
-      setDurationValue(e.target.value);
-    }
-  };
-
-  const [searchParams] = useSearchParams();
-  const index = searchParams.get("index");
-
   useEffect(() => {
     // 로컬 스토리지에서 토큰 가져오기
     const authToken = localStorage.getItem("Authorization");
@@ -178,6 +161,58 @@ const InstallmentSavingsJoin = () => {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
   }, []);
+
+  // const [moneyValue, setmoneyValue] = useState(100);
+  // const [durationValue, setDurationValue] = useState(4);
+
+  // 예금 가입 폼 데이터
+  const [formData, setFormData] = useState({
+    increase_money: 100,
+    week: 4,
+    depositId: 1,
+  });
+
+  // 폼 전송
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/game/deposit",
+        formData
+      );
+      if (response.status === 200) {
+        console.log("폼 데이터가 성공적으로 전송되었습니다.");
+      } else {
+        console.error("폼 데이터 전송 실패");
+      }
+    } catch (error) {
+      console.error("에러:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // const handleMoneyInput = event => {
+  //     if (event.target.value !== moneyValue) {
+  //         setmoneyValue(event.target.value);
+  //     }
+  // };
+
+  // const handleDurationInput = e => {
+  //     if (e.target.value !== durationValue) {
+  //         setDurationValue(e.target.value);
+  //     }
+  // };
+
+  const [searchParams] = useSearchParams();
+  const index = searchParams.get("index");
 
   const [savingsInfo, setSavingsInfo] = useState(null);
   useEffect(() => {
@@ -193,10 +228,12 @@ const InstallmentSavingsJoin = () => {
     return <div>Loading...</div>;
   }
 
-  const totalMoney = new Intl.NumberFormat("en-US").format(moneyValue * 10000);
-  const calRate = (0.5 + (durationValue - 4) * 0.1).toFixed(1);
+  const totalMoney = new Intl.NumberFormat("en-US").format(
+    formData.increase_money * 10000
+  );
+  const calRate = (0.5 + (formData.week - 4) * 0.1).toFixed(1);
   const totalInterest = new Intl.NumberFormat("en-US").format(
-    Math.floor(calRate * 0.01 * moneyValue * 10000)
+    Math.floor(calRate * 0.01 * formData.increase_money * 10000)
   );
 
   const day = new Date();
@@ -204,7 +241,7 @@ const InstallmentSavingsJoin = () => {
   const today = day.toLocaleDateString("ko-KR", options);
 
   const expiredDate = new Date(day);
-  expiredDate.setDate(day.getDate() + 7 * durationValue);
+  expiredDate.setDate(day.getDate() + 7 * formData.week);
   const expDate = expiredDate.toLocaleDateString("ko-KR", options);
 
   return (
@@ -230,16 +267,16 @@ const InstallmentSavingsJoin = () => {
         {/* </LabelContainer> */}
         {/* <MoneyGauge type="range" min={savingsInfo.minAmount} max={savingsInfo.maxAmount} step="10000" sliderThumb value={moneyValue} onChange={handleMoneySlider}></MoneyGauge> */}
 
-        <InputForm method="post" action="/game/deposit">
+        <InputForm onSubmit={handleSubmit}>
           <GaugeLabel>
             {savingsInfo.minAmount / 10000}~{savingsInfo.maxAmount / 10000}{" "}
             사이의 값을 입력해주세요
           </GaugeLabel>
           <InputBox
-            type="text"
+            type="number"
             name="increase_money"
-            defaultValue="100"
-            onChange={handleMoneyInput}
+            value={formData.increase_money}
+            onChange={handleInputChange}
           />
           만 포인트를 <br />
           <GaugeLabel>
@@ -247,14 +284,18 @@ const InstallmentSavingsJoin = () => {
             입력해주세요
           </GaugeLabel>
           <InputBox
-            type="text"
+            type="number"
             name="week"
-            defaultValue="4"
-            onChange={handleDurationInput}
+            value={formData.week}
+            onChange={handleInputChange}
           />
           주 동안 예금하기
-          <JoinButton>가입하기</JoinButton>
-          <input type="hidden" name="depositId" value={index}></input>
+          <JoinButton type="submit">가입하기</JoinButton>
+          <input
+            type="hidden"
+            name="depositId"
+            value={formData.depositId}
+          ></input>
         </InputForm>
       </JoinContainer>
       <DetailInfo>
