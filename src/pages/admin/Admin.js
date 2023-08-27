@@ -125,18 +125,8 @@ function Admin() {
     return bPoints - aPoints;
   });
 
-  // 0이 된 데이터 서버에 보내기
-  const postData = async () => {
-    try {
-      const response = await axios.post("YOUR_API_ENDPOINT_HERE", updatedData);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error sending data:", error);
-    }
-  };
-
   // 랭킹 맥이기
-  const top3 = sortedData.slice(0, 3);
+
   const [sortOption, setSortOption] = useState("id");
   const sortData = (data) => {
     let sortedData = [...data];
@@ -146,15 +136,40 @@ function Admin() {
       case "name":
         return sortedData.sort((a, b) => a.name.localeCompare(b.name));
       case "points":
-        return sortedData.sort(
-          (a, b) =>
-            parseInt(b.points.replace(/,/g, "")) -
-            parseInt(a.points.replace(/,/g, ""))
-        );
+        return sortedData.sort((a, b) => {
+          const aPoints =
+            typeof a.points === "string"
+              ? parseInt(a.points.replace(/,/g, ""), 10)
+              : a.points;
+          const bPoints =
+            typeof b.points === "string"
+              ? parseInt(b.points.replace(/,/g, ""), 10)
+              : b.points;
+
+          return bPoints - aPoints;
+        });
       default:
         return sortedData;
     }
   };
+  const [top3, setTop3] = useState([]);
+  useEffect(() => {
+    const sortedData = [...tableData].sort((a, b) => {
+      const aPoints =
+        typeof a.points === "string"
+          ? parseInt(a.points.replace(/,/g, ""), 10)
+          : a.points;
+      const bPoints =
+        typeof b.points === "string"
+          ? parseInt(b.points.replace(/,/g, ""), 10)
+          : b.points;
+
+      return bPoints - aPoints;
+    });
+
+    setTop3(sortedData.slice(0, 3));
+  }, [tableData]);
+
   // ID 찾기
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
@@ -329,7 +344,6 @@ function Admin() {
               <div key={student.userId} className={`${styles.rankDetail}`}>
                 <div className={`${styles.ranking} ml30`}>{index + 1}등</div>
                 <div className={`${styles.rankname} mgr20`}>
-                  {" "}
                   {student.studentName}
                 </div>
                 <div className={`${styles.rankscore} mgr20`}>
