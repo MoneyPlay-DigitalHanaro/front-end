@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
+import instance from '../oauth/instance';
 
 const SavingsName = styled.h5`
     font-size: 15px;
@@ -27,8 +29,8 @@ const PointsInfo = styled.span`
 `;
 
 const JoinContainer = styled.div`
-    margin-top: 50px;
-    height: 300px;
+    margin-top: 30px;
+    height: 270px;
     width: 374px;
     border-radius: 15px 15px 0 0;
     border-bottom: 1px solid #0E0E0E;
@@ -36,69 +38,71 @@ const JoinContainer = styled.div`
     padding: 20px;
 `;
 
-const LabelContainer = styled.div`
-    margin: 10px 10% 0 10%;
-    display: flex;
-    justify-content: space-between;
-`;
+// const LabelContainer = styled.div`
+//     margin: 10px 10% 0 10%;
+//     display: flex;
+//     justify-content: space-between;
+// `;
 
 const GaugeLabel = styled.span`
+    display: block;
     font-size: 16px;
     color: #0E0E0E;
     font-weight: normal;
+    text-align: left;
 `
 
-const MoneyGauge = styled.input`
-    -webkit-appearance: none;
-    outline: none;
-    width: 80%;
-    height: 10px;
-    background-color: #70C3FF;
-    border-radius: 10px;
-    margin-bottom: 30px;
+// const MoneyGauge = styled.input`
+//     -webkit-appearance: none;
+//     outline: none;
+//     width: 80%;
+//     height: 10px;
+//     background-color: #70C3FF;
+//     border-radius: 10px;
+//     margin-bottom: 30px;
 
-    &:focus {
-        outline: none;
-    }
+//     &:focus {
+//         outline: none;
+//     }
 
-    ${props => props.sliderThumb && css`
-        &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
-        background: #fff;
-        border-radius: 20px;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        }
-    `}
-`;
+//     ${props => props.sliderThumb && css`
+//         &::-webkit-slider-thumb {
+//         -webkit-appearance: none;
+//         width: 20px;
+//         height: 20px;
+//         background: #fff;
+//         border-radius: 20px;
+//         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
+//         cursor: pointer;
+//         }
+//     `}
+// `;
 
-const DurationGauge = styled.input`
-    -webkit-appearance: none;
-    outline: none;
-    width: 80%;
-    height: 10px;
-    background-color: #70C3FF;
-    border-radius: 10px;
-    margin-bottom: 30px;
+// const DurationGauge = styled.input`
+//     -webkit-appearance: none;
+//     outline: none;
+//     width: 80%;
+//     height: 10px;
+//     background-color: #70C3FF;
+//     border-radius: 10px;
+//     margin-bottom: 30px;
 
-    &:focus {
-        outline: none;
-    }
+//     &:focus {
+//         outline: none;
+//     }
 
-    ${props => props.sliderThumb && css`
-        &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
-        background: #fff;
-        border-radius: 20px;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        }
-    `}
-`;
+//     ${props => props.sliderThumb && css`
+//         &::-webkit-slider-thumb {
+//         -webkit-appearance: none;
+//         width: 20px;
+//         height: 20px;
+//         background: #fff;
+//         border-radius: 20px;
+//         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
+//         cursor: pointer;
+//         }
+//     `}
+// `;
 
 const JoinButton = styled.button`
     width: 130px;
@@ -108,6 +112,7 @@ const JoinButton = styled.button`
     background-color: #70C3FF;
     opacity: 0.8;
     font-weight: bold;
+    margin-left: 30%;
 
     &:hover {
         background-color: #1E90FF;
@@ -129,55 +134,100 @@ const DetailLink = styled.a`
     font-size: 16px;
     font-weight: normal;
 `;
+const InputForm = styled.form`
+    text-align: left;
+`;
+
+const InputBox = styled.input`
+    border: 3px solid rgba(112, 195, 255, 0.5);
+    border-radius: 15px;
+    width: 100px;
+    height: 45px;
+    margin: 5px 5px 15px 5px;
+    
+    &:focus {
+        -webkit-appearance: none;
+        outline: none;
+        border-color: #70C3FF;
+    }
+`;
 
 const InstallmentSavingsJoin = () => {
-    const [moneyValue, setmoneyValue] = useState(1);
-    const [durationValue, setDurationValue] = useState(1);
+    const [moneyValue, setmoneyValue] = useState(100);
+    const [durationValue, setDurationValue] = useState(4);
 
-    const handleMoneySlider = event => {
-        setmoneyValue(event.target.value);
+    const handleMoneyInput = event => {
+        if (event.target.value !== moneyValue) {
+            setmoneyValue(event.target.value);
+        }
     };
 
-    const handleDurationSlider = e => {
-        setDurationValue(e.target.value);
+    const handleDurationInput = e => {
+        if (e.target.value !== durationValue) {
+            setDurationValue(e.target.value);
+        }
     }; 
 
-    const rate = 3.5;
-    const totalMoney = new Intl.NumberFormat('en-US').format(moneyValue * 10000 * durationValue);
-    const totalInterest = new Intl.NumberFormat('en-US').format(Math.floor(rate / 100 * (parseInt(durationValue)+1) / 24 * moneyValue * 10000 * durationValue));
-    const minMoneyValue = 0;
-    const maxMoneyValue = 100;
-    const minDurationValue = 3;
-    const maxDurationValue = 36;
+    const [searchParams] = useSearchParams();
+    const index = searchParams.get('index');
+
+    const [savingsInfo, setSavingsInfo] = useState(null);
+    useEffect(()=>{
+        instance.get(`http://localhost:8080/savings/join?index=${index}`).then((response)=>{
+        // console.log(response.data)
+        setSavingsInfo(response.data);
+    })
+    }, [index]);
+
+    if (!savingsInfo) {
+        return <div>Loading...</div>;
+    }
+
+    const totalMoney = new Intl.NumberFormat('en-US').format(moneyValue * 10000);
+    const calRate = (0.5 + (durationValue - 4)*0.1).toFixed(1);
+    const totalInterest = new Intl.NumberFormat('en-US').format(Math.floor(calRate * 0.01 * moneyValue * 10000));
+
+    const day = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const today = day.toLocaleDateString('ko-KR', options);
+
+    const expiredDate = new Date(day);
+    expiredDate.setDate(day.getDate() + 7 * durationValue);
+    const expDate = expiredDate.toLocaleDateString('ko-KR', options);
 
     return (
         <div>
             <InfoContainer>
-                <SavingsName>짱구 자유적금</SavingsName>
-                <TotalPoints>이렇게 모으면<br /> 이자 { totalInterest } 포인트</TotalPoints>
+                <SavingsName>{savingsInfo.depositName}</SavingsName>
+                <TotalPoints>이렇게 모으면<br /> 이자 { totalInterest} 포인트</TotalPoints>
                 <PointsInfo> 원금 {totalMoney} 포인트 </PointsInfo><br />
-                <PointsInfo> 연 {rate}% </PointsInfo>
+                <PointsInfo> 이율 {calRate}% </PointsInfo> <br />
+                <PointsInfo> 만기일 : {expDate}</PointsInfo>
             </InfoContainer>
             <JoinContainer>
-                <TotalPoints>한 달에 {moneyValue}만 포인트</TotalPoints>
-                <LabelContainer>
-                    <GaugeLabel>{minMoneyValue}포인트</GaugeLabel>
-                    <GaugeLabel>{maxMoneyValue}포인트</GaugeLabel>
-                </LabelContainer>
-                <MoneyGauge type="range" min={minMoneyValue} max={maxMoneyValue} step="5" sliderThumb value={moneyValue} onChange={handleMoneySlider}></MoneyGauge>
-                <TotalPoints>{durationValue}개월 모으기</TotalPoints>
-                <LabelContainer>
-                    <GaugeLabel>{minDurationValue}개월</GaugeLabel>
-                    <GaugeLabel>{maxDurationValue}개월</GaugeLabel>
-                </LabelContainer>
-                <DurationGauge type="range" min={minDurationValue} max={maxDurationValue} step="1" sliderThumb value={durationValue} onChange={handleDurationSlider}></DurationGauge>
-                <JoinButton>가입하기</JoinButton>
+                {/* <TotalPoints>{moneyValue} 포인트를</TotalPoints> */}
+                {/* <LabelContainer> */}
+                    {/* <GaugeLabel>{minMoneyValue}포인트</GaugeLabel>
+                    <GaugeLabel>{maxMoneyValue}포인트</GaugeLabel> */}
+                    {/* <GaugeLabel>{savingsInfo.minAmount}포인트</GaugeLabel>
+                    <GaugeLabel>{savingsInfo.maxAmount}포인트</GaugeLabel> */}
+                {/* </LabelContainer> */}
+                {/* <MoneyGauge type="range" min={savingsInfo.minAmount} max={savingsInfo.maxAmount} step="10000" sliderThumb value={moneyValue} onChange={handleMoneySlider}></MoneyGauge> */}
+
+                <InputForm method="post" action="/game/deposit">
+                    <GaugeLabel>{savingsInfo.minAmount / 10000}~{savingsInfo.maxAmount / 10000} 사이의 값을 입력해주세요</GaugeLabel>
+                    <InputBox type="text" name="increase_money" defaultValue="100" onChange={handleMoneyInput}/>만 포인트를 <br />
+                    <GaugeLabel>{savingsInfo.minMonth}~{savingsInfo.maxMonth} 사이의 값을 입력해주세요</GaugeLabel>
+                    <InputBox type="text" name="week" defaultValue="4" onChange={handleDurationInput}/>주 동안 예금하기
+                    <JoinButton>가입하기</JoinButton>
+                    <input type="hidden" name="depositId" value={index}></input>
+                </InputForm>
             </JoinContainer>
             <DetailInfo>
-                <DetailLink href="#">상품 안내</DetailLink>
+                <DetailLink href="/savings/notice">상품 안내</DetailLink>
             </DetailInfo>
             <DetailInfo>
-                <DetailLink href="#">금리 정보</DetailLink>
+                <DetailLink href="/savings/rate">금리 정보</DetailLink>
             </DetailInfo>
         </div>
     );

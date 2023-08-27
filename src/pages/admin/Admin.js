@@ -15,23 +15,6 @@ function Admin() {
     if (authToken) {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
-    // 토큰을 이용하여 사용자 이름을 가져옵니다
-    const fetchUsername = async () => {
-      try {
-        const response = await axios.post("http://localhost:8080/decodeToken", {
-          tokenOnly,
-        });
-        setUsername(response.data.username);
-      } catch (error) {
-        console.error(error);
-        console.log(tokenOnly);
-      }
-    };
-    // const authToken = localStorage.getItem('Authorization');
-    const tokenOnly = authToken.split(" ")[1];
-    if (tokenOnly) {
-      fetchUsername();
-    }
   }, []);
 
   const [plusPoint, setPlusPoint] = useState(""); // useState를 사용하여 plusPoint 상태 설정
@@ -42,7 +25,6 @@ function Admin() {
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([]);
-
   useEffect(() => {
     // API에서 데이터를 가져와서 tableData 상태를 설정하는 함수
     async function fetchData() {
@@ -75,20 +57,20 @@ function Admin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작을 중지
-    console.log("plusPoint:", plusPoint); // 입력값 확인
-    console.log("ID:", ID);
 
     try {
       const response = await axios.post(
-        "https://codingapple1.github.io/shop/data2.json",
+        "http://localhost:8080/admin/total_increase",
+        null, // 요청 바디에 데이터 없음
         {
-          ID: ID,
-          plusPoint: plusPoint,
+          params: {
+            increase_point: plusPoint, // increase_point를 요청 파라미터로 전달
+          },
         }
       );
 
       console.log(response.data); // 서버로부터의 응답을 확인
-      // 여기서 필요한 다른 로직을 추가하십시오.
+      // 필요한 추가 로직을 여기에 추가하세요.
     } catch (error) {
       console.error("Error submitting data:", error);
     }
@@ -103,6 +85,20 @@ function Admin() {
     setTableData(updatedData);
   };
 
+  const handleInitPoints = async () => {
+    try {
+      resetPoints(); // 포인트 초기화
+      handleCloseDialog(); // 다이얼로그 닫기
+
+      const response = await axios.post(
+        "http://localhost:8080/admin/total_init"
+      );
+      console.log(response.data); // 서버로부터의 응답을 확인
+    } catch (error) {
+      console.error("Error initializing points:", error);
+    }
+  };
+
   const handleOpenDialog = () => {
     setShowConfirmDialog(true);
   };
@@ -112,21 +108,40 @@ function Admin() {
   };
 
   // <<<<<<<< 데이터 정렬 <<<<<<<<<<
-  const sortedData = [...tableData].sort((a, b) => {
-    const aPoints =
-      typeof a.points === "string"
-        ? parseInt(a.points.replace(/,/g, ""), 10)
-        : a.points;
-    const bPoints =
-      typeof b.points === "string"
-        ? parseInt(b.points.replace(/,/g, ""), 10)
-        : b.points;
+  const sortedData = [...tableData].sort(
+    (a, b) =>
+      parseInt(
+        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
+        10
+      ) -
+      parseInt(
+        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
+        10
+      )
+  );
 
-    return bPoints - aPoints;
-  });
+  // 0이 된 데이터 서버에 보내기
+  const postData = async () => {
+    const postData = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/admin/total_init"
+        );
+        console.log(response.data); // 서버로부터의 응답을 확인
+      } catch (error) {
+        console.error("Error sending data:", error);
+      }
+    };
+    try {
+      const response = await axios.post("YOUR_API_ENDPOINT_HERE", updatedData);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+  };
 
   // 랭킹 맥이기
-
+  const top3 = sortedData.slice(0, 3);
   const [sortOption, setSortOption] = useState("id");
   const sortData = (data) => {
     let sortedData = [...data];
@@ -136,40 +151,15 @@ function Admin() {
       case "name":
         return sortedData.sort((a, b) => a.name.localeCompare(b.name));
       case "points":
-        return sortedData.sort((a, b) => {
-          const aPoints =
-            typeof a.points === "string"
-              ? parseInt(a.points.replace(/,/g, ""), 10)
-              : a.points;
-          const bPoints =
-            typeof b.points === "string"
-              ? parseInt(b.points.replace(/,/g, ""), 10)
-              : b.points;
-
-          return bPoints - aPoints;
-        });
+        return sortedData.sort(
+          (a, b) =>
+            parseInt(b.points.replace(/,/g, "")) -
+            parseInt(a.points.replace(/,/g, ""))
+        );
       default:
         return sortedData;
     }
   };
-  const [top3, setTop3] = useState([]);
-  useEffect(() => {
-    const sortedData = [...tableData].sort((a, b) => {
-      const aPoints =
-        typeof a.points === "string"
-          ? parseInt(a.points.replace(/,/g, ""), 10)
-          : a.points;
-      const bPoints =
-        typeof b.points === "string"
-          ? parseInt(b.points.replace(/,/g, ""), 10)
-          : b.points;
-
-      return bPoints - aPoints;
-    });
-
-    setTop3(sortedData.slice(0, 3));
-  }, [tableData]);
-
   // ID 찾기
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
@@ -217,7 +207,7 @@ function Admin() {
                   <th>ID</th>
                   <th>이름</th>
                   <th>이메일</th>
-                  <th>포인트</th>
+                  <th>누적 포인트</th>
                 </tr>
               </thead>
               <tbody>
@@ -323,6 +313,7 @@ function Admin() {
                   // 초기화 로직
                   console.log("포인트 초기화됨");
                   handleCloseDialog();
+                  handleInitPoints();
                 }}
                 style={{ fontSize: "20px", marginRight: "10px" }}
               >
@@ -339,15 +330,16 @@ function Admin() {
           )}
 
           <div className={`${styles.rankBox}`}>
-            <b>이달의 랭킹</b>
+            <b>현재 랭킹</b>
             {top3.map((student, index) => (
-              <div key={student.userId} className={`${styles.rankDetail}`}>
+              <div key={student.id} className={`${styles.rankDetail}`}>
                 <div className={`${styles.ranking} ml30`}>{index + 1}등</div>
                 <div className={`${styles.rankname} mgr20`}>
-                  {student.studentName}
+                  {" "}
+                  {student.name}
                 </div>
                 <div className={`${styles.rankscore} mgr20`}>
-                  {student.totalHoldingPoint}
+                  {student.points}
                 </div>
               </div>
             ))}

@@ -1,9 +1,10 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 // import axios from 'axios';
 import styled from 'styled-components';
 import Hand from '../../image/Savings/hand.png';
 import Savings from '../../component/Savings';
+import instance from '../oauth/instance';
 
 const SavingMainContainer = styled.div`
     margin-top: 30px;
@@ -51,9 +52,17 @@ const HandImage = styled.img`
 `;
 
 const InstallmentSavings = () => {
+    const [savingsList,setSavingsList] = useState([])
+    useEffect(()=>{
+        instance.get("http://localhost:8080/game/deposit").then((response)=>{
+        // console.log(response.data) 
+        setSavingsList(response.data);
+    })
+    },[])
+
     return (
         <SavingMainContainer>
-            <Title>곧 끝나는 적금</Title>
+            <Title>곧 끝나는 예금</Title>
             <ExpiredContent>
                 <ExpiredNotice><b>짱구 적금</b>이 <br /> <b>2023년 8월 20일</b>에 만기 되어요</ExpiredNotice>
                 <ExpiredText>
@@ -68,11 +77,15 @@ const InstallmentSavings = () => {
                 </ExpiredText>
                 <HandImage src={Hand}></HandImage>
             </ExpiredContent>
-            <Title>적금 상품들을 구경해보세요</Title>
-            <Savings></Savings>
-            <Savings />
-            <Savings />
-            <Savings />
+
+            <Title>예금 상품들을 구경해보세요</Title>
+            {
+                savingsList.map(sv => {
+                    return(
+                        <Savings key={sv.depositTypeId} savings_name={sv.depositName} savings_rate={sv.depositInterestRate} savings_minMonth={sv.minMonth} savings_maxMonth={sv.maxMonth} savings_id={sv.depositTypeId}/>
+                    )
+                })
+            }
         </SavingMainContainer>
         
     );
