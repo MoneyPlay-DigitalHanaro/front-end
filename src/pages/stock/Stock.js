@@ -112,8 +112,8 @@ function Stock() {
                 color: myStockInfo?.totalChangeStockValue < 0 ? "blue" : "red",
               }}
             >
-              {myStockInfo?.totalChangeStockValue} ({" "}
-              {myStockInfo?.totalChangeStockRate}% )
+              {myStockInfo?.totalChangeStockValue} (
+              {parseFloat(myStockInfo?.totalChangeStockRate).toFixed(2)}% )
             </div>
           </div>
 

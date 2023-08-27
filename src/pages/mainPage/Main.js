@@ -14,6 +14,7 @@ import QR from "../../image/Main/QrCode.png";
 import Footer from "../../component/Footer.js";
 import axios from "axios";
 import Logo from "../../image/Main/IecoLogo.png";
+import LogoutButton from "../oauth/Logout.js";
 
 let MenuBtn = styled.button`
   background: ${(props) => props.bg};
