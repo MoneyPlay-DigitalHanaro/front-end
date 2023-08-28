@@ -31,7 +31,7 @@ const KakaoAuthHandle = (props) => {
           // 추가 정보 입력 페이지로 리다이렉트
           navigate("/additionalInfo"); // '/additional-info'가 추가 정보 페이지의 라우트라고 가정
         } else {
-          window.location.href = "/";
+          window.location.href = "/main";
         }
       } catch (error) {
         console.error("카카오 로그인 중 오류 발생:", error);

@@ -78,36 +78,36 @@ function Main() {
           <MenuBtn
             bg="white"
             boxShadow="2px 3px 4px 1px rgba(0, 0, 0, 0.25);"
-            width="238px"
+            width="348px"
             height="118px"
           >
-            <p style={{}}>
+            <p style={{marginTop: "15px", marginLeft: "3px"}}>
               <b className="title">{username ? `${username}님은` : ""}</b>
               <span>
-                <img
+                {/* <img
                   src={coin}
                   style={{
                     position: "relative",
                     display: "inline-block",
                     marginLeft: "10px",
                   }}
-                />
-                <b>{Maindata[0].price}</b>
-                <br /> 가지고 있어요
+                /> */}
+                현재 <b>{Maindata[0].price} 포인트</b>를
+                <br />가지고 있어요!
               </span>
-              <img src={person} className="imgMain" />
+              <img src={person} className="imgMain mgr15" style={{width: "100px", height: "90px"}}/>
             </p>
           </MenuBtn>
         </a>
 
-        <a href="/QR" style={{ textDecoration: "none" }}>
+        {/* <a href="/QR" style={{ textDecoration: "none" }}>
           <MenuBtn bg="rgba(255, 223, 142, 0.5);" width="95px" height="118px">
             <p>
               <b className="title">QR</b>
               <img src={QR} className="qr imgMain" />
             </p>
           </MenuBtn>
-        </a>
+        </a> */}
       </div>
       <div className="rowbox">
         <a href="/wordQuiz" style={{ textDecoration: "none" }}>
