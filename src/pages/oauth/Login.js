@@ -12,7 +12,7 @@ const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIE
 export default function Login() {
     let navigate = useNavigate();
     const onClickBackHome = () => {
-        navigate('/')
+        navigate('/main')
         window.scrollTo(0, 0)
     };
     const kakaoLogin = () => {
