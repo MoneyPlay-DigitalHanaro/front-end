@@ -164,7 +164,7 @@ function MyPage() {
               }
               onClick={() => setSelectedTab("적금")}
             >
-              적금
+              예금
             </button>
           </div>
 

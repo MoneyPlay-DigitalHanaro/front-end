@@ -110,7 +110,7 @@ function Main() {
         </a>
       </div>
       <div className="rowbox">
-        <a href="/QR" style={{ textDecoration: "none" }}>
+        <a href="/wordQuiz" style={{ textDecoration: "none" }}>
           <MenuBtn bg="rgba(255, 237, 203, 0.5);">
             <b className="title mt10 mb10">오늘의 단어</b>
             <span>
@@ -124,8 +124,8 @@ function Main() {
         <a href="/news" style={{ textDecoration: "none" }}>
           <MenuBtn bg="rgba(112, 195, 255, 0.5);">
             <div>
-              <b className="title mt10 mb10">뉴스</b>
-              <span>조금씩 알아보아요</span>
+              <b className="title mt10 mb10">경제 뉴스</b>
+              <span>재미있는 이야기로 배워요</span>
               <img src={Globe} className="imgMain" />
             </div>
           </MenuBtn>
@@ -168,7 +168,7 @@ function Main() {
             </div>
           </div>
         </MenuBtn>
-        <a href="/stock" style={{ textDecoration: "none" }}>
+        <a href="/asset" style={{ textDecoration: "none" }}>
           <MenuBtn bg="rgba(255, 224, 112, 0.5)">
             <p>
               <b className="title mt10 mb10">자산 불리기</b>
