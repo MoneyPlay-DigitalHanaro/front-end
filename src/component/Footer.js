@@ -8,7 +8,7 @@ import Text from '../image/Footer/IecoText.png';
 function Footer() {
   return (
     <div className="footer">
-      <a href="/" ><img src={circle} className="FooterCircle" /></a>
+      <a href="/main" ><img src={circle} className="FooterCircle" /></a>
       <img src={Text} className='FooterText' />
       <a href="/board" className='footerElement' style={{ textDecoration: 'none', color: 'black' }}>
         <div>

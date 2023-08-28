@@ -18,6 +18,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate,
   Link,
   useLocation,
 } from "react-router-dom";
@@ -66,7 +67,8 @@ function App() {
         <div className="App-container">
           <Routes>
             <Route path="*" element={<Main />} />
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/main" element={<Main />} />
             <Route path="/news" element={<NewsList />} />
             <Route path="/stock" element={<Stock />} />
             <Route path="/stock/:stockName" element={<PurchaseStock />} />
