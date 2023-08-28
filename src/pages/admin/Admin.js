@@ -25,6 +25,7 @@ function Admin() {
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([]);
+  let [sortOption, setSortOption] = useState("id");
   useEffect(() => {
     // API에서 데이터를 가져와서 tableData 상태를 설정하는 함수
     async function fetchData() {
@@ -37,7 +38,7 @@ function Admin() {
     }
 
     fetchData(); // 함수 호출하여 실행
-  }, []);
+  }, [sortOption]);
   const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
 
   // 3. 페이지네이션 버튼을 누르면 현재 페이지를 업데이트하는 함수를 추가합니다.
@@ -141,7 +142,7 @@ function Admin() {
   };
 
   // 랭킹 맥이기
-  const [sortOption, setSortOption] = useState("id");
+  
   const sortData = (data) => {
     let sortedData = [...data];
     switch (sortOption) {
@@ -152,14 +153,18 @@ function Admin() {
       case "points":
         return sortedData.sort(
           (a, b) =>
-            parseInt(b.points.replace(/,/g, "")) -
-            parseInt(a.points.replace(/,/g, ""))
+            parseInt(b.totalHoldingPoint) -
+            parseInt(a.totalHoldingPoint)
         );
       default:
         return sortedData;
     }
   };
-  const top3 = sortedData.slice(0, 3);
+
+  setSortOption = "points";
+  const top3 = sortData(tableData).slice(0, 3);
+  console.log(top3);
+
   // ID 찾기
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
