@@ -25,6 +25,7 @@ function Admin() {
   const ITEMS_PER_PAGE = 6; // 2. 페이지 당 몇 개의 아이템을 표시할 것인지 정하는 상수를 추가합니다.
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([]);
+  let [sortOption, setSortOption] = useState("id");
   useEffect(() => {
     // API에서 데이터를 가져와서 tableData 상태를 설정하는 함수
     async function fetchData() {
@@ -111,11 +112,11 @@ function Admin() {
   const sortedData = [...tableData].sort(
     (a, b) =>
       parseInt(
-        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
+        typeof b.totalHoldingPoint === "string" ? b.totalHoldingPoint.replace(/,/g, "") : b.totalHoldingPoint,
         10
       ) -
       parseInt(
-        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
+        typeof a.totalHoldingPoint === "string" ? a.totalHoldingPoint.replace(/,/g, "") : a.totalHoldingPoint,
         10
       )
   );
@@ -141,7 +142,7 @@ function Admin() {
   };
 
   // 랭킹 맥이기
-  const [sortOption, setSortOption] = useState("id");
+  
   const sortData = (data) => {
     let sortedData = [...data];
     switch (sortOption) {
@@ -152,14 +153,17 @@ function Admin() {
       case "points":
         return sortedData.sort(
           (a, b) =>
-            parseInt(b.points.replace(/,/g, "")) -
-            parseInt(a.points.replace(/,/g, ""))
+            parseInt(b.totalHoldingPoint.replace(/,/g, "")) -
+            parseInt(a.totalHoldingPoint.replace(/,/g, ""))
         );
       default:
         return sortedData;
     }
   };
+
   const top3 = sortedData.slice(0, 3);
+  console.log(top3);
+
   // ID 찾기
   const handleCheckboxChange = (id, isChecked) => {
     if (isChecked) {
@@ -185,7 +189,7 @@ function Admin() {
         <div className={`ml290 `}>
           <div className={`${styles.main} mgr24 `}>
             <AdminChart data={data} />
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <label htmlFor="sort">정렬 : </label>
               <select
                 className={`${styles.sortBox} ml20`}
@@ -199,7 +203,7 @@ function Admin() {
                 <option value="name">이름</option>
                 <option value="points">포인트가 높은 순</option>
               </select>
-            </div>
+            </div> */}
             <table className="table">
               <thead>
                 <tr>
