@@ -479,14 +479,19 @@ input[type="checkbox"] {
   bottom: 0;
   width: 100%;
   background-color: #f9f8f8dc;
-  width: 375px;
+  /* width: 375px; */
   height: 84px;
   border: solid #f9f8f8dc 1px;
   display: flex;
   justify-content: space-between;
-  padding: 0 60px;
+  align-items: center;
+  /* padding: 0 60px; */
   position: relative;
   z-index: 2;
+}
+
+.footerElement {
+  width: 50%;
 }
 
 .confirm-modal {

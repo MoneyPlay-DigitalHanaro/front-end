@@ -8,18 +8,18 @@ import Text from '../image/Footer/IecoText.png';
 function Footer() {
   return (
     <div className="footer">
-      <img src={circle} className="FooterCircle" />
+      <a href="/" ><img src={circle} className="FooterCircle" /></a>
       <img src={Text} className='FooterText' />
-      <a href="/board" style={{ textDecoration: 'none', color: 'black' }}>
+      <a href="/board" className='footerElement' style={{ textDecoration: 'none', color: 'black' }}>
         <div>
           <img src={chat} className="iconChat" />
-          <p className="ft12">채팅</p>
+          <p className="ft12" style={{ marginBottom: 0}}>채팅</p>
         </div>
       </a>
-      <a href="/mypage" style={{ textDecoration: 'none', color: 'black' }}>
+      <a href="/mypage" className='footerElement' style={{ textDecoration: 'none', color: 'black' }}>
         <div>
           <img src={baby} className="" />
-          <p className="ft12">마이페이지</p>
+          <p className="ft12" style={{ marginBottom: 0}}>마이페이지</p>
         </div>
       </a>
     </div>
