@@ -225,8 +225,8 @@ function AdminStudent() {
           </div>
         </div>
         <div className={`${styles.detailBox}`}>
-          <DetailsPane data={selectedRow} />
-          <AdminDetailChart data={selectedRow} />
+          {selectedRow && <DetailsPane data={selectedRow} />}
+          {selectedRow && <AdminDetailChart data={selectedRow} />}
         </div>
       </div>
     </div>

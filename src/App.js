@@ -87,8 +87,14 @@ function App() {
             <Route path="/savings/join" element={<InstallmentSavingsJoin />} />
             <Route path="/wordQuiz" element={<WordQuiz />} />
             <Route path="/board" element={<Board />} />
-            <Route path="/savings/notice" element={<InstallmentSavingsNotice />} />
-            <Route path="/savings/rate" element={<InstallmentSavingsRateInfo />} />
+            <Route
+              path="/savings/notice"
+              element={<InstallmentSavingsNotice />}
+            />
+            <Route
+              path="/savings/rate"
+              element={<InstallmentSavingsRateInfo />}
+            />
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== "/admin" &&
