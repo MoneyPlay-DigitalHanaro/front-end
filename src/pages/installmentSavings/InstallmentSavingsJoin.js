@@ -181,6 +181,7 @@ const InstallmentSavingsJoin = () => {
         "http://localhost:8080/game/deposit",
         formData
       );
+      console.log(formData);
       if (response.status === 200) {
         console.log("폼 데이터가 성공적으로 전송되었습니다.");
       } else {

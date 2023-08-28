@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+import { useNavigate } from "react-router-dom";
 import styles from "../../style/css/MyPage.module.css";
 import rocket from "../../image/App/rocket.png";
 import rocket90 from "../../image/App/rocket90.png";
@@ -19,10 +19,12 @@ function MyPage() {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
   }, []);
+
+  const navigate = useNavigate();
+
   function Commas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
   const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
     // 각 박스마다 적용될 배경색과 이미지를 배열로 정의
@@ -33,6 +35,7 @@ function MyPage() {
       { backgroundColor: "rgb(131, 252, 169, 0.25)", image: saving4 },
     ];
   };
+
   const [isNegativeDifference, setIsNegativeDifference] = useState(false);
   const totalPointDifferenceValue = "- 293,182"; // 예시 값입니다.
   useEffect(() => {
@@ -54,21 +57,34 @@ function MyPage() {
     }
   }, [DetailPointDifferenceValue]);
 
-  const [stockData, setStockData] = useState(null);
-  const [myStockInfo, setMyStockInfo] = useState(null);
+  const [myPointDto, setMyPoint] = useState(null);
+  const [myStockDtoList, setMyStocks] = useState(null);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/stock/")
+      .get("http://localhost:8080/mypage/stock")
       .then((response) => {
-        setStockData(response.data.stockDataList);
-        setMyStockInfo(response.data.myStockInfoDto);
+        setMyPoint(response.data.myPointDto);
+        setMyStocks(response.data.myStockDtoList);
       })
       .catch((error) => {
         console.error("에러", error);
       });
   }, []);
 
-  if (!stockData) return <div>Loading...</div>;
+  const [myDepositDto, setmyDeposits] = useState(null);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/mypage/deposit")
+      .then((response) => {
+        setmyDeposits(response.data.myDepositDto);
+      })
+      .catch((error) => {
+        console.error("에러", error);
+      });
+  }, []);
+
+  if (!myPointDto || !myStockDtoList || !myDepositDto)
+    return <div>Loading...</div>;
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -88,7 +104,7 @@ function MyPage() {
         <div className={`${styles.myPageBox} mb40`}>
           <div className={`${styles.totalPoint} mb20`}>
             <div className="mb_3">
-              {Commas(myStockInfo?.totalChangeStockValue)}
+              {Commas(myPointDto?.changePointValue)}
               <span
                 style={{
                   color: "#FFA502",
@@ -107,11 +123,11 @@ function MyPage() {
                 marginTop: "10px",
                 fontSize: "20px",
                 fontWeight: 600,
-                color: myStockInfo?.totalChangeStockValue < 0 ? "blue" : "red",
+                color: myPointDto?.changePointValue < 0 ? "blue" : "red",
               }}
             >
-              {myStockInfo?.totalChangeStockValue} (
-              {parseFloat(myStockInfo?.totalChangeStockRate).toFixed(2)}% )
+              {myPointDto?.changePointValue} (
+              {parseFloat(myPointDto?.changePointRate).toFixed(2)}% )
             </div>
           </div>
 
@@ -120,10 +136,10 @@ function MyPage() {
             style={{ justifyContent: "flex-start", alignContent: "flex-start" }}
           >
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              총 주식 포인트
+              총 적금 포인트
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              투자한 포인트
+              총 주식 포인트
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
               사용 가능 포인트
@@ -131,13 +147,13 @@ function MyPage() {
           </div>
           <div className={`${styles.detailPoint}`}>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              {Commas(myStockInfo?.totalStockValue)}
+              {Commas(myPointDto?.totalDepositPoint)}
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              {Commas(myStockInfo?.totalBuyStockPoint)}
+              {Commas(myPointDto?.totalStockPoint)}
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              {Commas(myStockInfo?.availablePoint)}
+              {Commas(myPointDto?.availablePoint)}
             </div>
           </div>
           <div className={`${styles.detailPoint} mgr_50 `}>
@@ -170,35 +186,46 @@ function MyPage() {
 
           {selectedTab === "주식" && (
             <div className={styles.stockListContainer}>
-              <div>
-                <div className={`${styles.stockBox} ft18 mb20`}>
-                  <b className={`${styles.stockName} ft18`}>삼성전자</b>
-                  <div>
-                    <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
-                      <div className="mb_3">50,000</div>
-                      <div
-                        className={`${styles.totalPointDefferance} ft14`}
-                        style={{ color: "black" }}
-                      >
-                        2주
+              {myStockDtoList?.map((stock) => {
+                // const isNegativeDifference = stock.presentPrice.startsWith("-");
+                return (
+                  <div
+                    key={stock.name}
+                    onClick={() => navigate(`/stock/${stock.name}`)}
+                  >
+                    <div className={`${styles.stockBox} ft18 mb20`}>
+                      <b className={`${styles.stockName} ft18`}>{stock.name}</b>
+                      <div>
+                        <div
+                          className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}
+                        >
+                          <div className="mb_3">{stock.presentPrice}</div>
+                          {/* 현재 가격으로 일단 넣어놈 */}
+                          <div
+                            className={`${styles.totalPointDefferance} ft14`}
+                            style={{ color: "black" }}
+                          >
+                            {stock.hodingStockCount}주
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
+                          <div className="mb_3">{stock.changeStockValue}</div>
+                          <div
+                            className={`${styles.detailPointDefferance}`}
+                            style={{
+                              color: isNegativeDifference ? "blue" : "red",
+                            }}
+                          >
+                            ({parseFloat(stock?.changeStockRate).toFixed(2)}% )
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div>
-                    <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
-                      <div className="mb_3">100,000</div>
-                      <div
-                        className={`${styles.detailPointDefferance}`}
-                        style={{
-                          color: isDetailNegativeDifference ? "blue" : "red",
-                        }}
-                      >
-                        {DetailPointDifferenceValue} ( -10.3% )
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           )}
 
@@ -213,21 +240,22 @@ function MyPage() {
                       alignItems: "flex-start",
                     }}
                   >
-                    <b className={`${styles.savingName} ft18 ml20`}>짱구</b>
+                    <b className={`${styles.savingName} ft18 ml20`}>
+                      {myDepositDto.depositType.depositName}
+                    </b>
                     <img src={saving1} className="img_saving ml_12 mt_10" />
                   </div>
                   <div className="ft14 fw400 mgr_15">
-                    <div>현재금액</div>
+                    <div>총 적금 포인트</div>
                     <div>이자</div>
-                    <div>시작일</div>
-                    <div>만기일</div>
+                    <div>시작 날짜</div>
+                    <div>끝나는 날짜</div>
                   </div>
-
                   <div className="ft14 fw400 mgr30">
-                    <div>200,000</div>
-                    <div>550</div>
-                    <div>2023-01-01</div>
-                    <div>2023-06-01</div>
+                    <div>{myDepositDto.depositAmount}</div>
+                    <div>{myDepositDto.interestAmount}</div>
+                    <div>{myDepositDto.startDate}</div>
+                    <div>{myDepositDto.endDate}</div>
                   </div>
                 </div>
               </div>
