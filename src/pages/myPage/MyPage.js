@@ -136,7 +136,7 @@ function MyPage() {
             style={{ justifyContent: "flex-start", alignContent: "flex-start" }}
           >
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              총 적금 포인트
+              총 예금 포인트
             </div>
             <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
               총 주식 포인트
@@ -246,7 +246,7 @@ function MyPage() {
                     <img src={saving1} className="img_saving ml_12 mt_10" />
                   </div>
                   <div className="ft14 fw400 mgr_15">
-                    <div>총 적금 포인트</div>
+                    <div>총 예금 포인트</div>
                     <div>이자</div>
                     <div>시작 날짜</div>
                     <div>끝나는 날짜</div>
