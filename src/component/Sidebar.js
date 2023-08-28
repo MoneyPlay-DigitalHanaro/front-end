@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../style/css/Admin.module.css';
+import Logo from '../image/Footer/IecoText.png';
 // import App.css
 
 function SideBar() {
@@ -11,7 +12,7 @@ function SideBar() {
     <div className={styles.sidebar}>
       <ul className="nav sidebar-nav">
         <li class="sidebar-brand">
-          <a href="/">i - Eco</a>
+          <a href="/admin"><img src={Logo} style={{width: "130px", height: "70px", backgroundColor: "white", borderRadius: "30px", padding: "15px"}}/></a>
         </li>
         <li className={styles.flexContainer}>
           <a href="/admin" className={styles.menuItem}>

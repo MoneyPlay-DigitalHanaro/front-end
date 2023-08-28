@@ -38,7 +38,7 @@ function Admin() {
     }
 
     fetchData(); // 함수 호출하여 실행
-  }, [sortOption]);
+  }, []);
   const totalPages = Math.ceil(tableData.length / ITEMS_PER_PAGE);
 
   // 3. 페이지네이션 버튼을 누르면 현재 페이지를 업데이트하는 함수를 추가합니다.
@@ -112,11 +112,11 @@ function Admin() {
   const sortedData = [...tableData].sort(
     (a, b) =>
       parseInt(
-        typeof b.points === "string" ? b.points.replace(/,/g, "") : b.points,
+        typeof b.totalHoldingPoint === "string" ? b.totalHoldingPoint.replace(/,/g, "") : b.totalHoldingPoint,
         10
       ) -
       parseInt(
-        typeof a.points === "string" ? a.points.replace(/,/g, "") : a.points,
+        typeof a.totalHoldingPoint === "string" ? a.totalHoldingPoint.replace(/,/g, "") : a.totalHoldingPoint,
         10
       )
   );
@@ -153,16 +153,15 @@ function Admin() {
       case "points":
         return sortedData.sort(
           (a, b) =>
-            parseInt(b.totalHoldingPoint) -
-            parseInt(a.totalHoldingPoint)
+            parseInt(b.totalHoldingPoint.replace(/,/g, "")) -
+            parseInt(a.totalHoldingPoint.replace(/,/g, ""))
         );
       default:
         return sortedData;
     }
   };
 
-  setSortOption = "points";
-  const top3 = sortData(tableData).slice(0, 3);
+  const top3 = sortedData.slice(0, 3);
   console.log(top3);
 
   // ID 찾기
@@ -190,7 +189,7 @@ function Admin() {
         <div className={`ml290 `}>
           <div className={`${styles.main} mgr24 `}>
             <AdminChart data={data} />
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <label htmlFor="sort">정렬 : </label>
               <select
                 className={`${styles.sortBox} ml20`}
@@ -204,7 +203,7 @@ function Admin() {
                 <option value="name">이름</option>
                 <option value="points">포인트가 높은 순</option>
               </select>
-            </div>
+            </div> */}
             <table className="table">
               <thead>
                 <tr>
