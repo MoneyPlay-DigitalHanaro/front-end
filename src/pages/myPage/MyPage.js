@@ -10,6 +10,31 @@ import saving3 from "../../image/App/Savings/Saving3.png";
 import saving4 from "../../image/App/Savings/Saving4.png";
 import axios from "axios";
 import LogoutButton from "../oauth/Logout";
+import styled from "styled-components";
+
+const ExpiredContent = styled.div`
+  width: 330px;
+  height: 165px;
+  background-color: rgba(112, 195, 255, 0.5);
+  border-radius: 15px 15px 15px 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  padding: 20px;
+  position: relative;
+`;
+const ExpiredNotice = styled.h5`
+  font-size: 18px;
+  text-align: left;
+`;
+const ExpiredText = styled.div`
+  display: inline-block;
+  width: 120px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: normal;
+  margin-top: 10px;
+`;
 
 function MyPage() {
   useEffect(() => {
@@ -23,8 +48,10 @@ function MyPage() {
   const navigate = useNavigate();
 
   function Commas(x) {
+    if (!x) return "0";
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   const [selectedTab, setSelectedTab] = useState("주식");
   const SavingBoxes = () => {
     // 각 박스마다 적용될 배경색과 이미지를 배열로 정의
@@ -83,8 +110,8 @@ function MyPage() {
       });
   }, []);
 
-  if (!myPointDto || !myStockDtoList || !myDepositDto)
-    return <div>Loading...</div>;
+  // if (!myPointDto || !myStockDtoList || !myDepositDto)
+  //   return <div>Loading...</div>;
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -184,7 +211,7 @@ function MyPage() {
             </button>
           </div>
 
-          {selectedTab === "주식" && (
+          {selectedTab === "주식" && myStockDtoList ? (
             <div className={styles.stockListContainer}>
               {myStockDtoList?.map((stock) => {
                 // const isNegativeDifference = stock.presentPrice.startsWith("-");
@@ -227,9 +254,17 @@ function MyPage() {
                 );
               })}
             </div>
+          ) : selectedTab === "주식" ? (
+            <ExpiredContent>
+              <ExpiredNotice>
+                <b>구매한 주식이 없습니다.</b>
+              </ExpiredNotice>
+            </ExpiredContent>
+          ) : (
+            ""
           )}
 
-          {selectedTab === "적금" && (
+          {selectedTab === "적금" && myDepositDto ? (
             <div className={styles.savingListContainer}>
               <div>
                 <div className={`${styles.savingBox} ft18 mb20`}>
@@ -260,6 +295,14 @@ function MyPage() {
                 </div>
               </div>
             </div>
+          ) : selectedTab === "적금" ? (
+            <ExpiredContent>
+              <ExpiredNotice>
+                <b>가입한 예금이 없습니다.</b>
+              </ExpiredNotice>
+            </ExpiredContent>
+          ) : (
+            ""
           )}
         </div>
       </div>
