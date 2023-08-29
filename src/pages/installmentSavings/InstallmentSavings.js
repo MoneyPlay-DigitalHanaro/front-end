@@ -70,43 +70,53 @@ const InstallmentSavings = () => {
   }, []);
 
   const [mySavings, setMySavings] = useState([]);
+
   useEffect(() => {
-    axios.get("http://localhost:8080/mypage/deposit").then((response) => {
-      // console.log(response.data);
-      setMySavings(response.data);
-    });
+    axios
+      .get("http://localhost:8080/mypage/deposit")
+      .then((response) => {
+        console.log(response.data);
+        setMySavings(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // 필요하면 여기에 추가적인 에러 처리 로직을 넣을 수 있습니다.
+      });
   }, []);
 
   return (
     <SavingMainContainer>
       <Title>곧 끝나는 예금</Title>
-      {mySavings.length > 0 ? (
+      {mySavings && mySavings.myDepositDto ? (
         <ExpiredContent>
           <ExpiredNotice>
-            <b>{mySavings[0].myDepositDto.depositType.depositName}</b>이 <br />{" "}
-            <b>{mySavings[0].myDepositDto.endDate}</b>에 만기 되어요
+            <b>{mySavings.myDepositDto.depositType.depositName}</b>예금이 <br />{" "}
+            <b>{mySavings.myDepositDto.endDate}</b>일에 만기 되어요
           </ExpiredNotice>
-        <ExpiredText>
-          원금 포인트
-          <br />
-          이자
-          <br />
-          받을 총 포인트
-        </ExpiredText>
-        <ExpiredText>
-          {mySavings[0].myDepositDto.depositAmount * 10000}
-          <br />
-          {mySavings[0].myDepositDto.interestAmount}
-          <br />
-          {mySavings[0].myDepositDto.depositAmount * 10000 + mySavings[0].myDepositDto.interestAmount}
-        </ExpiredText>
-        <HandImage src={Hand}></HandImage>
-      </ExpiredContent>
-    ) : (
-      <ExpiredContent>
-        <ExpiredNotice><b>가입한 예금 상품이 없습니다.</b></ExpiredNotice>
-      </ExpiredContent>
-  )}
+          <ExpiredText>
+            원금 포인트
+            <br />
+            이자
+            <br />
+            받을 총 포인트
+          </ExpiredText>
+          <ExpiredText>
+            {mySavings.myDepositDto.depositAmount * 10000}
+            <br />
+            {mySavings.myDepositDto.interestAmount}
+            <br />
+            {mySavings.myDepositDto.depositAmount * 10000 +
+              mySavings.myDepositDto.interestAmount}
+          </ExpiredText>
+          <HandImage src={Hand}></HandImage>
+        </ExpiredContent>
+      ) : (
+        <ExpiredContent>
+          <ExpiredNotice>
+            <b>가입한 예금 상품이 없습니다.</b>
+          </ExpiredNotice>
+        </ExpiredContent>
+      )}
 
       <Title>예금 상품들을 구경해보세요</Title>
       {savingsList.map((sv) => {
