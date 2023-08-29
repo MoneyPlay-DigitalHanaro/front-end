@@ -162,21 +162,7 @@ function AdminStudent() {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div className={`ml290 `}>
           <div className={`${styles.main} mgr24 `}>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <label htmlFor="sort">정렬 : </label>
-              <select
-                className={`${styles.sortBox} ml20`}
-                value={sortOption}
-                onChange={(e) => {
-                  setSortOption(e.target.value);
-                  setCurrentPage(1);
-                }}
-              >
-                <option value="id">ID</option>
-                <option value="name">이름</option>
-                <option value="points">포인트가 높은 순</option>
-              </select>
-            </div>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
             <table className="table">
               <thead>
                 <tr>
