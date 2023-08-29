@@ -10,6 +10,26 @@ import saving3 from "../../image/App/Savings/Saving3.png";
 import saving4 from "../../image/App/Savings/Saving4.png";
 import dogAndPerson from "../../image/Stock/dogAndperson.png";
 import axios from "axios";
+import styled from 'styled-components';
+
+const StockContainer = styled.div`
+  width: 300px;
+  height: 77px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+`;
+
+const StockName = styled.h5`
+  font-size: 18px;
+  font-weight: bold;
+`
+
+const StockPrice = styled.h5`
+  font-size: 17px;
+`;
 
 function Stock() {
   useEffect(() => {
@@ -83,24 +103,14 @@ function Stock() {
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
-        <div className={`${styles.StockBox2} mb40`}>
+        <div className={`${styles.StockBox2} mb40`} style={{ position: "relative", paddingLeft: "10px" }}>
           <div className={`${styles.totalPoint} mb10`}>
             <div className="mb_3">
-              {Commas(myStockInfo?.totalChangeStockValue)}
-              <span
-                style={{
-                  color: "#FFA502",
-                  fontWeight: 400,
-                  marginRight: "3px",
-                }}
-              >
-                {" "}
-                ⓟ
-              </span>
-              를 벌었어요!
+              {Commas(myStockInfo?.totalChangeStockValue)} 포인트를 &nbsp;
+              {myStockInfo.totalChangeStockValue >= 0 ? "벌었어요!" : "잃었어요"}
             </div>
 
             <div
@@ -112,42 +122,37 @@ function Stock() {
                 color: myStockInfo?.totalChangeStockValue < 0 ? "blue" : "red",
               }}
             >
-              {myStockInfo?.totalChangeStockValue} (
-              {parseFloat(myStockInfo?.totalChangeStockRate).toFixed(2)}% )
+              {myStockInfo?.totalChangeStockValue < 0 ? ( <span>{parseFloat(myStockInfo.totalChangeStockRate).toFixed(2)}%</span>) : (<span>+ {parseFloat(myStockInfo.totalChangeStockRate).toFixed(2)}%</span>)}
             </div>
           </div>
 
           <div
-            className={`${styles.detailPoint} mgr15`}
-            style={{ justifyContent: "flex-start", alignContent: "flex-start" }}
+            className={`${styles.detailPoint}`}
+            style={{display: "grid", gridTemplateColumns: "120px 110px", textAlign: "left"}}
           >
-            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "16px" }}>
               총 주식 포인트
             </div>
-            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              투자한 포인트
-            </div>
-            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
-              사용 가능 포인트
-            </div>
-          </div>
-
-          <div className={`${styles.detailPoint}`}>
-            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "16px" }}>
               {Commas(myStockInfo?.totalStockValue)}
             </div>
-            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "16px" }}>
+              투자한 포인트
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "16px" }}>
               {Commas(myStockInfo?.totalBuyStockPoint)}
             </div>
-            <div className="mb4" style={{ fontWeight: 400, fontSize: "17px" }}>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "16px" }}>
+              사용 가능 포인트
+            </div>
+            <div className="mb4" style={{ fontWeight: 400, fontSize: "16px" }}>
               {Commas(myStockInfo?.availablePoint)}
             </div>
           </div>
-
           <div className={`${styles.detailPoint} mgr_50 `}>
             <img
               src={dogAndPerson}
-              style={{ marginTop: "-50px", marginRight: "30px" }}
+              style={{ position: "absolute", right: "0", bottom: "0", width: "100px", height: "120px" }}
             />
           </div>
         </div>
@@ -161,48 +166,26 @@ function Stock() {
             marginBottom: "20px",
           }}
         >
-          오늘 가장 많이 오른 종목
+          주식 종목을 확인해보세요
         </div>
 
         <div className={styles.stockListContainer}>
           {stockData?.map((stock) => {
-            const isNegativeDifference =
-              stock.previousComparePrice.startsWith("-");
+            const previousComparePrice = parseFloat(stock.previousComparePrice);
+            const isNegativeDifference = previousComparePrice < 0;
+            const isPositiveDifference = previousComparePrice > 0;
+            const priceStyle = {
+              color: isNegativeDifference ? "#1E90FF" : isPositiveDifference ? "#FF1E1E" : "black"
+            };
+
             return (
-              <div
-                key={stock.name}
-                onClick={() => navigate(`/stock/${stock.name}`)}
-              >
-                <div className={`${styles.stockBox} ft18 mb20`}>
-                  <b className={`${styles.stockName} ft18`}>{stock.name}</b>
-                  <div>
-                    <div className={`${styles.stockBoxDetail} mb20 ft18 mgr30`}>
-                      <div className="mb_3">{stock.stockPresentPrice}</div>
-                      {/* 현재 가격으로 일단 넣어놈 */}
-                      <div
-                        className={`${styles.totalPointDefferance} ft14`}
-                        style={{ color: "black" }}
-                      >
-                        1주
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className={`${styles.stockBoxDetail2} mb20 ft20`}>
-                      <div className="mb_3">{stock.previousComparePrice}</div>
-                      <div
-                        className={`${styles.detailPointDefferance}`}
-                        style={{
-                          color: isNegativeDifference ? "blue" : "red",
-                        }}
-                      >
-                        {stock.previousCompareRate} ({" "}
-                        {stock.previousCompareRate}% )
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <StockContainer key={stock.name} onClick={() => navigate(`/stock/${stock.name}`)}>
+                <StockName>{stock.name}</StockName>
+                <StockPrice style={priceStyle}>{Commas(stock.stockPresentPrice)}<br/ >
+                {stock.previousComparePrice >= 0 ? (<span>+{Commas(stock.previousComparePrice)}</span>) : (<span>{Commas(stock.previousComparePrice)}</span>)}
+                &nbsp;
+                ({stock.previousCompareRate > 0 ? (<span>+{stock.previousCompareRate}%</span>) : (<span>{stock.previousCompareRate}%</span>)})</StockPrice>
+              </StockContainer>
             );
           })}
         </div>

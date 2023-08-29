@@ -118,9 +118,9 @@ function Main() {
           <MenuBtn bg="rgba(255, 237, 203, 0.5);">
             <b className="title mt10 mb10">오늘의 단어</b>
             <span>
-              매일 한 개씩
+              매일 3 개씩
               <br />
-              풀어봐요
+              공부해요
             </span>
             <img src={Calender} className="imgMain" />
           </MenuBtn>
