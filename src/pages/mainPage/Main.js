@@ -15,6 +15,7 @@ import Footer from "../../component/Footer.js";
 import axios from "axios";
 import Logo from "../../image/Main/IecoLogo.png";
 import LogoutButton from "../oauth/Logout.js";
+import Ad from "../../image/Main/Ad.jpeg";
 
 let MenuBtn = styled.button`
   background: ${(props) => props.bg};
@@ -118,7 +119,7 @@ function Main() {
           <MenuBtn bg="rgba(255, 237, 203, 0.5);">
             <b className="title mt10 mb10">오늘의 단어</b>
             <span>
-              매일 3 개씩
+              매일 3개씩
               <br />
               공부해요
             </span>
@@ -177,7 +178,7 @@ function Main() {
             <p>
               <b className="title mt10 mb10">자산 불리기</b>
               <span>
-                적금과 주식을
+                예금과 주식을
                 <br />
                 체험할 수 있어요
               </span>
@@ -186,21 +187,11 @@ function Main() {
           </MenuBtn>
         </a>
       </div>
-      <MenuBtn
-        bg="white"
-        boxShadow="2px 3px 4px 1px rgba(0,0,0, 0.25);"
-        width="348px"
-        height="97px"
-        style={{ marginLeft: "12px" }}
-      >
-        <div>
-          <img src={Dog} className="dog" />
-          <div className="inline absolute mt15  ">
-            <b className="title mb_3">공지사항</b>
-            <span>금리, 상품 정보, 패치내용</span>
-          </div>
-        </div>
-      </MenuBtn>
+      <div style={{position: "relative"}}>
+        <a href="https://www.kebhana.com/cont/mall/mall08/mall0801/mall080103/1466126_115188.jsp">
+        <img src={Ad} style={{width: "350px", height: "100px", borderRadius: "20px", boxShadow: "2px 3px 4px 1px rgba(0, 0, 0, 0.25)"}}/></a>
+        <h5 style={{position: "absolute", right: "25px", top: "5px", fontWeight: "normal", fontSize: "13px", backgroundColor: "white", borderRadius: "10px", width: "36px", boxShadow: "1px 2px 1px 1px rgba(0, 0, 0, 0.25)"}}>광고</h5>
+      </div>
     </div>
   );
 }
