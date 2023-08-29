@@ -100,7 +100,8 @@ function App() {
           </Routes>
           {/* `/admin` 또는 `/testadmin`이 아닌 경우에만 Footer를 렌더링합니다 */}
           {location.pathname !== "/admin" &&
-            location.pathname !== "/testadmin" && <Footer />}
+            location.pathname !== "/testadmin" &&
+            location.pathname !== "/login" && <Footer />}
         </div>
       ) : null}
     </div>

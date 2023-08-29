@@ -1,7 +1,32 @@
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  Dot,
+} from "recharts";
 
 const ChartStock = ({ data }) => {
+  const maxValue = Math.max(...data.map((item) => item.stockClosePrice));
+  const minValue = Math.min(...data.map((item) => item.stockClosePrice));
+  console.log(maxValue);
+  console.log(minValue);
+
+  const CustomDot = (props) => {
+    const { value } = props;
+    if (value === maxValue || value === minValue) {
+      return (
+        <Dot {...props} r={6} fill={value === maxValue ? "red" : "blue"} />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <ResponsiveContainer width={330} height={270}>
       <LineChart
@@ -16,13 +41,13 @@ const ChartStock = ({ data }) => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="stockOpenDate" tick={false} height={0}/>
-        <YAxis domain={["auto", "auto"]} tick={false} width={0}/>
+        <XAxis dataKey="stockOpenDate" tick={false} height={0} />
+        <YAxis domain={["auto", "auto"]} tick={false} width={0} />
         <Line
           type="monotone"
           dataKey="stockClosePrice"
           stroke="#8884d8"
-          // dot={false}
+          dot={CustomDot}
         />
       </LineChart>
     </ResponsiveContainer>
