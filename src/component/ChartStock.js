@@ -7,7 +7,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
-  Dot,
+  Legend,
 } from "recharts";
 
 const ChartStock = ({ data }) => {
@@ -15,17 +15,6 @@ const ChartStock = ({ data }) => {
   const minValue = Math.min(...data.map((item) => item.stockClosePrice));
   console.log(maxValue);
   console.log(minValue);
-
-  const CustomDot = (props) => {
-    const { value } = props;
-    if (value === maxValue || value === minValue) {
-      return (
-        <Dot {...props} r={6} fill={value === maxValue ? "red" : "blue"} />
-      );
-    }
-
-    return null;
-  };
 
   return (
     <ResponsiveContainer width={330} height={270}>
@@ -43,11 +32,14 @@ const ChartStock = ({ data }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="stockOpenDate" tick={false} height={0} />
         <YAxis domain={["auto", "auto"]} tick={false} width={0} />
+        <Tooltip />
+        <Legend />
         <Line
           type="monotone"
           dataKey="stockClosePrice"
           stroke="#8884d8"
-          dot={CustomDot}
+          activeDot={{ r: 8 }}
+          dot={false}
         />
       </LineChart>
     </ResponsiveContainer>
