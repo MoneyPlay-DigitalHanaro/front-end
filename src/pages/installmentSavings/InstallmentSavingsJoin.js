@@ -185,6 +185,8 @@ const InstallmentSavingsJoin = () => {
       console.log(formData);
       if (response.status === 200) {
         console.log("폼 데이터가 성공적으로 전송되었습니다.");
+        alert("예금 상품 가입되었습니다.");
+        window.location.href = "/main";
       } else {
         console.error("폼 데이터 전송 실패");
       }

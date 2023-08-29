@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ChartStock from "../../component/ChartStock";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function PurchaseStock() {
   useEffect(() => {
@@ -37,6 +38,7 @@ function PurchaseStock() {
       .then((response) => {
         // 성공적으로 요청이 처리되었을 때 처리할 로직
         alert(stockCount + " 주의 주식을 구매하였습니다.");
+        window.location.href = "/stock";
       })
       .catch((error) => {
         console.error("주식 구매 중 에러 발생:", error);
@@ -56,6 +58,7 @@ function PurchaseStock() {
       .then((response) => {
         // 성공적으로 요청이 처리되었을 때 처리할 로직
         alert(stockCount + " 주의 주식을 판매하였습니다.");
+        window.location.href = "/stock";
       })
       .catch((error) => {
         console.error("주식 판매 중 에러 발생:", error);

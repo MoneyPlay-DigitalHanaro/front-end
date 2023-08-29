@@ -71,6 +71,8 @@ function Admin() {
       );
 
       console.log(response.data); // 서버로부터의 응답을 확인
+      alert("포인트가 일괄 지급되었습니다.");
+      window.location.href = "/admin";
       // 필요한 추가 로직을 여기에 추가하세요.
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -95,6 +97,8 @@ function Admin() {
         "http://localhost:8080/admin/total_init"
       );
       console.log(response.data); // 서버로부터의 응답을 확인
+      alert("포인트가 일괄 초기화되었습니다.");
+      window.location.href = "/admin";
     } catch (error) {
       console.error("Error initializing points:", error);
     }
@@ -112,11 +116,15 @@ function Admin() {
   const sortedData = [...tableData].sort(
     (a, b) =>
       parseInt(
-        typeof b.totalHoldingPoint === "string" ? b.totalHoldingPoint.replace(/,/g, "") : b.totalHoldingPoint,
+        typeof b.totalHoldingPoint === "string"
+          ? b.totalHoldingPoint.replace(/,/g, "")
+          : b.totalHoldingPoint,
         10
       ) -
       parseInt(
-        typeof a.totalHoldingPoint === "string" ? a.totalHoldingPoint.replace(/,/g, "") : a.totalHoldingPoint,
+        typeof a.totalHoldingPoint === "string"
+          ? a.totalHoldingPoint.replace(/,/g, "")
+          : a.totalHoldingPoint,
         10
       )
   );
@@ -142,7 +150,7 @@ function Admin() {
   };
 
   // 랭킹 맥이기
-  
+
   const sortData = (data) => {
     let sortedData = [...data];
     switch (sortOption) {

@@ -49,23 +49,26 @@ function Main() {
     if (authToken) {
       axios.defaults.headers.common["Authorization"] = authToken;
     }
-    // 토큰을 이용하여 사용자 이름을 가져옵니다
-    const fetchUsername = async () => {
-      try {
-        const response = await axios.post("http://localhost:8080/decodeToken", {
-          tokenOnly,
-        });
-        setUsername(response.data.username);
-      } catch (error) {
-        console.error(error);
-        console.log(tokenOnly);
-      }
-    };
-    // const authToken = localStorage.getItem('Authorization');
-    const tokenOnly = authToken.split(" ")[1];
-    if (tokenOnly) {
-      fetchUsername();
-    }
+  }, []);
+
+  const [itemsWithIndex0, setItemsWithIndex0] = useState([]);
+  const [itemsWithIndex1, setItemsWithIndex1] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/main/")
+      .then((response) => {
+        // API 응답에서 데이터 필터링
+        const filteredItems0 = response.data.filter((item) => item.index === 0);
+        const filteredItems1 = response.data.filter((item) => item.index === 1);
+
+        // 필터링 된 데이터를 상태에 저장
+        setItemsWithIndex0(filteredItems0);
+        setItemsWithIndex1(filteredItems1);
+      })
+      .catch((error) => {
+        console.error("에러", error);
+      });
   }, []);
 
   return (
@@ -81,21 +84,22 @@ function Main() {
             width="348px"
             height="118px"
           >
-            <p style={{marginTop: "15px", marginLeft: "3px"}}>
-              <b className="title">{username ? `${username}님은` : ""}</b>
-              <span>
-                {/* <img
-                  src={coin}
-                  style={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginLeft: "10px",
-                  }}
-                /> */}
-                현재 <b>{Maindata[0].price} 포인트</b>를
-                <br />가지고 있어요!
-              </span>
-              <img src={person} className="imgMain mgr15" style={{width: "100px", height: "90px"}}/>
+            <p style={{ marginTop: "15px", marginLeft: "3px" }}>
+              {itemsWithIndex1.map((item) => (
+                <>
+                  <b className="title">{item.name ? `${item.name}님은` : ""}</b>
+                  <span>
+                    현재 <b>{item.point} 포인트</b>를 <br />
+                    가지고 있어요!
+                  </span>
+                  <br />
+                </>
+              ))}
+              <img
+                src={person}
+                className="imgMain mgr15"
+                style={{ width: "100px", height: "90px" }}
+              />
             </p>
           </MenuBtn>
         </a>
