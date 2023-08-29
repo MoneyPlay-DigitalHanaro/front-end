@@ -69,13 +69,23 @@ const InstallmentSavings = () => {
     });
   }, []);
 
+  const [mySavings, setMySavings] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:8080/mypage/deposit").then((response) => {
+      // console.log(response.data);
+      setMySavings(response.data);
+    });
+  }, []);
+
   return (
     <SavingMainContainer>
       <Title>곧 끝나는 예금</Title>
-      <ExpiredContent>
-        <ExpiredNotice>
-          <b>짱구 적금</b>이 <br /> <b>2023년 8월 20일</b>에 만기 되어요
-        </ExpiredNotice>
+      {mySavings.length > 0 ? (
+        <ExpiredContent>
+          <ExpiredNotice>
+            <b>{mySavings[0].myDepositDto.depositType.depositName}</b>이 <br />{" "}
+            <b>{mySavings[0].myDepositDto.endDate}</b>에 만기 되어요
+          </ExpiredNotice>
         <ExpiredText>
           원금 포인트
           <br />
@@ -84,14 +94,19 @@ const InstallmentSavings = () => {
           받을 총 포인트
         </ExpiredText>
         <ExpiredText>
-          2,000,000
+          {mySavings[0].myDepositDto.depositAmount * 10000}
           <br />
-          1,500
+          {mySavings[0].myDepositDto.interestAmount}
           <br />
-          2,001,500
+          {mySavings[0].myDepositDto.depositAmount * 10000 + mySavings[0].myDepositDto.interestAmount}
         </ExpiredText>
         <HandImage src={Hand}></HandImage>
       </ExpiredContent>
+    ) : (
+      <ExpiredContent>
+        <ExpiredNotice><b>가입한 예금 상품이 없습니다.</b></ExpiredNotice>
+      </ExpiredContent>
+  )}
 
       <Title>예금 상품들을 구경해보세요</Title>
       {savingsList.map((sv) => {
